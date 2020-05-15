@@ -164,7 +164,7 @@ class ViewCreate extends Command
 
             if (substr($column, -3) === '_id') {
                 $model = substr($column, 0, -3);
-                $field = 'optional($tiem->' . $model . ')->name';
+                $field = 'optional($item->' . $model . ')->name';
             }
 
             return '<td>{{ ' . $field . ' }}</td>';
@@ -187,7 +187,7 @@ class ViewCreate extends Command
 
             if (substr($column, -3) === '_id') {
                 $model = substr($column, 0, -3);
-                $field = 'optional($tiem->' . $model . ')->name';
+                $field = 'optional($item->' . $model . ')->name';
             }
 
             $attribute = '
