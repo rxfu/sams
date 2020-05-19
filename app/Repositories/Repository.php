@@ -58,6 +58,34 @@ abstract class Repository
         return $query->get();
     }
 
+    public function findBy($attributes, $relations = null, $order = 'id', $direction = 'asc', $trashed = false)
+    {
+        try {
+            $attributes = is_array($attributes) ? $attributes : ['id' => $attributes];
+            $query = $this->model;
+
+            if (!is_null($relations)) {
+                $relations = is_array($relations) ? $relations : [$relations];
+
+                $query = $query->with($relations);
+            }
+
+            foreach ($attributes as $key => $value) {
+                $query = $query->where($key, '=', $value);
+            }
+
+            $query = $query->orderBy($order, $direction);
+
+            if ($trashed) {
+                $query = $query->withTrashed();
+            }
+
+            return $query->get();
+        } catch (QueryException $e) {
+            throw new InternalException($e, $this->getModel(), __FUNCTION__);
+        }
+    }
+
     public function save($attributes)
     {
         try {
