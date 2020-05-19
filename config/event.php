@@ -15,7 +15,12 @@ return [
 
     'observers' => [
         App\Models\User::class,
+        App\Models\Role::class,
+        App\Models\Permission::class,
+        App\Models\Group::class,
         App\Models\Menu::class,
         App\Models\Menuitem::class,
+        App\Models\Setting::class,
+        // model_here
     ],
 ];

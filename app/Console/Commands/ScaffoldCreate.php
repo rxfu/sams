@@ -41,6 +41,7 @@ class ScaffoldCreate extends Command
 
         $this->call('create:policy', compact('name'));
         $this->call('create:controller', compact('name'));
+        $this->call('add:observer', compact('name'));
         $this->call('add:route', compact('name'));
         $this->call('create:view', compact('name'));
     }
