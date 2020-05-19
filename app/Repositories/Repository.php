@@ -36,26 +36,34 @@ abstract class Repository
 
     public function findAll($order = 'id', $direction = 'asc', $trashed = false)
     {
-        $query = $this->model->orderBy($order, $direction);
+        try {
+            $query = $this->model->orderBy($order, $direction);
 
-        if ($trashed) {
-            $query = $query->withTrashed();
+            if ($trashed) {
+                $query = $query->withTrashed();
+            }
+
+            return $query->get();
+        } catch (QueryException $e) {
+            throw new InternalException($e, $this->getModel(), __FUNCTION__);
         }
-
-        return $query->get();
     }
 
     public function findWith($relations, $order = 'id', $direction = 'asc', $trashed = false)
     {
-        $relations = is_array($relations) ? $relations : [$relations];
+        try {
+            $relations = is_array($relations) ? $relations : [$relations];
 
-        $query = $this->model->with($relations)->orderBy($order, $direction);
+            $query = $this->model->with($relations)->orderBy($order, $direction);
 
-        if ($trashed) {
-            $query = $query->withTrashed();
+            if ($trashed) {
+                $query = $query->withTrashed();
+            }
+
+            return $query->get();
+        } catch (QueryException $e) {
+            throw new InternalException($e, $this->getModel(), __FUNCTION__);
         }
-
-        return $query->get();
     }
 
     public function findBy($attributes, $relations = null, $order = 'id', $direction = 'asc', $trashed = false)

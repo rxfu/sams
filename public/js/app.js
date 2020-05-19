@@ -22,16 +22,6 @@ $(function () {
     });
     // });
 
-    // $('.delete').click(function () {
-    //     event.preventDefault();
-
-    //     if (confirm('记录删除后不可恢复，请问确定删除该条记录吗？')) {
-    //         var href = $(this).attr('href');
-    //         $('#delete-form').attr('action', href).submit();
-
-    //         return false;
-    //     }
-    // })
     $('#dialog').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var title = button.data('whatever');
