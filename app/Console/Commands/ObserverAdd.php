@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Support\Str;
 use Illuminate\Console\Command;
+use Illuminate\Filesystem\Filesystem;
 
 class ObserverAdd extends Command
 {
