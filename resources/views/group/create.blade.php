@@ -17,24 +17,24 @@
                     <div class="form-group row">
                         <label for="slug" class="col-sm-3 col-form-label text-right">{{ __('group.slug') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control{{ $errors->has('slug') ? ' is-invalid' : '' }}" name="slug" id="slug" placeholder="{{ __('group.slug') }}" value="{{ old('slug') }}">
-                            @if ($errors->has('slug'))
+                            <input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug" placeholder="{{ __('group.slug') }}" value="{{ old('slug') }}">
+                            @error('slug')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('slug') }}</strong>
+                                    <strong>{{ $message}}</strong>
                                 </div>
-                            @endif
+                            @enderror
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="name" class="col-sm-3 col-form-label text-right">{{ __('group.name') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" id="name" placeholder="{{ __('group.name') }}" value="{{ old('name') }}">
-                            @if ($errors->has('name'))
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="{{ __('group.name') }}" value="{{ old('name') }}">
+                            @error('name')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('name') }}</strong>
+                                    <strong>{{ $message}}</strong>
                                 </div>
-                            @endif
+                            @enderror
                         </div>
                     </div>
 
@@ -42,29 +42,29 @@
                         <label for="parent_id" class="col-sm-3 col-form-label text-right">{{ __('group.parent_id') }}</label>
                         <div class="col-sm-9">
                             @inject('groups', 'App\Services\GroupService')
-							<select name="parent_id" id="parent_id" class="form-control select2 select2-success{{ $errors->has('parent_id') ? ' is-invalid' : '' }}" data-dropdown-css-class="select2-success">
+							<select name="parent_id" id="parent_id" class="form-control select2 select2-success @error('parent_id') is-invalid @enderror" data-dropdown-css-class="select2-success">
                                 <option value="">无</option>
                                 @foreach ($groups->getAll() as $collection)
                                     <option value="{{ $collection->getKey() }}">{{ $collection->name }}</option>
                                 @endforeach
                             </select>
-                            @if ($errors->has('parent_id'))
+                            @error('parent_id')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('parent_id') }}</strong>
+                                    <strong>{{ $message}}</strong>
                                 </div>
-                            @endif
+                            @enderror
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="description" class="col-sm-3 col-form-label text-right">{{ __('group.description') }}</label>
                         <div class="col-sm-9">
-                            <textarea class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" id="description" rows="5" placeholder="{{ __('group.description') }}">{{ old('description') }}</textarea>
-                            @if ($errors->has('description'))
+                            <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="5" placeholder="{{ __('group.description') }}">{{ old('description') }}</textarea>
+                            @error('description')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('description') }}</strong>
+                                    <strong>{{ $message}}</strong>
                                 </div>
-                            @endif
+                            @enderror
                         </div>
                     </div>
                 </div>

@@ -20,15 +20,15 @@
                             @inject('groups', 'App\Services\GroupService')
                             @foreach ($groups->getAll() as $item)
                                 <div class="icheck-success icheck-inline">
-                                    <input type="checkbox" name="groups[]" id="group{{ $loop->index }}" class="form-check-input{{ $errors->has('groups[]') ? ' is-invalid' : '' }}" value="{{ $item->id }}"{{ in_array($item->id, $assignedGroups) ? ' checked' : '' }}>
+                                    <input type="checkbox" name="groups[]" id="group{{ $loop->index }}" class="form-check-input @error('groups[]') ? ' is-invalid' : '' }}" value="{{ $item->id }}"{{ in_array($item->id, $assignedGroups) checked @enderror>
                                     <label class="form-check-label" for="group{{ $loop->index }}">{{ $item->name }}</label>
                                 </div>
                             @endforeach
-                            @if ($errors->has('groups[]'))
+                            @error('groups[]')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('groups[]') }}</strong>
+                                    <strong>{{ $message}}</strong>
                                 </div>
-                            @endif
+                            @enderror
                         </div>
                     </div>
                 </div>

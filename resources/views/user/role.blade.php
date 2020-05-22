@@ -20,15 +20,15 @@
                             @inject('roles', 'App\Services\RoleService')
                             @foreach ($roles->getAll() as $item)
                                 <div class="icheck-warning icheck-inline">
-                                    <input type="checkbox" name="roles[]" id="role{{ $loop->index }}" class="form-check-input{{ $errors->has('roles[]') ? ' is-invalid' : '' }}" value="{{ $item->id }}"{{ in_array($item->id, $assignedRoles) ? ' checked' : '' }}>
+                                    <input type="checkbox" name="roles[]" id="role{{ $loop->index }}" class="form-check-input @error('roles[]') ? ' is-invalid' : '' }}" value="{{ $item->id }}"{{ in_array($item->id, $assignedRoles) checked @enderror>
                                     <label class="form-check-label" for="role{{ $loop->index }}">{{ $item->name }}</label>
                                 </div>
                             @endforeach
-                            @if ($errors->has('roles[]'))
+                            @error('roles[]')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('roles[]') }}</strong>
+                                    <strong>{{ $message}}</strong>
                                 </div>
-                            @endif
+                            @enderror
                         </div>
                     </div>
                 </div>

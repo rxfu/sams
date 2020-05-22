@@ -18,48 +18,48 @@
                     <div class="form-group row">
                         <label for="username" class="col-sm-3 col-form-label text-right">{{ __('user.username') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" id="username" placeholder="{{ __('user.username') }}" value="{{ old('username', $item->username) }}" required>
-                            @if ($errors->has('username'))
+                            <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" id="username" placeholder="{{ __('user.username') }}" value="{{ old('username', $item->username) }}" required>
+                            @error('username')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('username') }}</strong>
+                                    <strong>{{ $message}}</strong>
                                 </div>
-                            @endif
+                            @enderror
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="name" class="col-sm-3 col-form-label text-right">{{ __('user.name') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" id="name" placeholder="{{ __('user.name') }}" value="{{ old('name', $item->name) }}" required>
-                            @if ($errors->has('name'))
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="{{ __('user.name') }}" value="{{ old('name', $item->name) }}" required>
+                            @error('name')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('name') }}</strong>
+                                    <strong>{{ $message}}</strong>
                                 </div>
-                            @endif
+                            @enderror
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="phone" class="col-sm-3 col-form-label text-right">{{ __('user.phone') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" id="phone" placeholder="{{ __('user.phone') }}" value="{{ old('phone', $item->phone) }}">
-                            @if ($errors->has('phone'))
+                            <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="{{ __('user.phone') }}" value="{{ old('phone', $item->phone) }}">
+                            @error('phone')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('phone') }}</strong>
+                                    <strong>{{ $message}}</strong>
                                 </div>
-                            @endif
+                            @enderror
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="email" class="col-sm-3 col-form-label text-right">{{ __('user.email') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" id="email" placeholder="{{ __('user.email') }}" value="{{ old('email', $item->email) }}">
-                            @if ($errors->has('email'))
+                            <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="{{ __('user.email') }}" value="{{ old('email', $item->email) }}">
+                            @error('email')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('email') }}</strong>
+                                    <strong>{{ $message}}</strong>
                                 </div>
-                            @endif
+                            @enderror
                         </div>
                     </div>
 
@@ -67,18 +67,18 @@
                         <label for="is_enable" class="col-sm-3 col-form-label text-right">{{ __('user.is_enable') }}</label>
                         <div class="col-sm-9">
                             <div class="icheck-info icheck-inline">
-                                <input type="radio" name="is_enable" id="is_enable1" class="form-check-input{{ $errors->has('is_enable') ? ' is-invalid' : '' }}" value="1"{{ old('is_enable', $item->is_enable) == 1 ? ' checked' : '' }}>
+                                <input type="radio" name="is_enable" id="is_enable1" class="form-check-input @error('is_enable') is-invalid' : '' }}" value="1"{{ old('is_enable', $item->is_enable) == 1 ? ' checked @enderror>
                                 <label class="form-check-label" for="is_enable1">是</label>
                             </div>
                             <div class="icheck-info icheck-inline">
-                                <input type="radio" name="is_enable" id="is_enable0" class="form-check-input{{ $errors->has('is_enable') ? ' is-invalid' : '' }}" value="0"{{ old('is_enable', $item->is_enable) == 0 ? ' checked' : '' }}>
+                                <input type="radio" name="is_enable" id="is_enable0" class="form-check-input @error('is_enable') is-invalid' : '' }}" value="0"{{ old('is_enable', $item->is_enable) == 0 ? ' checked @enderror>
                                 <label class="form-check-label" for="is_enable0">否</label>
                             </div>
-                            @if ($errors->has('is_enable'))
+                            @error('is_enable')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('is_enable') }}</strong>
+                                    <strong>{{ $message}}</strong>
                                 </div>
-                            @endif
+                            @enderror
                         </div>
                     </div>
                 </div>
