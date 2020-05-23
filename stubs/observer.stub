@@ -1,0 +1,2 @@
+App\Models\{{ model }}::class;
+    // model_here
