@@ -20,7 +20,7 @@
                             <input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug" placeholder="{{ __('menu.slug') }}" value="{{ old('slug') }}" required>
                             @error('slug')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
@@ -32,7 +32,7 @@
                             <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="{{ __('menu.name') }}" value="{{ old('name') }}" required>
                             @error('name')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
@@ -44,7 +44,7 @@
                             <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="5" placeholder="{{ __('menu.description') }}">{{ old('description') }}</textarea>
                             @error('description')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
@@ -63,7 +63,7 @@
                             </div>
                             @error('is_enable')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>

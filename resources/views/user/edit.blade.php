@@ -21,7 +21,7 @@
                             <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" id="username" placeholder="{{ __('user.username') }}" value="{{ old('username', $item->username) }}" required>
                             @error('username')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
@@ -33,7 +33,7 @@
                             <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="{{ __('user.name') }}" value="{{ old('name', $item->name) }}" required>
                             @error('name')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
@@ -45,7 +45,7 @@
                             <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="{{ __('user.phone') }}" value="{{ old('phone', $item->phone) }}">
                             @error('phone')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
@@ -57,7 +57,7 @@
                             <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="{{ __('user.email') }}" value="{{ old('email', $item->email) }}">
                             @error('email')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
@@ -76,7 +76,7 @@
                             </div>
                             @error('is_enable')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>

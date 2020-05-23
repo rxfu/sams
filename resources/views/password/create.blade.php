@@ -19,7 +19,7 @@
 	                    	<input type="password" name="old_password" id="old_password" class="form-control{{ $errors->has('old_password') ? ' is-invalid' : '' }}" placeholder="{{ __('user.old_password') }}" value="{{ old('old_password') }}" required>
 	                        @error('old_password')
 		                        <div class="invalid-feedback" role="alert">
-		                            <strong>{{ $message}}</strong>
+		                            <strong>{{ $message }}</strong>
 		                        </div>
 	                        @enderror
 	                    </div>
@@ -30,7 +30,7 @@
 	                    	<input type="password" name="password" id="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('user.password') }}" required>
 	                        @error('password')
 		                        <div class="invalid-feedback" role="alert">
-		                            <strong>{{ $message}}</strong>
+		                            <strong>{{ $message }}</strong>
 		                        </div>
 	                        @enderror
 	                        <small class="form-text text-muted">密码至少8位</small>
@@ -42,7 +42,7 @@
 	                    	<input type="password" name="password_confirmation" id="password_confirmation" class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}" placeholder="{{ __('user.password_confirmation') }}" required>
 	                        @error('password_confirmation')
 		                        <div class="invalid-feedback" role="alert">
-		                            <strong>{{ $message}}</strong>
+		                            <strong>{{ $message }}</strong>
 		                        </div>
 	                        @enderror
 	                    </div>

@@ -21,7 +21,7 @@
                             <input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug" placeholder="{{ __('role.slug') }}" value="{{ old('slug', $item->slug) }}" required>
                             @error('slug')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
@@ -33,7 +33,7 @@
                             <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="{{ __('role.name') }}" value="{{ old('name', $item->name) }}" required>
                             @error('name')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
@@ -51,7 +51,7 @@
                             </select>
                             @error('parent_id')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
@@ -70,7 +70,7 @@
                             </div>
                             @error('by_group')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
@@ -82,7 +82,7 @@
                             <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="5" placeholder="{{ __('role.description') }}">{{ old('description', $item->description) }}</textarea>
                             @error('description')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>

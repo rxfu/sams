@@ -14,7 +14,7 @@
         </div>
         @error('username')
             <div class="invalid-feedback" role="alert">
-                <strong>{{ $message}}</strong>
+                <strong>{{ $message }}</strong>
             </div>
         @enderror
     </div>
@@ -27,7 +27,7 @@
         </div>
         @error('password')
             <div class="invalid-feedback" role="alert">
-                <strong>{{ $message}}</strong>
+                <strong>{{ $message }}</strong>
             </div>
         @enderror
     </div>

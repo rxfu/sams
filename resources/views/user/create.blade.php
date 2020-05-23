@@ -20,7 +20,7 @@
                             <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" id="username" placeholder="{{ __('user.username') }}" value="{{ old('username') }}" required>
                             @error('username')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
@@ -32,7 +32,7 @@
                             <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="{{ __('user.password') }}" value="{{ old('password') }}" required>
                             @error('password')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
 	                        <small class="form-text text-muted">密码至少8位</small>
@@ -45,7 +45,7 @@
 	                    	<input type="password" name="password_confirmation" id="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" placeholder="{{ __('user.password_confirmation') }}" required>
 	                        @error('password_confirmation')
 		                        <div class="invalid-feedback" role="alert">
-		                            <strong>{{ $message}}</strong>
+		                            <strong>{{ $message }}</strong>
 		                        </div>
 	                        @enderror
 	                    </div>
@@ -57,7 +57,7 @@
                             <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="{{ __('user.name') }}" value="{{ old('name') }}" required>
                             @error('name')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
@@ -69,7 +69,7 @@
                             <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="{{ __('user.phone') }}" value="{{ old('phone') }}">
                             @error('phone')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
@@ -81,7 +81,7 @@
                             <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="{{ __('user.email') }}" value="{{ old('email') }}">
                             @error('email')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
@@ -100,7 +100,7 @@
                             </div>
                             @error('is_enable')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>

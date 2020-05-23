@@ -20,7 +20,7 @@
                             <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="{{ __('setting.name') }}" value="{{ old('name') }}" required>
                             @error('name')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
@@ -32,7 +32,7 @@
                             <input type="text" class="form-control @error('value') is-invalid @enderror" name="value" id="value" placeholder="{{ __('setting.value') }}" value="{{ old('value') }}" required>
                             @error('value')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>
@@ -44,7 +44,7 @@
                             <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="5" placeholder="{{ __('setting.description') }}">{{ old('description') }}</textarea>
                             @error('description')
                                 <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message}}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
                         </div>

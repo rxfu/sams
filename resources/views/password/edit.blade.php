@@ -7,7 +7,7 @@
             <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" placeholder="{{ __('user.password') }}" required>
             @error('password')
                 <div class="invalid-feedback" role="alert">
-                    <strong>{{ $message}}</strong>
+                    <strong>{{ $message }}</strong>
                 </div>
             @enderror
             <small class="form-text text-light">密码至少8位</small>
@@ -19,7 +19,7 @@
             <input type="password" name="password_confirmation" id="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" placeholder="{{ __('user.password_confirmation') }}" required>
             @error('password_confirmation')
                 <div class="invalid-feedback" role="alert">
-                    <strong>{{ $message}}</strong>
+                    <strong>{{ $message }}</strong>
                 </div>
             @enderror
         </div>
