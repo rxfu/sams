@@ -18,7 +18,7 @@
                     <div class="form-group row">
                         <label for="name" class="col-sm-3 col-form-label text-right">{{ __('setting.name') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="{{ __('setting.name') }}" value="{{ old('name', $item->name) }}">
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="{{ __('setting.name') }}" value="{{ old('name', $item->name) }}" required>
                             @error('name')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message}}</strong>
@@ -30,7 +30,7 @@
                     <div class="form-group row">
                         <label for="value" class="col-sm-3 col-form-label text-right">{{ __('setting.value') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control @error('value') is-invalid @enderror" name="value" id="value" placeholder="{{ __('setting.value') }}" value="{{ old('value', $item->value) }}">
+                            <input type="text" class="form-control @error('value') is-invalid @enderror" name="value" id="value" placeholder="{{ __('setting.value') }}" value="{{ old('value', $item->value) }}" required>
                             @error('value')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message}}</strong>

@@ -21,7 +21,7 @@
                             <div class="col-sm-10">
                                 @foreach ($items as $item)
                                     <div class="icheck-warning icheck-inline">
-                                        <input type="checkbox" name="permissions[]" id="permission{{ $item->id }}" class="form-check-input @error('permissions[]') ? ' is-invalid' : '' }}" value="{{ $item->id }}"{{ in_array($item->id, $assignedPermissions) checked @enderror>
+                                        <input type="checkbox" name="permissions[]" id="permission{{ $item->id }}" class="form-check-input @error('permissions[]') is-invalid @enderror" value="{{ $item->id }}"{{ in_array($item->id, $assignedPermissions) ? ' checked' : '' }}>
                                         <label class="form-check-label" for="permission{{ $item->id }}">{{ __($item->action) }}</label>
                                     </div>
                                 @endforeach

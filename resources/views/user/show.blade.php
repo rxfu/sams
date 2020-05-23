@@ -15,77 +15,77 @@
                 <div class="form-group row">
                     <label for="id" class="col-sm-3 col-form-label text-right">{{ __('user.id') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="id" id="id" value="{{ $item->id }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->id }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="username" class="col-sm-3 col-form-label text-right">{{ __('user.username') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="username" id="username" value="{{ $item->username }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->username }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="name" class="col-sm-3 col-form-label text-right">{{ __('user.name') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="name" id="name" value="{{ $item->name }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->name }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="role" class="col-sm-3 col-form-label text-right">{{ __('user.role') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="role" id="role" value="{{ $item->present()->allRoles }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->present()->allRoles }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="group" class="col-sm-3 col-form-label text-right">{{ __('user.group') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="group" id="group" value="{{ $item->present()->allGroups }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->present()->allGroups }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="phone" class="col-sm-3 col-form-label text-right">{{ __('user.phone') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="phone" id="phone" value="{{ $item->phone }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->phone }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="email" class="col-sm-3 col-form-label text-right">{{ __('user.email') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="email" id="email" value="{{ $item->email }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->email }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="email_verified_at" class="col-sm-3 col-form-label text-right">{{ __('user.email_verified_at') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="email_verified_at" id="email_verified_at" value="{{ $item->email_verified_at }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->email_verified_at }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="is_enable" class="col-sm-3 col-form-label text-right">{{ __('user.is_enable') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="is_enable" id="is_enable" value="{{ $item->present()->isEnable }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->present()->isEnable }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="is_super" class="col-sm-3 col-form-label text-right">{{ __('user.is_super') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="is_super" id="is_super" value="{{ $item->present()->isSuper }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->present()->isSuper }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="last_login_at" class="col-sm-3 col-form-label text-right">{{ __('user.last_login_at') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="last_login_at" id="last_login_at" value="{{ $item->last_login_at }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->last_login_at }}</div>
                     </div>
                 </div>
             </div>

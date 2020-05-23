@@ -20,7 +20,7 @@
                             @inject('roles', 'App\Services\RoleService')
                             @foreach ($roles->getAll() as $item)
                                 <div class="icheck-warning icheck-inline">
-                                    <input type="checkbox" name="roles[]" id="role{{ $loop->index }}" class="form-check-input @error('roles[]') ? ' is-invalid' : '' }}" value="{{ $item->id }}"{{ in_array($item->id, $assignedRoles) checked @enderror>
+                                    <input type="checkbox" name="roles[]" id="role{{ $loop->index }}" class="form-check-input @error('roles[]') is-invalid @enderror" value="{{ $item->id }}"{{ in_array($item->id, $assignedRoles) ? ' checked' : '' }}>
                                     <label class="form-check-label" for="role{{ $loop->index }}">{{ $item->name }}</label>
                                 </div>
                             @endforeach

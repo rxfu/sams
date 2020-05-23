@@ -15,28 +15,28 @@
                 <div class="form-group row">
                     <label for="id" class="col-sm-3 col-form-label text-right">{{ __('setting.id') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="id" id="id" value="{{ $item->id }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->id }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="name" class="col-sm-3 col-form-label text-right">{{ __('setting.name') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="name" id="name" value="{{ $item->name }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->name }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="value" class="col-sm-3 col-form-label text-right">{{ __('setting.value') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="value" id="value" value="{{ $item->value }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->value }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="description" class="col-sm-3 col-form-label text-right">{{ __('setting.description') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="description" id="description" value="{{ $item->description }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->description }}</div>
                     </div>
                 </div>
             </div>

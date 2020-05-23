@@ -18,7 +18,7 @@
                     <div class="form-group row">
                         <label for="slug" class="col-sm-3 col-form-label text-right">{{ __('role.slug') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug" placeholder="{{ __('role.slug') }}" value="{{ old('slug', $item->slug) }}">
+                            <input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug" placeholder="{{ __('role.slug') }}" value="{{ old('slug', $item->slug) }}" required>
                             @error('slug')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message}}</strong>
@@ -30,7 +30,7 @@
                     <div class="form-group row">
                         <label for="name" class="col-sm-3 col-form-label text-right">{{ __('role.name') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="{{ __('role.name') }}" value="{{ old('name', $item->name) }}">
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="{{ __('role.name') }}" value="{{ old('name', $item->name) }}" required>
                             @error('name')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message}}</strong>
@@ -61,11 +61,11 @@
                         <label for="by_group" class="col-sm-3 col-form-label text-right">{{ __('role.by_group') }}</label>
                         <div class="col-sm-9">
                             <div class="icheck-info icheck-inline">
-                                <input type="radio" name="by_group" id="by_group1" class="form-check-input @error('by_group') is-invalid' : '' }}" value="1"{{ old('by_group', $item->by_group) == 1 ? ' checked @enderror>
+                                <input type="radio" name="by_group" id="by_group1" class="form-check-input @error('by_group') is-invalid @enderror" value="1"{{ old('by_group', $item->by_group) == 1 ? ' checked' : '' }}>
                                 <label class="form-check-label" for="by_group1">是</label>
                             </div>
                             <div class="icheck-info icheck-inline">
-                                <input type="radio" name="by_group" id="by_group0" class="form-check-input @error('by_group') is-invalid' : '' }}" value="0"{{ old('by_group', $item->by_group) == 0 ? ' checked @enderror>
+                                <input type="radio" name="by_group" id="by_group0" class="form-check-input @error('by_group') is-invalid @enderror" value="0"{{ old('by_group', $item->by_group) == 0 ? ' checked' : '' }}>
                                 <label class="form-check-label" for="by_group0">否</label>
                             </div>
                             @error('by_group')

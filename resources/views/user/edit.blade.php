@@ -67,11 +67,11 @@
                         <label for="is_enable" class="col-sm-3 col-form-label text-right">{{ __('user.is_enable') }}</label>
                         <div class="col-sm-9">
                             <div class="icheck-info icheck-inline">
-                                <input type="radio" name="is_enable" id="is_enable1" class="form-check-input @error('is_enable') is-invalid' : '' }}" value="1"{{ old('is_enable', $item->is_enable) == 1 ? ' checked @enderror>
+                                <input type="radio" name="is_enable" id="is_enable1" class="form-check-input @error('is_enable') is-invalid @enderror" value="1"{{ old('is_enable', $item->is_enable) == 1 ? ' checked' : '' }}>
                                 <label class="form-check-label" for="is_enable1">是</label>
                             </div>
                             <div class="icheck-info icheck-inline">
-                                <input type="radio" name="is_enable" id="is_enable0" class="form-check-input @error('is_enable') is-invalid' : '' }}" value="0"{{ old('is_enable', $item->is_enable) == 0 ? ' checked @enderror>
+                                <input type="radio" name="is_enable" id="is_enable0" class="form-check-input @error('is_enable') is-invalid @enderror" value="0"{{ old('is_enable', $item->is_enable) == 0 ? ' checked' : '' }}>
                                 <label class="form-check-label" for="is_enable0">否</label>
                             </div>
                             @error('is_enable')

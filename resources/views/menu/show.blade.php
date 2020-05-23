@@ -15,35 +15,35 @@
                 <div class="form-group row">
                     <label for="id" class="col-sm-3 col-form-label text-right">{{ __('menu.id') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="id" id="id" value="{{ $item->id }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->id }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="slug" class="col-sm-3 col-form-label text-right">{{ __('menu.slug') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="slug" id="slug" value="{{ $item->slug }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->slug }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="name" class="col-sm-3 col-form-label text-right">{{ __('menu.name') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="name" id="name" value="{{ $item->name }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->name }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="description" class="col-sm-3 col-form-label text-right">{{ __('menu.description') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="description" id="description" value="{{ $item->description }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->description }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="is_enable" class="col-sm-3 col-form-label text-right">{{ __('menu.is_enable') }}</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control-plaintext" name="is_enable" id="is_enable" value="{{ $item->present()->isEnable }}" readonly>
+                        <div class="form-control-plaintext">{{ $item->present()->isEnable }}</div>
                     </div>
                 </div>
             </div>

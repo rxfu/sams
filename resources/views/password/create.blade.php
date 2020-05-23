@@ -16,7 +16,7 @@
 	                <div class="form-group row">
 	                    <label for="old_password" class="col-sm-3 col-form-label text-right">{{ __('user.old_password') }}</label>
 	                    <div class="col-md-9">
-	                    	<input type="password" name="old_password" id="old_password" class="form-control{{ $errors->has('old_password') ? ' is-invalid' : '' }}" placeholder="{{ __('user.old_password') }}" value="{{ old('old_password') }}" required focus>
+	                    	<input type="password" name="old_password" id="old_password" class="form-control{{ $errors->has('old_password') ? ' is-invalid' : '' }}" placeholder="{{ __('user.old_password') }}" value="{{ old('old_password') }}" required>
 	                        @error('old_password')
 		                        <div class="invalid-feedback" role="alert">
 		                            <strong>{{ $message}}</strong>
