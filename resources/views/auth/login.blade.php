@@ -31,6 +31,17 @@
             </div>
         @enderror
     </div>
+    <div class="input-group mb-3">
+        <input type="text" id="captcha" name="captcha" class="form-control @error('captcha') is-invalid @enderror" placeholder="验证码" required>
+        <div class="input-group-append">
+        <img src="{{ captcha_src('custom') }}" style="cursor: pointer;" onclick="this.src='{{ captcha_src('custom') }}' + Math.random()">
+        </div>
+        @error('captcha')
+            <div class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </div>
+        @enderror
+    </div>
     <div class="row">
         <div class="col-8">
             <div class="icheck-primary">

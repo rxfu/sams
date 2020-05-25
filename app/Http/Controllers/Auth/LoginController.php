@@ -84,6 +84,10 @@ class LoginController extends Controller
         $request->validate([
             $this->username() => 'required|string',
             'password' => 'required|string',
+            'captcha' => 'required|captcha',
+        ], [
+            'captcha.required' => __('validation.required'),
+            'captcha.captcha' => __('validation.captcha'),
         ]);
 
         if ($this->service->isDeactive($request->username)) {
