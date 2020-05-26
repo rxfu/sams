@@ -16,8 +16,12 @@ class CreateForwardsTable extends Migration
         Schema::create('forwards', function (Blueprint $table) {
             $table->id();
             $table->string('archive_id', 20)->comment('档案编号');
-            $table->string('address')->comment('投递去向');
+            $table->string('location')->comment('投递去向');
             $table->integer('status')->default(0)->comment('投递状态，0-未投递，1-已投递，2-被退回');
+            $table->string('receiver', 64)->nullable()->comment("收件人姓名");
+            $table->string('phone', 20)->nullable()->comment("联系电话");
+            $table->string('address')->nullable()->comment("地址");
+            $table->boolean('had_receipt')->default(false)->comment('是否有回执，0-无，1-有');
             $table->foreignId('creator_id')
                 ->constrained('users')
                 ->comment('创建者ID');
