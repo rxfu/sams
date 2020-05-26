@@ -15,11 +15,7 @@ class CreateForwardsTable extends Migration
     {
         Schema::create('forwards', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('archive_id', 20)
-                ->constrained()
-                ->onDelete('cascade')
-                ->onUpdate('cascade')
-                ->comment('档案编号');
+            $table->string('archive_id', 20)->comment('档案编号');
             $table->string('address')->comment('投递去向');
             $table->integer('status')->default(0)->comment('投递状态，0-未投递，1-已投递，2-被退回');
             $table->foreignId('creator_id')
@@ -32,6 +28,7 @@ class CreateForwardsTable extends Migration
             $table->text('remark')->nullable()->comment('备注');
             $table->timestamps();
 
+            $table->foreign('archive_id')->references('id')->on('archives')->onDelete('cascade')->onUpdate('cascade');
             $table->index('archive_id');
         });
     }
