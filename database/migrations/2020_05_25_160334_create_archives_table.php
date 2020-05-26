@@ -16,13 +16,24 @@ class CreateArchivesTable extends Migration
         Schema::create('archives', function (Blueprint $table) {
             $table->string('id', 20)->comment('档案编号');
             $table->string('sid', 12)->comment('学号');
+            $table->string('card_number', 18)->comment('证件号码');
+            $table->date('received_at')->comment('接收时间');
             $table->string('name', 50)->comment('姓名');
             $table->string('department_id', 2)->comment('学院');
             $table->string('major_id', 7)->comment('专业');
             $table->string('grade', 4)->comment('年级');
+            $table->foreignId('creator_id')
+                ->constrained('users')
+                ->comment('创建者ID');
+            $table->foreignId('editor_id')
+                ->constrained('users')
+                ->comment('修改者ID');
+            $table->text('remark')->nullable()->comment('备注');
             $table->timestamps();
 
             $table->primary('id');
+            $table->index('sid');
+            $table->index('card_number');
         });
     }
 
