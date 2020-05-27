@@ -1,2 +1,2 @@
-App\Models\{{ model }}::class;
-    // model_here
+App\Models\{{ model }}::class,
+		// model_here
