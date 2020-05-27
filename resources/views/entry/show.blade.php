@@ -29,7 +29,7 @@
                 <div class="form-group row">
                     <label for="is_enable" class="col-sm-3 col-form-label text-right">{{ __('entry.is_enable') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->is_enable }}</div>
+                        <div class="form-control-plaintext">{{ $item->present()->isEnable }}</div>
                     </div>
                 </div>
 

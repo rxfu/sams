@@ -47,7 +47,7 @@ class MenusTableSeeder extends Seeder
                 'name' => '仪表盘',
                 'route' => 'home',
                 'icon' => 'tachometer-alt',
-                'order' => 3,
+                'order' => -999,
             ],
             [
                 'slug' => 'menu-manage',
@@ -141,6 +141,19 @@ class MenusTableSeeder extends Seeder
                 'parent_id' => 12,
                 'is_system' => true,
                 'order' => 15,
+            ],
+            [
+                'slug' => 'archive-manage',
+                'name' => '档案管理',
+                'icon' => 'archive',
+                'order' => 0,
+            ],
+            [
+                'slug' => 'entry',
+                'name' => '档案条目管理',
+                'route' => 'entries.index',
+                'parent_id' => 16,
+                'order' => 1,
             ],
         ]);
     }

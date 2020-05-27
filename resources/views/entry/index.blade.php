@@ -24,7 +24,6 @@
                             <th>{{ __('entry.id') }}</th>
 							<th>{{ __('entry.name') }}</th>
 							<th>{{ __('entry.is_enable') }}</th>
-							<th>{{ __('entry.description') }}</th>
                             <th>{{ __('Action') }}</th>
                         </tr>
                     </thead>
@@ -33,8 +32,7 @@
                             <tr>
                                 <td>{{ $item->id }}</td>
 								<td>{{ $item->name }}</td>
-								<td>{{ $item->is_enable }}</td>
-								<td>{{ $item->description }}</td>
+								<td>{{ $item->present()->isEnable }}</td>
                                 <td>
                                     @can('view', $item)
                                         <a href="{{ route('entries.show', $item) }}" class="btn btn-primary btn-sm" title="{{ __('Show') }}">
@@ -60,7 +58,6 @@
                             <th>{{ __('entry.id') }}</th>
 							<th>{{ __('entry.name') }}</th>
 							<th>{{ __('entry.is_enable') }}</th>
-							<th>{{ __('entry.description') }}</th>
                             <th>{{ __('Action') }}</th>
                         </tr>
                     </tfoot>
