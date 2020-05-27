@@ -2,13 +2,13 @@
 
 return [
     'base' => env('MIX_BASE_URL', '/'),
-    'name' => env('MIX_APP_NAME', 'Laradmin'),
-    'slug' => env('MIX_APP_SLUG', 'Laradmin'),
-    'keywords' => 'Laravel, Bootstrap, Admin template',
-    'description' => 'An admin boilerplate developed with Bootstrap and AdminLTE base on Laravel',
+    'name' => env('MIX_APP_NAME', '广西师范大学学生档案管理系统'),
+    'slug' => env('MIX_APP_SLUG', '学生档案管理'),
+    'keywords' => 'Laravel, Bootstrap, 档案管理, 学生档案',
+    'description' => '管理学生档案信息',
     'author' => 'Fu Rongxin',
     'powerby' => 'Fu Rongxin',
-    'copyright' => 'Laradmin Company',
+    'copyright' => '广西师范大学档案馆',
     'password' => '123456',
 
     // 状态代码,

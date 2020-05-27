@@ -56,5 +56,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('roles', 'RoleController');
     Route::resource('permissions', 'PermissionController');
     Route::resource('groups', 'GroupController');
+    Route::resource('entries', 'EntryController');
     // route_here
 });
