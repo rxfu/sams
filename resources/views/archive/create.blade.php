@@ -92,8 +92,8 @@
                         <label for="received_at" class="col-sm-3 col-form-label text-right">{{ __('archive.received_at') }}</label>
                         <div class="col-sm-9">
                             <div class="form-group">
-                                <div class="input-group datepicker">
-                                    <input type="text" class="form-control @error('received_at') is-invalid @enderror" name="received_at" id="received_at" placeholder="{{ __('archive.received_at') }}" value="{{ old('received_at') }}">
+                                <div class="input-group">
+                                    <input type="text" class="form-control datepicker @error('received_at') is-invalid @enderror" name="received_at" id="received_at" placeholder="{{ __('archive.received_at') }}" value="{{ old('received_at') }}">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <i class="far fa-calendar-alt"></i>

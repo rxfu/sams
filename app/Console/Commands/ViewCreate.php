@@ -251,8 +251,8 @@ class ViewCreate extends Command
                     case 'date':
                     case 'datetime':
                         $attribute .= '<div class="form-group">
-                                <div class="input-group datepicker">
-                                    <input type="text" name="' . $column . '" id="' . $column . '" class="form-control ' . $error . '" placeholder="{{ __(\'' . $table . '.' . $column . '\') }}" value="{{ old(\'' . $column . '\') }}">
+                                <div class="input-group">
+                                    <input type="text" name="' . $column . '" id="' . $column . '" class="form-control datepicker ' . $error . '" placeholder="{{ __(\'' . $table . '.' . $column . '\') }}" value="{{ old(\'' . $column . '\') }}">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <i class="far fa-calendar-alt"></i>
@@ -330,8 +330,8 @@ class ViewCreate extends Command
                     case 'date':
                     case 'datetime':
                         $attribute .= '<div class="form-group">
-                                <div class="input-group datepicker">
-                                    <input type="text" name="' . $column . '" id="' . $column . '" class="form-control ' . $error . '" placeholder="{{ __(\'' . $table . '.' . $column . '\') }}" value="{{ old(\'' . $column . '\', $item->' . $column . ') }}">
+                                <div class="input-group">
+                                    <input type="text" name="' . $column . '" id="' . $column . '" class="form-control datepicker ' . $error . '" placeholder="{{ __(\'' . $table . '.' . $column . '\') }}" value="{{ old(\'' . $column . '\', $item->' . $column . ') }}">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <i class="far fa-calendar-alt"></i>

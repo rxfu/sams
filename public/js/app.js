@@ -68,7 +68,6 @@ $(function () {
     });
 
     $('.datepicker').daterangepicker({
-        autoApply: true,
         singleDatePicker: true,
         locale: {
             format: "YYYY-MM-DD",
