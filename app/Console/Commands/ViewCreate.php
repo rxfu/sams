@@ -248,6 +248,7 @@ class ViewCreate extends Command
                             </div>';
                         break;
 
+                    case 'date':
                     case 'datetime':
                         $attribute .= '<div class="form-group">
                                 <div class="input-group datepicker">
@@ -326,6 +327,7 @@ class ViewCreate extends Command
                             </div>';
                         break;
 
+                    case 'date':
                     case 'datetime':
                         $attribute .= '<div class="form-group">
                                 <div class="input-group datepicker">

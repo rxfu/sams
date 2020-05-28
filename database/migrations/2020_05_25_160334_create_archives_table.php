@@ -16,8 +16,8 @@ class CreateArchivesTable extends Migration
         Schema::create('archives', function (Blueprint $table) {
             $table->string('id', 20)->comment('档案编号');
             $table->string('sid', 12)->comment('学号');
-            $table->string('card_number', 18)->comment('证件号码');
-            $table->date('received_at')->comment('接收时间');
+            $table->string('card_number', 18)->nullable()->comment('证件号码');
+            $table->date('received_at')->nullable()->comment('接收时间');
             $table->string('name', 50)->nullable()->comment('姓名');
             $table->string('department_id', 2)->nullable()->comment('学院');
             $table->string('major_id', 7)->nullable()->comment('专业');

@@ -34,9 +34,10 @@ abstract class Repository
         }
     }
 
-    public function findAll($order = 'id', $direction = 'asc', $trashed = false)
+    public function findAll($order = null, $direction = 'asc', $trashed = false)
     {
         try {
+            $order = is_null($order) ? $this->model->getKeyName() : $order;
             $query = $this->model->orderBy($order, $direction);
 
             if ($trashed) {
@@ -49,9 +50,10 @@ abstract class Repository
         }
     }
 
-    public function findWith($relations, $order = 'id', $direction = 'asc', $trashed = false)
+    public function findWith($relations, $order = null, $direction = 'asc', $trashed = false)
     {
         try {
+            $order = is_null($order) ? $this->model->getKeyName() : $order;
             $relations = is_array($relations) ? $relations : [$relations];
 
             $query = $this->model->with($relations)->orderBy($order, $direction);
@@ -66,10 +68,11 @@ abstract class Repository
         }
     }
 
-    public function findBy($attributes, $relations = null, $order = 'id', $direction = 'asc', $trashed = false)
+    public function findBy($attributes, $relations = null, $order = null, $direction = 'asc', $trashed = false)
     {
         try {
-            $attributes = is_array($attributes) ? $attributes : ['id' => $attributes];
+            $order = is_null($order) ? $this->model->getKeyName() : $order;
+            $attributes = is_array($attributes) ? $attributes : [$this->model->getKeyName() => $attributes];
             $query = $this->model;
 
             if (!is_null($relations)) {
