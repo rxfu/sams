@@ -22,6 +22,8 @@ return [
         App\Models\Menuitem::class,
         App\Models\Setting::class,
         App\Models\Entry::class,
-        // model_here
+        App\Models\Archive::class,
+		App\Models\Delivery::class,
+		// model_here
     ],
 ];

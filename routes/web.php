@@ -57,5 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('permissions', 'PermissionController');
     Route::resource('groups', 'GroupController');
     Route::resource('entries', 'EntryController');
+    Route::resource('archives', 'ArchiveController');
+    Route::resource('deliveries', 'DeliveryController');
     // route_here
 });

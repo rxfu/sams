@@ -149,11 +149,25 @@ class MenusTableSeeder extends Seeder
                 'order' => 0,
             ],
             [
+                'slug' => 'archive',
+                'name' => '档案管理',
+                'route' => 'archives.index',
+                'parent_id' => 16,
+                'order' => 1,
+            ],
+            [
+                'slug' => 'delivery',
+                'name' => '档案去向管理',
+                'route' => 'deliveries.index',
+                'parent_id' => 16,
+                'order' => 2,
+            ],
+            [
                 'slug' => 'entry',
                 'name' => '档案条目管理',
                 'route' => 'entries.index',
                 'parent_id' => 16,
-                'order' => 1,
+                'order' => 3,
             ],
         ]);
     }
