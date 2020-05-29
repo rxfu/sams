@@ -42,11 +42,11 @@
                                 <td>{{ $item->id }}</td>
 								<td>{{ optional($item->archive)->name }}</td>
 								<td>{{ $item->forward }}</td>
-								<td>{{ $item->status }}</td>
+								<td>{{ $item->present()->hasStatus }}</td>
 								<td>{{ $item->receiver }}</td>
 								<td>{{ $item->phone }}</td>
 								<td>{{ $item->address }}</td>
-								<td>{{ $item->had_receipt }}</td>
+								<td>{{ $item->present()->hadReceipt }}</td>
 								<td>{{ optional($item->creator)->name }}</td>
 								<td>{{ optional($item->editor)->name }}</td>
 								<td>{{ $item->version }}</td>

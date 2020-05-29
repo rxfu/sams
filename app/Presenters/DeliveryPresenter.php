@@ -22,4 +22,9 @@ class DeliveryPresenter extends Presenter
                 return '未投递';
         }
     }
+
+    public function hadReceipt()
+    {
+        return $this->had_receipt ? '是' : '否';
+    }
 }

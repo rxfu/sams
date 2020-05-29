@@ -20,7 +20,7 @@
                             @inject('students', 'App\Services\StudentService')
 							<select name="sid" id="sid" class="form-control select2 select2-success @error('sid') is-invalid @enderror" data-dropdown-css-class="select2-success">
                                 @foreach ($students->getAllByNoArchive() as $collection)
-                                    <option value="{{ $collection->getKey() }}">{{ $collection->getKey() }}（{{ $collection->xm }}）</option>
+                                    <option value="{{ $collection->getKey() }}">{{ $collection->id }}（{{ $collection->name }}）</option>
                                 @endforeach
                             </select>
                             @error('sid')
