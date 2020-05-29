@@ -22,7 +22,7 @@
                 <div class="form-group row">
                     <label for="archive_id" class="col-sm-3 col-form-label text-right">{{ __('delivery.archive_id') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ optional($item->archive)->name }}</div>
+                        <div class="form-control-plaintext">{{ $item->archive_id }}</div>
                     </div>
                 </div>
 
