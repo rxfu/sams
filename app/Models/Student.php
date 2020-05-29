@@ -13,4 +13,9 @@ class Student extends Model
     public $timestamps = false;
 
     protected $primaryKey = 'xh';
+
+    public function archives()
+    {
+        return $this->hasMany('App\Models\Archive', 'sid', 'xh');
+    }
 }

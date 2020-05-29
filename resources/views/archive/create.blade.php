@@ -19,7 +19,7 @@
                         <div class="col-sm-9">
                             @inject('students', 'App\Services\StudentService')
 							<select name="sid" id="sid" class="form-control select2 select2-success @error('sid') is-invalid @enderror" data-dropdown-css-class="select2-success">
-                                @foreach ($students->getAll() as $collection)
+                                @foreach ($students->getAllByNoArchive() as $collection)
                                     <option value="{{ $collection->getKey() }}">{{ $collection->getKey() }}（{{ $collection->xm }}）</option>
                                 @endforeach
                             </select>
@@ -108,6 +108,33 @@
                             @enderror
                         </div>
                     </div>
+
+                    <hr>
+
+                    @inject('entries', 'App\Services\EntryService')
+                    @foreach ($entries->getActiveItems() as $entry)
+                        @if ($loop->index % 3 === 0)
+                            <div class="row">
+                        @endif
+
+                        <div class="col-sm-4">
+                            <div class="form-group row">
+                                <label for="entry[{{ $entry->id }}]" class="col-sm-9 col-form-label text-right">{{ $entry->name }}</label>
+                                <div class="col-sm-3">
+                                    <input type="number" class="form-control @error('entry.' . $entry->id) is-invalid @enderror" name="entry[{{ $entry->id }}]" id="entry[{{ $entry->id }}]" placeholder="份数" value="{{ old('entry[' . $entry->id . ']', 0) }}" min="0">
+                                    @error('entry.' . $entry->id)
+                                        <div class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        @if ($loop->index % 3 === 2)
+                            </div>
+                        @endif
+                    @endforeach
                 </div>
 
                 <div class="card-footer">

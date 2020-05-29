@@ -20,6 +20,13 @@
                 </div>
 
                 <div class="form-group row">
+                    <label for="received_at" class="col-sm-3 col-form-label text-right">{{ __('archive.received_at') }}</label>
+                    <div class="col-sm-9">
+                        <div class="form-control-plaintext">{{ $item->received_at }}</div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label for="sid" class="col-sm-3 col-form-label text-right">{{ __('archive.sid') }}</label>
                     <div class="col-sm-9">
                         <div class="form-control-plaintext">{{ $item->sid }}</div>
@@ -29,42 +36,35 @@
                 <div class="form-group row">
                     <label for="card_number" class="col-sm-3 col-form-label text-right">{{ __('archive.card_number') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->card_number }}</div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="received_at" class="col-sm-3 col-form-label text-right">{{ __('archive.received_at') }}</label>
-                    <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->received_at }}</div>
+                        <div class="form-control-plaintext">{{ $item->student->sfzh }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="name" class="col-sm-3 col-form-label text-right">{{ __('archive.name') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->name }}</div>
+                        <div class="form-control-plaintext">{{ $item->student->xm }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="department_id" class="col-sm-3 col-form-label text-right">{{ __('archive.department_id') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ optional($item->department)->name }}</div>
+                        <div class="form-control-plaintext">{{ $item->student->xy }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="major_id" class="col-sm-3 col-form-label text-right">{{ __('archive.major_id') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ optional($item->major)->name }}</div>
+                        <div class="form-control-plaintext">{{ $item->student->zy }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="grade" class="col-sm-3 col-form-label text-right">{{ __('archive.grade') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->grade }}</div>
+                        <div class="form-control-plaintext">{{ $item->student->nj }}</div>
                     </div>
                 </div>
 
@@ -88,6 +88,28 @@
                         <div class="form-control-plaintext">{{ $item->remark }}</div>
                     </div>
                 </div>
+
+                <hr>
+
+                @inject('entries', 'App\Services\EntryService')
+                @foreach ($item->entries as $entry)
+                    @if ($loop->index % 3 === 0)
+                        <div class="row">
+                    @endif
+
+                    <div class="col-sm-4">
+                        <div class="form-group row">
+                            <label for="entry[{{ $entry->id }}]" class="col-sm-9 col-form-label text-right">{{ $entry->name }}</label>
+                            <div class="col-sm-3">
+                                <div class="form-control-plaintext">{{ $entry->pivot->quantity }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if ($loop->index % 3 === 2)
+                        </div>
+                    @endif
+                @endforeach
             </div>
 
             <div class="card-footer">

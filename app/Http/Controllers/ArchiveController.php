@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Archive;
-use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Services\ArchiveService;
 use App\Http\Requests\ArchiveStoreRequest;
@@ -11,6 +10,8 @@ use App\Http\Requests\ArchiveUpdateRequest;
 
 class ArchiveController extends Controller
 {
+    protected $entryService;
+
     /**
      * Create a new controller instance.
      *
@@ -55,7 +56,6 @@ class ArchiveController extends Controller
     public function store(ArchiveStoreRequest $request)
     {
         if ($request->isMethod('post')) {
-
             $item = $this->service->store($request->all());
 
             return redirect()->route('archives.show', $item);
@@ -132,14 +132,5 @@ class ArchiveController extends Controller
         $this->error(405001);
 
         return back();
-    }
-
-    /**
-     * Get a student of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function student(Student $student)
-    {
     }
 }

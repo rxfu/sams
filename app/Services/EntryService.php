@@ -10,4 +10,9 @@ class EntryService extends Service
     {
         $this->repository = $entries;
     }
+
+    public function getActiveItems()
+    {
+        return $this->repository->activeItems();
+    }
 }

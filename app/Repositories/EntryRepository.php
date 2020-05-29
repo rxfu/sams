@@ -10,4 +10,11 @@ class EntryRepository extends Repository
     {
         $this->model = $entry;
     }
+
+    public function activeItems()
+    {
+        return $this->model->whereIsEnable(true)
+            ->orderBy('order')
+            ->get();
+    }
 }

@@ -17,6 +17,13 @@ class Entry extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'is_enable', 'description',
+        'name', 'is_enable', 'description', 'order',
     ];
+
+    public function archives()
+    {
+        return $this->belongsToMany('App\Models\Archive')
+            ->withPivot('quantity')
+            ->withTimestamps();
+    }
 }

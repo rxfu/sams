@@ -10,4 +10,9 @@ class StudentService extends Service
     {
         $this->repository = $students;
     }
+
+    public function getAllByNoArchive()
+    {
+        return $this->repository->doesntHaveArchive();
+    }
 }

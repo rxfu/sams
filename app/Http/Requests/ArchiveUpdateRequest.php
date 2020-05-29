@@ -24,7 +24,7 @@ class ArchiveUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'entry.*' => 'numeric|min:0',
         ];
     }
 }

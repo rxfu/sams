@@ -22,6 +22,12 @@ class CreateArchiveEntryTable extends Migration
                 ->onUpdate('cascade')
                 ->comment('档案条目ID');
             $table->unsignedInteger('quantity')->default(0)->comment('数量');
+            $table->foreignId('creator_id')
+                ->constrained('users')
+                ->comment('创建者ID');
+            $table->foreignId('editor_id')
+                ->constrained('users')
+                ->comment('修改者ID');
             $table->timestamps();
 
             $table->foreign('archive_id')

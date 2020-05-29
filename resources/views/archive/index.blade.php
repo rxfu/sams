@@ -40,12 +40,12 @@
                             <tr>
                                 <td>{{ $item->id }}</td>
 								<td>{{ $item->sid }}</td>
-								<td>{{ $item->card_number }}</td>
+								<td>{{ $item->student->sfzh }}</td>
 								<td>{{ $item->received_at }}</td>
-								<td>{{ $item->name }}</td>
-								<td>{{ optional($item->department)->name }}</td>
-								<td>{{ optional($item->major)->name }}</td>
-								<td>{{ $item->grade }}</td>
+								<td>{{ $item->student->xm }}</td>
+								<td>{{ $item->student->xy }}</td>
+								<td>{{ $item->student->zy }}</td>
+								<td>{{ $item->student->nj }}</td>
 								<td>{{ optional($item->creator)->name }}</td>
 								<td>{{ optional($item->editor)->name }}</td>
 								<td>{{ $item->remark }}</td>
