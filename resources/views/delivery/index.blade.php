@@ -40,7 +40,7 @@
                         @foreach ($items as $item)
                             <tr>
                                 <td>{{ $item->id }}</td>
-								<td>{{ optional($item->archive)->name }}</td>
+								<td>{{ $item->archive_id }}</td>
 								<td>{{ $item->forward }}</td>
 								<td>{{ $item->present()->hasStatus }}</td>
 								<td>{{ $item->receiver }}</td>

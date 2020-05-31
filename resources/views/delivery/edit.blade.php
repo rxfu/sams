@@ -18,17 +18,7 @@
                     <div class="form-group row">
                         <label for="archive_id" class="col-sm-3 col-form-label text-right">{{ __('delivery.archive_id') }}</label>
                         <div class="col-sm-9">
-                            @inject('archives', 'App\Services\ArchiveService')
-							<select name="archive_id" id="archive_id" class="form-control select2 select2-info @error('archive_id') is-invalid @enderror" data-dropdown-css-class="select2-info">
-                                @foreach ($archives->getAll() as $collection)
-                                    <option value="{{ $collection->getKey() }}"{{ old('archive_id', $item->archive_id) === $collection->getKey() ? ' selected' : '' }}>{{ $collection->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('archive_id')
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </div>
-                            @enderror
+                            <div class="form-control-plaintext">{{ $item->archive_id }}</div>
                         </div>
                     </div>
 
@@ -47,7 +37,18 @@
                     <div class="form-group row">
                         <label for="status" class="col-sm-3 col-form-label text-right">{{ __('delivery.status') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control @error('status') is-invalid @enderror" name="status" id="status" placeholder="{{ __('delivery.status') }}" value="{{ old('status', $item->status) }}">
+                            <div class="icheck-info icheck-inline">
+                                <input type="radio" name="status" id="status0" class="form-check-input @error('status') is-invalid @enderror" value="0"{{ $item->status === 0 ? ' checked' : '' }}>
+                                <label class="form-check-label" for="status0">未投递</label>
+                            </div>
+                            <div class="icheck-info icheck-inline">
+                                <input type="radio" name="status" id="status1" class="form-check-input @error('status') is-invalid @enderror" value="1"{{ $item->status === 1 ? ' checked' : '' }}>
+                                <label class="form-check-label" for="status1">已投递</label>
+                            </div>
+                            <div class="icheck-info icheck-inline">
+                                <input type="radio" name="status" id="status2" class="form-check-input @error('status') is-invalid @enderror" value="2"{{ $item->status === 2 ? ' checked' : '' }}>
+                                <label class="form-check-label" for="status2">被退回</label>
+                            </div>
                             @error('status')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -104,52 +105,6 @@
                                 <label class="form-check-label" for="had_receipt0">否</label>
                             </div>
                             @error('had_receipt')
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="creator_id" class="col-sm-3 col-form-label text-right">{{ __('delivery.creator_id') }}</label>
-                        <div class="col-sm-9">
-                            @inject('creators', 'App\Services\CreatorService')
-							<select name="creator_id" id="creator_id" class="form-control select2 select2-info @error('creator_id') is-invalid @enderror" data-dropdown-css-class="select2-info">
-                                @foreach ($creators->getAll() as $collection)
-                                    <option value="{{ $collection->getKey() }}"{{ old('creator_id', $item->creator_id) === $collection->getKey() ? ' selected' : '' }}>{{ $collection->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('creator_id')
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="editor_id" class="col-sm-3 col-form-label text-right">{{ __('delivery.editor_id') }}</label>
-                        <div class="col-sm-9">
-                            @inject('editors', 'App\Services\EditorService')
-							<select name="editor_id" id="editor_id" class="form-control select2 select2-info @error('editor_id') is-invalid @enderror" data-dropdown-css-class="select2-info">
-                                @foreach ($editors->getAll() as $collection)
-                                    <option value="{{ $collection->getKey() }}"{{ old('editor_id', $item->editor_id) === $collection->getKey() ? ' selected' : '' }}>{{ $collection->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('editor_id')
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="version" class="col-sm-3 col-form-label text-right">{{ __('delivery.version') }}</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control @error('version') is-invalid @enderror" name="version" id="version" placeholder="{{ __('delivery.version') }}" value="{{ old('version', $item->version) }}">
-                            @error('version')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>

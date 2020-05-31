@@ -36,7 +36,7 @@
                 <div class="form-group row">
                     <label for="status" class="col-sm-3 col-form-label text-right">{{ __('delivery.status') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->status }}</div>
+                        <div class="form-control-plaintext">{{ $item->present()->hasStatus }}</div>
                     </div>
                 </div>
 
@@ -64,7 +64,7 @@
                 <div class="form-group row">
                     <label for="had_receipt" class="col-sm-3 col-form-label text-right">{{ __('delivery.had_receipt') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->had_receipt }}</div>
+                        <div class="form-control-plaintext">{{ $item->present()->hadReceipt }}</div>
                     </div>
                 </div>
 
