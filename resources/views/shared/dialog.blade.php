@@ -11,8 +11,8 @@
                 <p>Loading...</p>
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-outline-light" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-outline-light" id="btn-confirmed">确定</button>
+                <button name="cancel" class="btn btn-outline-light" data-dismiss="modal">取消</button>
+                <button name="confirm" class="btn btn-outline-light" id="btn-confirmed">确定</button>
             </div>
         </div>
     </div>

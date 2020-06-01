@@ -71,6 +71,7 @@ $(function () {
         e.preventDefault();
 
         var href = $(this).attr('href');
+        var $page;
 
         $('#dialog').on('show.bs.modal', function (e) {
             var button = $(e.relatedTarget);
@@ -81,11 +82,12 @@ $(function () {
             modal.find('.modal-title').text(title);
             modal.find('.modal-body').load(href, function (result) {
                 $page = $(result);
-                alert($page.find('#import'));
-                $page.find('#import').html('djfaoijfopjwoi');
+                $page.find('#import-form').attr('action', href);
             });
         }).on('click', '#btn-confirmed', function () {
-            $('#import-form').submit();
+            $page.find('#import-form').submit(function() {
+                alert($(this).attr('action'));
+            });
         });
     });
 
