@@ -48,6 +48,11 @@ Route::middleware('auth')->group(function () {
         Route::put('/{password}', 'PasswordController@update')->name('update');
     });
 
+    Route::prefix('deliveries')->name('deliveries.')->group(function () {
+        Route::get('/import', 'DeliveryController@showImportForm')->name('import');
+        Route::post('/import', 'DeliveryController@import');
+    });
+
     Route::resource('logs', 'LogController')->only(['index', 'show']);
     Route::resource('settings', 'SettingController');
     Route::resource('menus', 'MenuController');

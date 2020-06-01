@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Delivery;
+use Illuminate\Http\Request;
+use App\Imports\DeliveryImport;
+use App\Services\DeliveryService;
 use App\Http\Requests\DeliveryStoreRequest;
 use App\Http\Requests\DeliveryUpdateRequest;
-use App\Models\Delivery;
-use App\Services\DeliveryService;
-use Illuminate\Http\Request;
 
 class DeliveryController extends Controller
 {
@@ -54,7 +55,7 @@ class DeliveryController extends Controller
     public function store(DeliveryStoreRequest $request)
     {
         if ($request->isMethod('post')) {
-    
+
             $item = $this->service->store($request->all());
 
             return redirect()->route('deliveries.show', $item);
@@ -101,7 +102,7 @@ class DeliveryController extends Controller
     public function update(DeliveryUpdateRequest $request, Delivery $delivery)
     {
         if ($request->isMethod('put')) {
-    
+
             $this->service->update($delivery, $request->all());
 
             return redirect()->route('deliveries.show', $delivery);
@@ -124,6 +125,42 @@ class DeliveryController extends Controller
         if ($request->isMethod('delete')) {
 
             $this->service->delete($delivery);
+
+            return redirect()->route('deliveries.index');
+        }
+
+        $this->error(405001);
+
+        return back();
+    }
+
+    /**
+     * Show the form for importing the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showImportForm()
+    {
+        $this->authorize('import', Delivery::class);
+
+        return view('shared.import');
+    }
+
+    /**
+     * Import the specified users in storage.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function import(Request $request)
+    {
+        $this->authorize('import', Delivery::class);
+
+        if ($request->isMethod('post')) {
+
+            $this->service->import(new DeliveryImport($this->service), $request->file('import'));
+
+            $this->success(200009);
 
             return redirect()->route('deliveries.index');
         }

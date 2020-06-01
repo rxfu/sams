@@ -16,7 +16,7 @@ class DeliveryService extends Service
     {
         $data['creator_id'] = Auth::id();
         $data['editor_id'] = Auth::id();
-        $data['version'] = 1;
+        $data['version'] = $this->repository->maxVersion($data['archive_id']) + 1;
 
         return $this->repository->save($data);
     }

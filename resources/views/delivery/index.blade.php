@@ -9,6 +9,12 @@
             <div class="card-header">
                 <h3 class="card-title">{{ __('delivery.module') . __('List') }}</h3>
                 <div class="card-tools">
+                    @can('import', Delivery::class)
+                        <a href="{{ route('deliveries.import') }}" title="{{ __('Import') }}" class="btn btn-info import" data-toggle="modal" data-target="#dialog" data-whatever="{{  __('delivery.module') . __('import') }}
+                    ">
+                            <i class="fas fa-file-import"></i> {{ __('Import') . __('delivery.module') }}
+                        </a>
+                    @endcan
                     @can('create', Delivery::class)
                         <a href="{{ route('deliveries.create') }}" title="{{ __('Create') }}" class="btn btn-success">
                             <i class="fas fa-plus"></i> {{ __('Create') . __('delivery.module') }}

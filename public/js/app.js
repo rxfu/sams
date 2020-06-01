@@ -67,6 +67,28 @@ $(function () {
         });
     });
 
+    $('.import').click(function (e) {
+        e.preventDefault();
+
+        var href = $(this).attr('href');
+
+        $('#dialog').on('show.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var title = button.data('whatever');
+            var modal = $(this);
+
+            modal.find('.modal-content').removeClass().addClass('modal-content bg-info');
+            modal.find('.modal-title').text(title);
+            modal.find('.modal-body').load(href, function (result) {
+                $page = $(result);
+                alert($page.find('#import'));
+                $page.find('#import').html('djfaoijfopjwoi');
+            });
+        }).on('click', '#btn-confirmed', function () {
+            $('#import-form').submit();
+        });
+    });
+
     $('.datepicker').daterangepicker({
         singleDatePicker: true,
         locale: {
