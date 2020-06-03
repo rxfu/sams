@@ -71,7 +71,7 @@ $(function () {
         e.preventDefault();
 
         var href = $(this).attr('href');
-        var $page;
+        var form;
 
         $('#dialog').on('show.bs.modal', function (e) {
             var button = $(e.relatedTarget);
@@ -81,13 +81,12 @@ $(function () {
             modal.find('.modal-content').removeClass().addClass('modal-content bg-info');
             modal.find('.modal-title').text(title);
             modal.find('.modal-body').load(href, function (result) {
-                $page = $(result);
-                $page.find('#import-form').attr('action', href);
+                form = $(result);
+                form.find('#import-form').attr('action', href);
+                $(this).html(form);
             });
         }).on('click', '#btn-confirmed', function () {
-            $page.find('#import-form').submit(function() {
-                alert($(this).attr('action'));
-            });
+            form.find('#import-form').submit();
         });
     });
 

@@ -27,11 +27,12 @@ class DeliveryImport implements OnEachRow, WithHeadingRow
         $rowIndex = $row->getIndex();
         $row = $row->toArray();
 
-        $sid = $row['学号'];
-        $forward = $row['投递去向'];
-        $receiver = $row['收件人'];
-        $phone = $row['联系电话'];
-        $address = $row['地址'];
+        $sid = $row[0];
+        $forward = $row[1];
+        $receiver = $row[2];
+        $phone = $row[3];
+        $address = $row[4];
+        $remark = $row[5];
         $archiveId = Archive::whereSid($sid)->first()->archive_id;
 
         $this->deliveryService->store([
@@ -40,6 +41,7 @@ class DeliveryImport implements OnEachRow, WithHeadingRow
             'receiver' => $receiver,
             'phone' => $phone,
             'address' => $address,
+            'remark' => $remark,
         ]);
     }
 }

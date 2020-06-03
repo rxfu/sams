@@ -47,7 +47,7 @@ return [
     ],
     'custom' => [
         'length' => 4,
-        'width' => 80,
+        'width' => 120,
         'height' => 24,
         'quality' => 90,
         'math' => false,
