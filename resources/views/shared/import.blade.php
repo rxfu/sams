@@ -1,5 +1,5 @@
 <div>
-    <form role="form" id="import-form" name="import-form" method="post" action="#" enctype="multipart/form-data">
+    <form role="form" id="import-form" name="import-form" method="post" action="{{ request('action') }}" enctype="multipart/form-data">
         @csrf
         <div class="form-group row">
             <label for="import" class="col-sm-3 col-form-label text-right">{{ __('Import') . __('File') }}</label>

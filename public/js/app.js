@@ -71,7 +71,6 @@ $(function () {
         e.preventDefault();
 
         var href = $(this).attr('href');
-        var form;
 
         $('#dialog').on('show.bs.modal', function (e) {
             var button = $(e.relatedTarget);
@@ -80,13 +79,11 @@ $(function () {
 
             modal.find('.modal-content').removeClass().addClass('modal-content bg-info');
             modal.find('.modal-title').text(title);
-            modal.find('.modal-body').load(href, function (result) {
-                form = $(result);
-                form.find('#import-form').attr('action', href);
-                $(this).html(form);
+            modal.find('.modal-body').load(href, {
+                action: href
             });
         }).on('click', '#btn-confirmed', function () {
-            form.find('#import-form').submit();
+            $('#import-form').submit();
         });
     });
 

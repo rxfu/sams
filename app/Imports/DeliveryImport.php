@@ -3,13 +3,12 @@
 namespace App\Imports;
 
 use App\Models\Archive;
-use App\Models\Delivery;
 use Maatwebsite\Excel\Row;
 use App\Services\DeliveryService;
 use Maatwebsite\Excel\Concerns\OnEachRow;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class DeliveryImport implements OnEachRow, WithHeadingRow
+class DeliveryImport implements OnEachRow, WithStartRow
 {
     protected $deliveryService;
 
@@ -33,7 +32,7 @@ class DeliveryImport implements OnEachRow, WithHeadingRow
         $phone = $row[3];
         $address = $row[4];
         $remark = $row[5];
-        $archiveId = Archive::whereSid($sid)->first()->archive_id;
+        $archiveId = Archive::whereSid($sid)->first()->id;
 
         $this->deliveryService->store([
             'archive_id' => $archiveId,
@@ -43,5 +42,13 @@ class DeliveryImport implements OnEachRow, WithHeadingRow
             'address' => $address,
             'remark' => $remark,
         ]);
+    }
+
+    /**
+     * @return int
+     */
+    public function startRow(): int
+    {
+        return 2;
     }
 }
