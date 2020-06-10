@@ -21,7 +21,9 @@ class CreateDeliveriesTable extends Migration
             $table->string('receiver', 128)->nullable()->comment("收件人");
             $table->string('phone', 20)->nullable()->comment("联系电话");
             $table->string('address')->nullable()->comment("地址");
+            $table->string('zipcode', 6)->nullable()->comment('邮政编码');
             $table->boolean('had_receipt')->default(false)->comment('是否有回执，0-无，1-有');
+            $table->timestamp('send_at')->nullable()->comment('寄送时间');
             $table->foreignId('creator_id')
                 ->constrained('users')
                 ->comment('创建者ID');
