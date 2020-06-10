@@ -35,6 +35,18 @@
                     </div>
 
                     <div class="form-group row">
+                        <label for="reason" class="col-sm-3 col-form-label text-right">{{ __('delivery.reason') }}</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control @error('reason') is-invalid @enderror" name="reason" id="reason" placeholder="{{ __('delivery.reason') }}" value="{{ old('reason', $item->reason) }}">
+                            @error('reason')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label for="status" class="col-sm-3 col-form-label text-right">{{ __('delivery.status') }}</label>
                         <div class="col-sm-9">
                             <div class="icheck-info icheck-inline">
@@ -86,6 +98,39 @@
                         <div class="col-sm-9">
                             <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" id="address" placeholder="{{ __('delivery.address') }}" value="{{ old('address', $item->address) }}">
                             @error('address')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="zipcode" class="col-sm-3 col-form-label text-right">{{ __('delivery.zipcode') }}</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control @error('zipcode') is-invalid @enderror" name="zipcode" id="zipcode" placeholder="{{ __('delivery.zipcode') }}" value="{{ old('zipcode', $item->zipcode) }}">
+                            @error('zipcode')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="send_at" class="col-sm-3 col-form-label text-right">{{ __('delivery.send_at') }}</label>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control datepicker @error('send_at') is-invalid @enderror" name="send_at" id="send_at" placeholder="{{ __('delivery.send_at') }}" value="{{ old('send_at', $item->send_at) }}">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="far fa-calendar-alt"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @error('send_at')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>

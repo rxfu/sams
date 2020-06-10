@@ -16,7 +16,7 @@ class Delivery extends Model
      * @var array
      */
     protected $fillable = [
-        'archive_id', 'forward', 'status', 'receiver', 'phone', 'address', 'had_receipt', 'creator_id', 'editor_id', 'version', 'remark',
+        'archive_id', 'forward', 'reason', 'status', 'receiver', 'phone', 'address', 'zipcode', 'send_at', 'had_receipt', 'creator_id', 'editor_id', 'version', 'remark',
     ];
 
     public function student()
