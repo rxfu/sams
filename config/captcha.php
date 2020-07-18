@@ -48,8 +48,8 @@ return [
     ],
     'custom' => [
         'length' => 4,
-        'width' => 110,
-        'height' => 24,
+        'width' => 120,
+        'height' => 36,
         'quality' => 90,
         'math' => false,
         'bgImage' => false,
