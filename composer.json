@@ -19,7 +19,8 @@
         "laravel/tinker": "^2.3",
         "maatwebsite/excel": "^3.1",
         "mews/captcha": "^3.1",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "yajra/laravel-oci8": "7"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
