@@ -26,22 +26,12 @@ class Student extends Model
 
     public function getCardNumberAttribute()
     {
-        return $this->sfzh;
-    }
-
-    public function getDepartmentAttribute()
-    {
-        return $this->xy;
-    }
-
-    public function getMajorAttribute()
-    {
-        return $this->zy;
+        return $this->sfzjh;
     }
 
     public function getGradeAttribute()
     {
-        return $this->nj;
+        return $this->dqszj;
     }
 
     public function archives()
