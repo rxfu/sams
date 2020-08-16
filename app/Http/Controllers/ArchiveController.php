@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Archive;
 use Illuminate\Http\Request;
+use App\Exports\ArchiveExport;
 use App\Services\ArchiveService;
 use App\Http\Requests\ArchiveStoreRequest;
 use App\Http\Requests\ArchiveUpdateRequest;
@@ -132,5 +133,20 @@ class ArchiveController extends Controller
         $this->error(405001);
 
         return back();
+    }
+
+    /**
+     * Export the specified users in storage.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function export(Request $request)
+    {
+        $this->authorize('export', Archive::class);
+
+        $this->success(200010);
+
+        return $this->service->exportExcel(new ArchiveExport, 'export.xlsx');
     }
 }

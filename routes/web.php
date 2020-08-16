@@ -53,6 +53,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/import', 'DeliveryController@import');
     });
 
+    Route::prefix('archives')->name('archives.')->group(function () {
+        Route::get('/import', 'ArchiveController@showImportForm')->name('import');
+        Route::post('/import', 'ArchiveController@import');
+        Route::get('/export', 'ArchiveController@export')->name('export');
+    });
+
     Route::resource('logs', 'LogController')->only(['index', 'show']);
     Route::resource('settings', 'SettingController');
     Route::resource('menus', 'MenuController');

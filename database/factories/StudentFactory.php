@@ -20,6 +20,6 @@ $factory->define(Student::class, function (Faker $faker) {
         'dqszj' => $faker->year,
         'xz' => $faker->randomElement(['2', '4']),
         'sfzx' => $faker->numberBetween(0, 1),
-        'sjly' => $faker->randomElement(['教务管理系统', '研究生管理系统']),
+        'sjly' => $faker->randomElement(['教务管理系统', '研究生系统']),
     ];
 });

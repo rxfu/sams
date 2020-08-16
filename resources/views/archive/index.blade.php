@@ -9,6 +9,17 @@
             <div class="card-header">
                 <h3 class="card-title">{{ __('archive.module') . __('List') }}</h3>
                 <div class="card-tools">
+                    @can('export', Archive::class)
+                        <a href="{{ route('archives.export') }}" title="{{ __('Export') }}" class="btn btn-secondary">
+                            <i class="fas fa-file-export"></i> {{ __('Export') . __('archive.module') }}
+                        </a>
+                    @endcan
+                    @can('import', Archive::class)
+                        <a href="{{ route('archives.import') }}" title="{{ __('Import') }}" class="btn btn-info import" data-toggle="modal" data-target="#dialog" data-whatever="{{  __('score.module') . __('import') }}
+                        ">
+                            <i class="fas fa-file-import"></i> {{ __('Import') . __('archive.module') }}
+                        </a>
+                    @endcan
                     @can('create', Archive::class)
                         <a href="{{ route('archives.create') }}" title="{{ __('Create') }}" class="btn btn-success">
                             <i class="fas fa-plus"></i> {{ __('Create') . __('archive.module') }}
