@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Archive;
 use Illuminate\Http\Request;
 use App\Exports\ArchiveExport;
+use App\Imports\ArchiveImport;
 use App\Services\ArchiveService;
 use App\Http\Requests\ArchiveStoreRequest;
 use App\Http\Requests\ArchiveUpdateRequest;
@@ -136,7 +137,31 @@ class ArchiveController extends Controller
     }
 
     /**
-     * Export the specified users in storage.
+     * Import the specified resource in storage.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function import(Request $request)
+    {
+        $this->authorize('import', Archive::class);
+
+        if ($request->isMethod('post')) {
+
+            $this->service->import(new ArchiveImport($this->service), $request->file('import'));
+
+            $this->success(200009);
+
+            return redirect()->route('archives.index');
+        }
+
+        $this->error(405001);
+
+        return back();
+    }
+
+    /**
+     * Export the specified resource in storage.
      *
      * @param  Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
