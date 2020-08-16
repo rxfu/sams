@@ -12,13 +12,6 @@ use Maatwebsite\Excel\Concerns\WithStartRow;
 
 class ArchiveImport implements OnEachRow, WithStartRow
 {
-    protected $archiveService;
-
-    public function __construct(ArchiveService $archiveService)
-    {
-        $this->archiveService = $archiveService;
-    }
-
     /**
      * @param \Maatwebsite\Excel\Row $row
      *
@@ -29,20 +22,22 @@ class ArchiveImport implements OnEachRow, WithStartRow
         $rowIndex = $row->getIndex();
         $row = $row->toArray();
 
-        $creatorId=Auth::id();
+        $creatorId = Auth::id();
         $archive = Archive::UpdateOrCreate([
             'sid' => $row[0],
         ], [
             'receive_at' => now(),
             'creator_id' => $creatorId,
+            'editor_id' => $creatorId,
         ]);
 
-        $entries=Entry::orderBy('order')->get();
-        $i=2;
-        foreach ($entries as $entry){
-            $archive->attach($entry->id,[
-                'quantity'=>$row[$i++];
-                'creator_id'=>$creatorId,
+        $entries = Entry::orderBy('order')->get();
+        $i = 2;
+        foreach ($entries as $entry) {
+            $archive->attach($entry->id, [
+                'quantity' => $row[$i++],
+                'creator_id' => $creatorId,
+                'editor_id' => $creatorId,
             ]);
         }
     }

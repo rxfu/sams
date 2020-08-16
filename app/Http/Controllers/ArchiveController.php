@@ -137,6 +137,18 @@ class ArchiveController extends Controller
     }
 
     /**
+     * Show the form for importing the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showImportForm()
+    {
+        $this->authorize('import', Archive::class);
+
+        return view('shared.import');
+    }
+
+    /**
      * Import the specified resource in storage.
      *
      * @param  Illuminate\Http\Request  $request
@@ -148,7 +160,7 @@ class ArchiveController extends Controller
 
         if ($request->isMethod('post')) {
 
-            $this->service->import(new ArchiveImport($this->service), $request->file('import'));
+            $this->service->import(new ArchiveImport, $request->file('import'));
 
             $this->success(200009);
 

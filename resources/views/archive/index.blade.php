@@ -15,7 +15,7 @@
                         </a>
                     @endcan
                     @can('import', Archive::class)
-                        <a href="{{ route('archives.import') }}" title="{{ __('Import') }}" class="btn btn-info import" data-toggle="modal" data-target="#dialog" data-whatever="{{  __('score.module') . __('import') }}
+                        <a href="{{ route('archives.import') }}" title="{{ __('Import') }}" class="btn btn-info import" data-toggle="modal" data-target="#dialog" data-whatever="{{  __('archive.module') . __('import') }}
                         ">
                             <i class="fas fa-file-import"></i> {{ __('Import') . __('archive.module') }}
                         </a>
