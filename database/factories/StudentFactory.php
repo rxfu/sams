@@ -10,7 +10,7 @@ $factory->define(Student::class, function (Faker $faker) {
         'xh' => $faker->regexify('[0-9]{12}'),
         'xm' => $faker->name,
         'card_type' => $faker->numberBetween(0, 1),
-        'sfzjh' => $faker->unique()->regexify('[0-9]{17}[0-9|X]'),
+        'sfzjh' => $faker->unique()->regexify('[0-9]{17}[0-9X]'),
         'xbm' => $faker->randomElement(['男', '女']),
         'mzm' => $faker->word,
         'dwh' => $faker->randomNumber(2, true),

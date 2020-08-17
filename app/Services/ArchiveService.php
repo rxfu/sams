@@ -12,17 +12,23 @@ class ArchiveService extends Service
         $this->repository = $archives;
     }
 
+    public function getBySid($sid)
+    {
+        return $this->repository->findBySid($sid);
+    }
+
     public function store($data)
     {
+        $userId = Auth::id();
         $data['id'] = date('YmdHis') . random_int(10000, 99999);
-        $data['creator_id'] = Auth::id();
-        $data['editor_id'] = Auth::id();
+        $data['creator_id'] = $userId;
+        $data['editor_id'] = $userId;
 
-        $entries = array_map(function ($number) {
+        $entries = array_map(function ($number) use ($userId) {
             return [
-                'quantity' => $number,
-                'creator_id' => Auth::id(),
-                'editor_id' => Auth::id(),
+                'quantity' => $number ?? 0,
+                'creator_id' => $userId,
+                'editor_id' => $userId,
             ];
         }, $data['entry']);
 
@@ -34,12 +40,13 @@ class ArchiveService extends Service
 
     public function update($model, $data)
     {
-        $data['editor_id'] = Auth::id();
+        $userId = Auth::id();
+        $data['editor_id'] = $userId;
 
-        $entries = array_map(function ($number) {
+        $entries = array_map(function ($number) use ($userId) {
             return [
-                'quantity' => $number,
-                'editor_id' => Auth::id(),
+                'quantity' => $number ?? 0,
+                'editor_id' => $userId,
             ];
         }, $data['entry']);
 

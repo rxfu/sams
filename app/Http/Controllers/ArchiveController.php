@@ -160,7 +160,7 @@ class ArchiveController extends Controller
 
         if ($request->isMethod('post')) {
 
-            $this->service->import(new ArchiveImport, $request->file('import'));
+            $this->service->import(new ArchiveImport($this->service), $request->file('import'));
 
             $this->success(200009);
 

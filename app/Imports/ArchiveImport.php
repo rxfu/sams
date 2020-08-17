@@ -5,12 +5,18 @@ namespace App\Imports;
 use App\Models\Entry;
 use App\Models\Archive;
 use Maatwebsite\Excel\Row;
-use Illuminate\Support\Facades\Auth;
+use App\Services\ArchiveService;
 use Maatwebsite\Excel\Concerns\OnEachRow;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 
 class ArchiveImport implements OnEachRow, WithStartRow
 {
+    protected $archiveService;
+
+    public function __construct(ArchiveService $archiveService)
+    {
+        $this->archiveService = $archiveService;
+    }
     /**
      * @param \Maatwebsite\Excel\Row $row
      *
@@ -21,23 +27,19 @@ class ArchiveImport implements OnEachRow, WithStartRow
         $rowIndex = $row->getIndex();
         $row = $row->toArray();
 
-        $creatorId = Auth::id();
-        $archive = Archive::UpdateOrCreate([
-            'sid' => $row[0],
-        ], [
-            'receive_at' => now(),
-            'creator_id' => $creatorId,
-            'editor_id' => $creatorId,
-        ]);
+        $data['sid'] = $row[0];
 
-        $entries = Entry::orderBy('order')->get();
         $i = 2;
+        $entries = Entry::orderBy('order')->get();
         foreach ($entries as $entry) {
-            $archive->attach($entry->id, [
-                'quantity' => $row[$i++],
-                'creator_id' => $creatorId,
-                'editor_id' => $creatorId,
-            ]);
+            $data['entry'][$entry->id] = $row[$i++];
+        }
+
+        $archive = $this->archiveService->getBySid($data['sid']);
+        if (empty($archive)) {
+            $this->archiveService->store($data);
+        } else {
+            $this->archiveService->update($archive, $data);
         }
     }
 

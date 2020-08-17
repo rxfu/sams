@@ -10,4 +10,9 @@ class ArchiveRepository extends Repository
     {
         $this->model = $archive;
     }
+
+    public function findBySid($sid)
+    {
+        return $this->model->whereSid($sid)->first();
+    }
 }
