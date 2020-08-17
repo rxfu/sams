@@ -3,7 +3,6 @@
 namespace App\Imports;
 
 use App\Models\Entry;
-use App\Models\Archive;
 use Maatwebsite\Excel\Row;
 use App\Services\ArchiveService;
 use Maatwebsite\Excel\Concerns\OnEachRow;
@@ -17,6 +16,7 @@ class ArchiveImport implements OnEachRow, WithStartRow
     {
         $this->archiveService = $archiveService;
     }
+
     /**
      * @param \Maatwebsite\Excel\Row $row
      *
@@ -37,6 +37,7 @@ class ArchiveImport implements OnEachRow, WithStartRow
 
         $archive = $this->archiveService->getBySid($data['sid']);
         if (empty($archive)) {
+            $data['received_at'] = now();
             $this->archiveService->store($data);
         } else {
             $this->archiveService->update($archive, $data);

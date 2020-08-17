@@ -4,12 +4,16 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\ArchiveRepository;
+use App\Repositories\StudentRepository;
 
 class ArchiveService extends Service
 {
-    public function __construct(ArchiveRepository $archives)
+    protected $studentRepository;
+
+    public function __construct(ArchiveRepository $archives, StudentRepository $studentRepository)
     {
         $this->repository = $archives;
+        $this->studentRepository = $studentRepository;
     }
 
     public function getBySid($sid)
@@ -20,7 +24,8 @@ class ArchiveService extends Service
     public function store($data)
     {
         $userId = Auth::id();
-        $data['id'] = date('YmdHis') . random_int(10000, 99999);
+        $student = $this->studentRepository->find($data['sid']);
+        $data['id'] = date('Y') . $student->dwh . substr($student->id, -4);
         $data['creator_id'] = $userId;
         $data['editor_id'] = $userId;
 
