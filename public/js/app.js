@@ -68,7 +68,7 @@ $(function () {
         });
     });
 
-    $('.import').click(function (e) {
+    $('body').on('click', '.import', function (e) {
         e.preventDefault();
 
         var href = $(this).attr('href');
@@ -80,7 +80,9 @@ $(function () {
 
             modal.find('.modal-content').removeClass().addClass('modal-content bg-info');
             modal.find('.modal-title').text(title);
-            modal.find('.modal-body').load(href);
+            modal.find('.modal-body').load(href, {
+                'action': href
+            });
 
             $(this).off('show.bs.modal');
         }).on('click', '#btn-confirmed', function () {
