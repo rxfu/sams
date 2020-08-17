@@ -28,20 +28,15 @@ class DeliveryImport implements OnEachRow, WithStartRow
         $row = $row->toArray();
 
         $sid = $row[0];
-        $forward = $row[1];
-        $receiver = $row[2];
-        $phone = $row[3];
-        $address = $row[4];
-        $remark = $row[5];
         $archiveId = Archive::whereSid($sid)->first()->id;
 
         $this->deliveryService->store([
             'archive_id' => $archiveId,
-            'forward' => $forward,
-            'receiver' => $receiver,
-            'phone' => $phone,
-            'address' => $address,
-            'remark' => $remark,
+            'forward' => $row[1],
+            'receiver' => $row[2],
+            'phone' => $row[3],
+            'address' => $row[4],
+            'remark' => $row[5],
         ]);
     }
 

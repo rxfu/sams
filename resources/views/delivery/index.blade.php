@@ -9,6 +9,9 @@
             <div class="card-header">
                 <h3 class="card-title">{{ __('delivery.module') . __('List') }}</h3>
                 <div class="card-tools">
+                    <a href="{{ asset('storage/files/template.xlsx') }}" title="{{ __('Download') }}" class="btn btn-warning">
+                        <i class="fas fa-download"></i> {{ __('Download') . __('delivery.module') . __('template') }}
+                    </a>
                     @can('import', Delivery::class)
                         <a href="{{ route('deliveries.import') }}" title="{{ __('Import') }}" class="btn btn-info import" data-toggle="modal" data-target="#dialog" data-whatever="{{  __('delivery.module') . __('import') }}
                     ">

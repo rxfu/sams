@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('deliveries')->name('deliveries.')->group(function () {
         Route::get('/import', 'DeliveryController@showImportForm')->name('import');
         Route::post('/import', 'DeliveryController@import');
+        Route::get('/export', 'DeliveryController@export')->name('export');
     });
 
     Route::prefix('archives')->name('archives.')->group(function () {

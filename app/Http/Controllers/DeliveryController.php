@@ -169,4 +169,19 @@ class DeliveryController extends Controller
 
         return back();
     }
+
+    /**
+     * Export the specified resource in storage.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function export(Request $request)
+    {
+        $this->authorize('export', Delivery::class);
+
+        $this->success(200010);
+
+        return $this->service->exportExcel(new DeliveryExport, 'export.xlsx');
+    }
 }
