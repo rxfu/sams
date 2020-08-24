@@ -21,9 +21,9 @@ class CreateStudentsTable extends Migration
             $table->string('xbm', 2)->comment('性别');
             $table->string('mzm', 20)->comment('民族');
             $table->string('dwh', 2)->comment('学院代码');
-            $table->string('department', 60)->comment('学院');
+            $table->string('xy', 60)->comment('学院');
             $table->string('zydm', 7)->comment('专业代码');
-            $table->string('major', 60)->comment('专业');
+            $table->string('zy', 60)->comment('专业');
             $table->string('dqszj', 4)->comment('年级');
             $table->string('xz', 1)->comment('学制');
             $table->string('sfzx', 20)->comment('学籍状态');

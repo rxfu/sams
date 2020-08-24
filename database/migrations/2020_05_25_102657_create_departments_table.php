@@ -14,12 +14,13 @@ class CreateDepartmentsTable extends Migration
     public function up()
     {
         Schema::create('departments', function (Blueprint $table) {
-            $table->id();
-            $table->string('did', 2)->unique()->nullable()->comment('学院号');
+            $table->string('id', 10)->unique()->comment('学院代码');
             $table->string('name', 64)->unique()->comment('名称');
             $table->boolean('is_enable')->default(true)->comment('是否启用，0-未启用，1-启用');
             $table->text('description')->nullable()->comment('描述');
             $table->timestamps();
+
+            $table->primary('id');
         });
     }
 

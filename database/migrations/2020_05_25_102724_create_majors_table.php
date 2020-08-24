@@ -14,17 +14,15 @@ class CreateMajorsTable extends Migration
     public function up()
     {
         Schema::create('majors', function (Blueprint $table) {
-            $table->id();
-            $table->string('mid', 7)->unique()->nullable()->comment('专业号');
+            $table->string('id', 7)->unique()->comment('专业代码');
             $table->string('name', 64)->comment('名称');
             $table->boolean('is_enable')->default(true)->comment('是否启用，0-未启用，1-启用');
-            $table->foreignId('department_id')
-                ->constrained()
-                ->onDelete('cascade')
-                ->onUpdate('cascade')
-                ->comment('学院ID');
+            $table->string('department_id', 10)->comment('学院ID');
             $table->text('description')->nullable()->comment('描述');
             $table->timestamps();
+
+            $table->primary('id');
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
