@@ -15,4 +15,9 @@ class StudentService extends Service
     {
         return $this->repository->doesntHaveArchive();
     }
+
+    public function getAllGrades()
+    {
+        return $this->repository->allGrades();
+    }
 }

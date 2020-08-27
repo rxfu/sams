@@ -21,4 +21,16 @@ class StudentRepository extends Repository
             throw new InternalException($e, $this->getModel(), __FUNCTION__);
         }
     }
+
+    public function allGrades()
+    {
+        try {
+            return $this->model->distinct()
+                ->select('dqszj')
+                ->orderBy('dqszj')
+                ->get();
+        } catch (QueryException $e) {
+            throw new InternalException($e, $this->getModel(), __FUNCTION__);
+        }
+    }
 }

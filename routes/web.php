@@ -58,6 +58,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/import', 'ArchiveController@showImportForm')->name('import');
         Route::post('/import', 'ArchiveController@import');
         Route::get('/export', 'ArchiveController@export')->name('export');
+        Route::get('/search', 'ArchiveController@showSearchForm')->name('search');
+        Route::post('/search', 'ArchiveController@search');
     });
 
     Route::resource('logs', 'LogController')->only(['index', 'show']);

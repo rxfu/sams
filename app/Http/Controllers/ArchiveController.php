@@ -6,25 +6,38 @@ use App\Models\Archive;
 use Illuminate\Http\Request;
 use App\Exports\ArchiveExport;
 use App\Imports\ArchiveImport;
+use App\Services\MajorService;
 use App\Services\ArchiveService;
+use App\Services\StudentService;
+use App\Services\DepartmentService;
 use App\Http\Requests\ArchiveStoreRequest;
 use App\Http\Requests\ArchiveUpdateRequest;
 
 class ArchiveController extends Controller
 {
-    protected $entryService;
+    protected $studentService;
+
+    protected $departmentService;
+
+    protected $majorService;
 
     /**
      * Create a new controller instance.
      *
      * @param \App\Services\ArchiveService  $archiveService
+     * @param \App\Services\StudenttService  $studentService
+     * @param \App\Services\DepartmentService  $departmentService
+     * @param \App\Services\MajortService  $majorService
      * @return void
      */
-    public function __construct(ArchiveService $archiveService)
+    public function __construct(ArchiveService $archiveService, StudentService $studentService, DepartmentService $departmentService, MajorService $majorService)
     {
         $this->authorizeResource(Archive::class, 'archive');
 
         $this->service = $archiveService;
+        $this->studentService = $studentService;
+        $this->departmentService = $departmentService;
+        $this->majorService = $majorService;
     }
 
     /**
@@ -185,5 +198,36 @@ class ArchiveController extends Controller
         $this->success(200010);
 
         return $this->service->exportExcel(new ArchiveExport, 'export.xlsx');
+    }
+
+    /**
+     * Show the specified resource search form in storage.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function showSearchForm(Request $request)
+    {
+        $this->authorize('search', Archive::class);
+
+        $departments = $this->departmentService->getEnableItems();
+        $majors = $this->majorService->getEnableItems();
+        $grades = $this->studentService->getAllGrades();
+        $levels = ['教务管理系统', '研究生系统'];
+
+        return view('archive.search', compact('departments', 'majors', 'grades', 'levels'));
+    }
+
+    /**
+     * Search the specified resource in storage.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $this->authorize('search', Archive::class);
+
+        return redirect()->route('archives.search', $items);
     }
 }

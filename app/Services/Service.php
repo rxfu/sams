@@ -85,4 +85,9 @@ class Service
             throw new InternalException($e, $this->repository->getModel(), __FUNCTION__);
         }
     }
+
+    public function getEnableItems($isEnable = true)
+    {
+        return $this->repository->findBy(['is_enable' => $isEnable]);
+    }
 }

@@ -29,6 +29,62 @@
             </div>
 
             <div class="card-body">
+                <form id="search-form" name="search-form" action="{{ route('archives.search') }}" method="post">
+                    <div class="form-row justify-content-center">
+                        <div class="form-group col-md-4">
+                            <label for="id">学号</label>
+                            <input type="text" name="id" id="id" class="form-control" placeholder="学号" aria-label="学号" aria-describedby="btnSearch" value="">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="name">姓名</label>
+                            <input type="text" name="name" id="name" class="form-control" placeholder="姓名" aria-label="姓名" aria-describedby="btnSearch" value="">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="level">培养层次</label>
+                            <select id="level" name="level" class="form-control">
+                                <option value="all">全部培养层次</option>
+                                @foreach ($levels as $item)
+                                    <option value="{{ $item }}">{{ $item }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center">
+                        <div class="form-group col-md-4">
+                            <label for="department">学院</label>
+                            <select id="department" name="department" class="form-control">
+                                <option value="all">全部学院</option>
+                                @foreach ($departments as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="major">专业</label>
+                            <select id="major" name="major" class="form-control">
+                                <option value="all" class="all {{ $departments->implode('id', ' ') }}">全部专业</option>
+                                @foreach ($majors as $item)
+                                    <option value="{{ $item->id }}" class="{{ $item->department_id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="grade">年级</label>
+                            <select id="grade" name="grade" class="form-control">
+                                <option value="all">全部年级</option>
+                                @foreach ($grades as $item)
+                                    <option value="{{ $item->grade }}">{{ $item->grade }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center">
+                        <button class="btn btn-primary" type="submit" id="search">{{ __('Search') }}</button>
+                    </div>
+                </form>
+            </div>
+
+            @if (isset($items) && !empty($items))
                 <table id="archives-table" class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -97,32 +153,25 @@
                         </tr>
                     </tfoot>
                 </table>
-            </div>
-            @isset($items[0])
-                @can('delete', $items[0])
-                    <form id="delete-form" method="post" style="display: none;">
-                        @csrf
-                        @method('delete')
-                    </form>
-                @endcan
-            @endisset
+                @isset($items[0])
+                    @can('delete', $items[0])
+                        <form id="delete-form" method="post" style="display: none;">
+                            @csrf
+                            @method('delete')
+                        </form>
+                    @endcan
+                @endisset
+            @endif
         </div>
     </div>
 </div>
 @endsection
 
 @push('scripts')
-<script>
-	$('#archives-table').DataTable({
-        'paging': true,
-        'lengthChange': true,
-        'searching': true,
-        'ordering': true,
-        'info': true,
-        'autoWidth': true,
-        'language': {
-            'url': "{{ asset('plugins/datatables/lang/Chinese.json') }}"
-        }
-    });
-</script>
+    <script src="{{ asset('plugins/jquery-chained/jquery.chained.min.js') }}"></script>
+    <script>
+        $(function() {
+            $('#major').chained('#department');
+        })
+    </script>
 @endpush
