@@ -60,4 +60,9 @@ class ArchiveService extends Service
 
         return $archive;
     }
+
+    public function search($sid, $name, $level, $department, $major, $grade)
+    {
+        return $this->studentRepository->searchBy($sid, $name, $level, $department, $major, $grade);
+    }
 }

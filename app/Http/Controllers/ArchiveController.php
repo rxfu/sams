@@ -201,24 +201,6 @@ class ArchiveController extends Controller
     }
 
     /**
-     * Show the specified resource search form in storage.
-     *
-     * @param  Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function showSearchForm(Request $request)
-    {
-        $this->authorize('search', Archive::class);
-
-        $departments = $this->departmentService->getEnableItems();
-        $majors = $this->majorService->getEnableItems();
-        $grades = $this->studentService->getAllGrades();
-        $levels = ['教务管理系统', '研究生系统'];
-
-        return view('archive.search', compact('departments', 'majors', 'grades', 'levels'));
-    }
-
-    /**
      * Search the specified resource in storage.
      *
      * @param  Illuminate\Http\Request  $request
@@ -228,6 +210,25 @@ class ArchiveController extends Controller
     {
         $this->authorize('search', Archive::class);
 
-        return redirect()->route('archives.search', $items);
+        $departments = $this->departmentService->getEnableItems();
+        $majors = $this->majorService->getEnableItems();
+        $grades = $this->studentService->getAllGrades();
+        $levels = $this->studentService->getAllLevels();
+
+        $condition = [];
+        $items = [];
+        if ($request->hasAny(['id', 'name', 'level', 'department', 'major', 'grade'])) {
+            $sid = $request->input('id') ?? null;
+            $name = $request->input('name') ?? null;
+            $level = $request->input('level');
+            $department = $request->input('department');
+            $major = $request->input('major');
+            $grade = $request->input('grade');
+
+            $items = $this->service->search($sid, $name, $level, $department, $major, $grade);
+            $condition = compact('sid', 'name', 'level', 'department', 'major', 'grade');
+        }
+
+        return view('archive.search', compact('departments', 'majors', 'grades', 'levels', 'condition', 'items'));
     }
 }

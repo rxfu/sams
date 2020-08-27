@@ -20,4 +20,9 @@ class StudentService extends Service
     {
         return $this->repository->allGrades();
     }
+
+    public function getAllLevels()
+    {
+        return $this->repository->allLevels();
+    }
 }

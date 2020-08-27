@@ -34,8 +34,18 @@ class Student extends Model
         return $this->dqszj;
     }
 
-    public function archives()
+    public function getDepartmentAttribute()
     {
-        return $this->hasMany('App\Models\Archive', 'sid', 'xh');
+        return $this->xy;
+    }
+
+    public function getMajorAttribute()
+    {
+        return $this->zy;
+    }
+
+    public function archive()
+    {
+        return $this->hasOne('App\Models\Archive', 'sid', 'xh');
     }
 }
