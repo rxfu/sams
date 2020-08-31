@@ -61,8 +61,46 @@ class ArchiveService extends Service
         return $archive;
     }
 
-    public function search($sid, $name, $level, $department, $major, $grade)
+    protected function getSearchQuery($attributes, $relations, $order, $direction, $trashed)
     {
-        return $this->studentRepository->searchBy($sid, $name, $level, $department, $major, $grade);
+        $fields = [];
+
+        if (!is_null($attributes['sid'])) {
+            if (is_array($attributes['sid'])) {
+                $fields['xh'] = $attributes['sid'];
+            } elseif (!empty($attributes['sid'])) {
+                $fields['xh'] = ['like', '%' . $attributes['sid'] . '%'];
+            }
+        }
+
+        if (!is_null($attributes['name'])) {
+            if (is_array($attributes['name'])) {
+                $fields['xm'] = $attributes['name'];
+            } elseif (!empty($attributes['name'])) {
+                $fields['xm'] = ['like', '%' . $attributes['name'] . '%'];
+            }
+        }
+
+        if ('all' !== $attributes['level']) {
+            $fields['sjly'] = $attributes['level'];
+        }
+
+        if ('all' !== $attributes['department']) {
+            $fields['dwh'] = $attributes['department'];
+        }
+
+        if ('all' !== $attributes['major']) {
+            $fields['zydm'] = $attributes['major'];
+        }
+
+        if ('all' !== $attributes['grade']) {
+            $fields['dqszj'] = $attributes['grade'];
+        }
+
+        $students = $this->studentRepository->findBy($fields, $relations, $order, $direction, $trashed);
+
+        $query = $this->repository->getAllByStudentsQuery($students->pluck('xh')->toArray());
+
+        return $query;
     }
 }

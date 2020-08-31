@@ -3,13 +3,17 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\StudentRepository;
 use App\Repositories\DeliveryRepository;
 
 class DeliveryService extends Service
 {
-    public function __construct(DeliveryRepository $deliveries)
+    protected $studentRepository;
+
+    public function __construct(DeliveryRepository $deliveries, StudentRepository $studentRepository)
     {
         $this->repository = $deliveries;
+        $this->studentRepository = $studentRepository;
     }
 
     public function store($data)
@@ -19,5 +23,10 @@ class DeliveryService extends Service
         $data['version'] = $this->repository->maxVersion($data['archive_id']) + 1;
 
         return $this->repository->save($data);
+    }
+
+    protected function getSearchQuery($attributes, $relations, $order, $direction, $trashed)
+    {
+        return $this->repository->queryBy($attributes, $relations, $order, $direction, $trashed);
     }
 }

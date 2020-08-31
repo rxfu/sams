@@ -16,4 +16,15 @@ class DeliveryPolicy extends ModelPolicy
     {
         return $this->service->hasPermission($user, 'delivery-import');
     }
+
+    /**
+     * Determine whether the user can search deliveries.
+     *
+     * @param  \App\Models\User  $user
+     * @return mixed
+     */
+    public function search(User $user)
+    {
+        return $this->service->hasPermission($user, 'delivery-search');
+    }
 }

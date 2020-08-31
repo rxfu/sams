@@ -33,4 +33,9 @@ class Delivery extends Model
     {
         return $this->belongsTo('App\Models\User', 'editor_id');
     }
+
+    public function archive()
+    {
+        return $this->belongsTo('App\Models\Archive');
+    }
 }

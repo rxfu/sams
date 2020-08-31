@@ -45,4 +45,9 @@ class Archive extends Model
     {
         return $this->belongsTo('App\Models\User', 'editor_id');
     }
+
+    public function deliveries()
+    {
+        return $this->hasMany('App\Models\Delivery');
+    }
 }

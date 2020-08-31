@@ -1,35 +1,33 @@
 @extends('layouts.app')
 
-@section('title', __('archive.module') . __('List'))
+@section('title', __('delivery.module') . __('List'))
 
 @section('content')
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">{{ __('archive.module') . __('List') }}</h3>
+                <h3 class="card-title">{{ __('delivery.module') . __('List') }}</h3>
                 <div class="card-tools">
-                    @can('export', Archive::class)
-                        <a href="{{ route('archives.export') }}" title="{{ __('Export') }}" class="btn btn-secondary">
-                            <i class="fas fa-file-export"></i> {{ __('Export') . __('archive.module') }}
+                    <a href="{{ asset('storage/files/template.xlsx') }}" title="{{ __('Download') }}" class="btn btn-warning">
+                        <i class="fas fa-download"></i> {{ __('Download') . __('delivery.module') . __('template') }}
+                    </a>
+                    @can('import', Delivery::class)
+                        <a href="{{ route('deliveries.import') }}" title="{{ __('Import') }}" class="btn btn-info import" data-toggle="modal" data-target="#dialog" data-whatever="{{  __('delivery.module') . __('import') }}
+                    ">
+                            <i class="fas fa-file-import"></i> {{ __('Import') . __('delivery.module') }}
                         </a>
                     @endcan
-                    @can('import', Archive::class)
-                        <a href="{{ route('archives.import') }}" title="{{ __('Import') }}" class="btn btn-info import" data-toggle="modal" data-target="#dialog" data-whatever="{{  __('archive.module') . __('import') }}
-                        ">
-                            <i class="fas fa-file-import"></i> {{ __('Import') . __('archive.module') }}
-                        </a>
-                    @endcan
-                    @can('create', Archive::class)
-                        <a href="{{ route('archives.create') }}" title="{{ __('Create') }}" class="btn btn-success">
-                            <i class="fas fa-plus"></i> {{ __('Create') . __('archive.module') }}
+                    @can('create', Delivery::class)
+                        <a href="{{ route('deliveries.create') }}" title="{{ __('Create') }}" class="btn btn-success">
+                            <i class="fas fa-plus"></i> {{ __('Create') . __('delivery.module') }}
                         </a>
                     @endcan
                 </div>
             </div>
 
             <div class="card-body">
-                <form id="search-form" name="search-form" action="{{ route('archives.search') }}" method="get">
+                <form id="search-form" name="search-form" action="{{ route('deliveries.search') }}" method="get">
                     <div class="form-row justify-content-center">
                         <div class="form-group col-md-4">
                             <label for="id">学号</label>
@@ -83,11 +81,11 @@
                     </div>
                 </form>
             </div>
-            
-            @isset($items)
+
+            @if (isset($items) && !empty($items))
                 @if ($items->isEmpty())
                     <div class="callout callout-danger">
-                        <p>没有搜索到符合条件的档案记录，请重新输入搜索条件</p>
+                        <p>查无此人</p>
                     </div>
                 @else
                     <div class="row justify-content-end">
@@ -97,20 +95,21 @@
                             </div>
                         </div>
                     </div>
-                    <table id="archives-table" class="table table-bordered table-striped">
+                    <table id="deliveries-table" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>{{ __('archive.id') }}</th>
-                                <th>{{ __('archive.sid') }}</th>
-                                <th>{{ __('archive.card_number') }}</th>
-                                <th>{{ __('archive.received_at') }}</th>
-                                <th>{{ __('archive.name') }}</th>
-                                <th>{{ __('archive.department_id') }}</th>
-                                <th>{{ __('archive.major_id') }}</th>
-                                <th>{{ __('archive.grade') }}</th>
-                                <th>{{ __('archive.creator_id') }}</th>
-                                <th>{{ __('archive.editor_id') }}</th>
-                                <th>{{ __('archive.remark') }}</th>
+                                <th>{{ __('delivery.id') }}</th>
+                                <th>{{ __('delivery.archive_id') }}</th>
+                                <th>{{ __('delivery.forward') }}</th>
+                                <th>{{ __('delivery.status') }}</th>
+                                <th>{{ __('delivery.receiver') }}</th>
+                                <th>{{ __('delivery.phone') }}</th>
+                                <th>{{ __('delivery.address') }}</th>
+                                <th>{{ __('delivery.had_receipt') }}</th>
+                                <th>{{ __('delivery.creator_id') }}</th>
+                                <th>{{ __('delivery.editor_id') }}</th>
+                                <th>{{ __('delivery.version') }}</th>
+                                <th>{{ __('delivery.remark') }}</th>
                                 <th>{{ __('Action') }}</th>
                             </tr>
                         </thead>
@@ -118,29 +117,30 @@
                             @foreach ($items as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
-                                    <td>{{ $item->sid }}</td>
-                                    <td>{{ $item->student->card_number }}</td>
-                                    <td>{{ $item->received_at }}</td>
-                                    <td>{{ $item->student->name }}</td>
-                                    <td>{{ $item->student->department }}</td>
-                                    <td>{{ $item->student->major }}</td>
-                                    <td>{{ $item->student->grade }}</td>
-                                    <td>{{ $item->creator->name }}</td>
-                                    <td>{{ $item->editor->name }}</td>
+                                    <td>{{ $item->archive_id }}</td>
+                                    <td>{{ $item->forward }}</td>
+                                    <td>{{ $item->present()->hasStatus }}</td>
+                                    <td>{{ $item->receiver }}</td>
+                                    <td>{{ $item->phone }}</td>
+                                    <td>{{ $item->address }}</td>
+                                    <td>{{ $item->present()->hadReceipt }}</td>
+                                    <td>{{ optional($item->creator)->name }}</td>
+                                    <td>{{ optional($item->editor)->name }}</td>
+                                    <td>{{ $item->version }}</td>
                                     <td>{{ $item->remark }}</td>
                                     <td>
                                         @can('view', $item)
-                                            <a href="{{ route('archives.show', $item) }}" class="btn btn-primary btn-sm" title="{{ __('Show') }}">
+                                            <a href="{{ route('deliveries.show', $item) }}" class="btn btn-primary btn-sm" title="{{ __('Show') }}">
                                                 <i class="fas fa-folder"></i> {{ __('Show') }}
                                             </a>
                                         @endcan
                                         @can('update', $item)
-                                            <a href="{{ route('archives.edit', $item) }}" class="btn btn-info btn-sm" title="{{ __('Edit') }}">
+                                            <a href="{{ route('deliveries.edit', $item) }}" class="btn btn-info btn-sm" title="{{ __('Edit') }}">
                                                 <i class="fas fa-pencil-alt"></i> {{ __('Edit') }}
                                             </a>
                                         @endcan
                                         @can('delete', $item)
-                                            <a href="{{ route('archives.destroy', $item) }}" class="btn btn-danger btn-sm delete" title="{{ __('Delete') }}" data-toggle="modal" data-target="#dialog" data-whatever="{{ __('Confirm') . __('Delete') }}">
+                                            <a href="{{ route('deliveries.destroy', $item) }}" class="btn btn-danger btn-sm delete" title="{{ __('Delete') }}" data-toggle="modal" data-target="#dialog" data-whatever="{{ __('Confirm') . __('Delete') }}">
                                                 <i class="fas fa-trash"></i> {{ __('Delete') }}
                                             </a>
                                         @endcan
@@ -150,17 +150,18 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>{{ __('archive.id') }}</th>
-                                <th>{{ __('archive.sid') }}</th>
-                                <th>{{ __('archive.card_number') }}</th>
-                                <th>{{ __('archive.received_at') }}</th>
-                                <th>{{ __('archive.name') }}</th>
-                                <th>{{ __('archive.department_id') }}</th>
-                                <th>{{ __('archive.major_id') }}</th>
-                                <th>{{ __('archive.grade') }}</th>
-                                <th>{{ __('archive.creator_id') }}</th>
-                                <th>{{ __('archive.editor_id') }}</th>
-                                <th>{{ __('archive.remark') }}</th>
+                                <th>{{ __('delivery.id') }}</th>
+                                <th>{{ __('delivery.archive_id') }}</th>
+                                <th>{{ __('delivery.forward') }}</th>
+                                <th>{{ __('delivery.status') }}</th>
+                                <th>{{ __('delivery.receiver') }}</th>
+                                <th>{{ __('delivery.phone') }}</th>
+                                <th>{{ __('delivery.address') }}</th>
+                                <th>{{ __('delivery.had_receipt') }}</th>
+                                <th>{{ __('delivery.creator_id') }}</th>
+                                <th>{{ __('delivery.editor_id') }}</th>
+                                <th>{{ __('delivery.version') }}</th>
+                                <th>{{ __('delivery.remark') }}</th>
                                 <th>{{ __('Action') }}</th>
                             </tr>
                         </tfoot>
@@ -174,7 +175,7 @@
                         @endcan
                     @endisset
                 @endif
-            @endisset
+            @endif
         </div>
     </div>
 </div>

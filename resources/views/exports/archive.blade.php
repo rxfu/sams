@@ -17,12 +17,10 @@
             <tr>
                 <td>{{ $student->id }}</td>
                 <td>{{ $student->name }}</td>
-                @foreach ($student->archives as $archive)
-                    @foreach ($archive->entries as $item)
-                        {{ $item->quantity }}
-                    @endforeach
-                    <td>{{ $archive->remark }}</td>
+                @foreach ($student->archive->entries as $item)
+                    {{ $item->quantity }}
                 @endforeach
+                <td>{{ $student->archive->remark }}</td>
             </tr>
         @endforeach
     </tbody>

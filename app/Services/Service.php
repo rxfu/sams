@@ -90,4 +90,20 @@ class Service
     {
         return $this->repository->findBy(['is_enable' => $isEnable]);
     }
+
+    public function search($attributes, $limit = 0, $relations = null, $order = null, $direction = 'asc', $trashed = false)
+    {
+        $query = $this->getSearchQuery($attributes, $relations, $order, $direction, $trashed);
+
+        if ($limit > 0) {
+            return $this->repository->paginate($query, $limit);
+        } else {
+            return $this->repository->get($query);
+        }
+    }
+
+    protected function getSearchQuery($attributes, $relations, $order, $direction, $trashed)
+    {
+        return $this->repository->queryBy($attributes, $relations, $order, $direction, $trashed);
+    }
 }
