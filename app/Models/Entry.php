@@ -26,4 +26,9 @@ class Entry extends Model
             ->withPivot('quantity')
             ->withTimestamps();
     }
+
+    public function groups()
+    {
+        return $this->belongsToMany('App\Models\Group');
+    }
 }

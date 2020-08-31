@@ -62,6 +62,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/search', 'ArchiveController@search')->name('search');
     });
 
+    Route::prefix('entries')->name('entries.')->group(function () {
+        Route::get('/{entry}/groups', 'EntryController@showGroupForm')->name('group');
+        Route::post('/{entry}/groups', 'EntryController@assignGroup');
+    });
+
     Route::resource('logs', 'LogController')->only(['index', 'show']);
     Route::resource('settings', 'SettingController');
     Route::resource('menus', 'MenuController');

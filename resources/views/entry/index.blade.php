@@ -23,6 +23,7 @@
                         <tr>
                             <th>{{ __('entry.id') }}</th>
 							<th>{{ __('entry.name') }}</th>
+							<th>{{ __('entry.group') }}</th>
 							<th>{{ __('entry.is_enable') }}</th>
                             <th>{{ __('Action') }}</th>
                         </tr>
@@ -32,6 +33,7 @@
                             <tr>
                                 <td>{{ $item->id }}</td>
 								<td>{{ $item->name }}</td>
+								<td>{{ $item->present()->allGroups }}</td>
 								<td>{{ $item->present()->isEnable }}</td>
                                 <td>
                                     @can('view', $item)
@@ -47,6 +49,11 @@
                                     @can('delete', $item)
                                         <a href="{{ route('entries.destroy', $item) }}" class="btn btn-danger btn-sm delete" title="{{ __('Delete') }}" data-toggle="modal" data-target="#dialog" data-whatever="{{ __('Confirm') . __('Delete') }}">
                                             <i class="fas fa-trash"></i> {{ __('Delete') }}
+                                        </a>
+                                    @endcan
+                                    @can('group', $item)
+                                        <a href="{{ route('entries.group', $item->getKey()) }}" class="btn btn-success btn-sm" title="{{ __('Assign Group') }}">
+                                            <i class="fas fa-user-friends"></i> {{ __('Assign Group') }}
                                         </a>
                                     @endcan
                                 </td>

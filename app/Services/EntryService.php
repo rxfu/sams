@@ -15,4 +15,18 @@ class EntryService extends Service
     {
         return $this->repository->activeItems();
     }
+
+    public function assignGroup($entry, $groups)
+    {
+        $entry = $this->repository->find($entry->getKey());
+
+        $this->repository->assignGroup($entry, $groups);
+    }
+
+    public function getAssignedGroups($entry)
+    {
+        $entry = $this->repository->find($entry->getKey());
+
+        return $entry->groups->pluck('id')->toArray();
+    }
 }

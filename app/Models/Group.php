@@ -24,4 +24,9 @@ class Group extends Model
     {
         return $this->belongsTo('App\Models\Group', 'parent_id');
     }
+
+    public function entries()
+    {
+        return $this->belongsToMany('App\Models\Entry');
+    }
 }

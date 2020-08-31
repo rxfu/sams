@@ -189,7 +189,7 @@ class UserController extends Controller
     }
 
     /**
-     * Assign the specified role in storage.
+     * Assign the specified group in storage.
      *
      * @param  Illuminate\Http\Request  $request
      * @param  User  $user

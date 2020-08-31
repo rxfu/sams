@@ -54,7 +54,7 @@ class EntryController extends Controller
     public function store(EntryStoreRequest $request)
     {
         if ($request->isMethod('post')) {
-    
+
             $item = $this->service->store($request->all());
 
             return redirect()->route('entries.show', $item);
@@ -101,7 +101,7 @@ class EntryController extends Controller
     public function update(EntryUpdateRequest $request, Entry $entry)
     {
         if ($request->isMethod('put')) {
-    
+
             $this->service->update($entry, $request->all());
 
             return redirect()->route('entries.show', $entry);
@@ -124,6 +124,45 @@ class EntryController extends Controller
         if ($request->isMethod('delete')) {
 
             $this->service->delete($entry);
+
+            return redirect()->route('entries.index');
+        }
+
+        $this->error(405001);
+
+        return back();
+    }
+
+    /**
+     * Show the form for assigning the specified resource.
+     *
+     * @param  Entry  $entry
+     * @return \Illuminate\Http\Response
+     */
+    public function showGroupForm(Entry $entry)
+    {
+        $this->authorize('group', $entry);
+
+        $item = $this->service->get($entry);
+        $assignedGroups = $this->service->getAssignedGroups($item);
+
+        return view('entry.group', compact('item', 'assignedGroups'));
+    }
+
+    /**
+     * Assign the specified group in storage.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @param  Entry  $entry
+     * @return \Illuminate\Http\Response
+     */
+    public function assignGroup(Request $request, Entry $entry)
+    {
+        $this->authorize('group', $entry);
+
+        if ($request->isMethod('post')) {
+
+            $this->service->assignGroup($entry, $request->groups);
 
             return redirect()->route('entries.index');
         }
