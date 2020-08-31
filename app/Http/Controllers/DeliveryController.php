@@ -215,20 +215,21 @@ class DeliveryController extends Controller
         $grades = $this->studentService->getAllGrades();
         $levels = $this->studentService->getAllLevels();
 
-        $condition = [];
-        $items = [];
+        $attributes = [];
+        $items = null;
         if ($request->hasAny(['id', 'name', 'level', 'department', 'major', 'grade'])) {
-            $sid = $request->input('id') ?? null;
-            $name = $request->input('name') ?? null;
-            $level = $request->input('level');
-            $department = $request->input('department');
-            $major = $request->input('major');
-            $grade = $request->input('grade');
+            $attributes = [
+                'sid' => $request->input('id'),
+                'name' => $request->input('name'),
+                'level' => $request->input('level'),
+                'department' => $request->input('department'),
+                'major' => $request->input('major'),
+                'grade' => $request->input('grade'),
+            ];
 
-            $items = $this->service->search($sid, $name, $level, $department, $major, $grade);
-            $condition = compact('sid', 'name', 'level', 'department', 'major', 'grade');
+            $items = $this->service->search($attributes, 10);
         }
 
-        return view('delivery.search', compact('departments', 'majors', 'grades', 'levels', 'condition', 'items'));
+        return view('delivery.search', compact('departments', 'majors', 'grades', 'levels', 'attributes', 'items'));
     }
 }

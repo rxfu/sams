@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Repositories\ArchiveRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\StudentRepository;
 use App\Repositories\DeliveryRepository;
@@ -10,10 +11,13 @@ class DeliveryService extends Service
 {
     protected $studentRepository;
 
-    public function __construct(DeliveryRepository $deliveries, StudentRepository $studentRepository)
+    protected $archiveRepository;
+
+    public function __construct(DeliveryRepository $deliveries, StudentRepository $studentRepository, ArchiveRepository $archiveRepository)
     {
         $this->repository = $deliveries;
         $this->studentRepository = $studentRepository;
+        $this->archiveRepository = $archiveRepository;
     }
 
     public function store($data)
@@ -27,6 +31,46 @@ class DeliveryService extends Service
 
     protected function getSearchQuery($attributes, $relations, $order, $direction, $trashed)
     {
-        return $this->repository->queryBy($attributes, $relations, $order, $direction, $trashed);
+        $fields = [];
+
+        if (!is_null($attributes['sid'])) {
+            if (is_array($attributes['sid'])) {
+                $fields['xh'] = $attributes['sid'];
+            } elseif (!empty($attributes['sid'])) {
+                $fields['xh'] = ['like', '%' . $attributes['sid'] . '%'];
+            }
+        }
+
+        if (!is_null($attributes['name'])) {
+            if (is_array($attributes['name'])) {
+                $fields['xm'] = $attributes['name'];
+            } elseif (!empty($attributes['name'])) {
+                $fields['xm'] = ['like', '%' . $attributes['name'] . '%'];
+            }
+        }
+
+        if ('all' !== $attributes['level']) {
+            $fields['sjly'] = $attributes['level'];
+        }
+
+        if ('all' !== $attributes['department']) {
+            $fields['dwh'] = $attributes['department'];
+        }
+
+        if ('all' !== $attributes['major']) {
+            $fields['zydm'] = $attributes['major'];
+        }
+
+        if ('all' !== $attributes['grade']) {
+            $fields['dqszj'] = $attributes['grade'];
+        }
+
+        $students = $this->studentRepository->findBy($fields, $relations, $order, $direction, $trashed);
+
+        $archives = $this->archiveRepository->getAllByStudents($students->pluck('xh')->toArray());
+
+        $query = $this->repository->getAllByArchives($archives->pluck('id')->toArray());
+
+        return $query;
     }
 }

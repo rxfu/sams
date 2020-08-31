@@ -32,4 +32,13 @@ class ArchiveRepository extends Repository
             throw new InternalException($e, $this->getModel(), __FUNCTION__);
         }
     }
+
+    public function getAllByStudents($sid)
+    {
+        try {
+            return $this->getAllByStudentsQuery($sid)->get();
+        } catch (QueryException $e) {
+            throw new InternalException($e, $this->getModel(), __FUNCTION__);
+        }
+    }
 }

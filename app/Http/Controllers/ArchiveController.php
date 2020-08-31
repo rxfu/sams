@@ -215,7 +215,7 @@ class ArchiveController extends Controller
         $grades = $this->studentService->getAllGrades();
         $levels = $this->studentService->getAllLevels();
 
-        $condition = [];
+        $attributes = [];
         $items = null;
         if ($request->hasAny(['id', 'name', 'level', 'department', 'major', 'grade'])) {
             $attributes = [
@@ -228,9 +228,8 @@ class ArchiveController extends Controller
             ];
 
             $items = $this->service->search($attributes, 10);
-            $condition = $attributes;
         }
 
-        return view('archive.search', compact('departments', 'majors', 'grades', 'levels', 'condition', 'items'));
+        return view('archive.search', compact('departments', 'majors', 'grades', 'levels', 'attributes', 'items'));
     }
 }
