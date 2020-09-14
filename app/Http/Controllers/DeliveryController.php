@@ -250,4 +250,21 @@ class DeliveryController extends Controller
 
         return $this->service->exportPdf('exports.delivery-ems', compact('deliveries'), 'ems.pdf');
     }
+
+    /**
+     * Export the specified resource ems in storage.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function exportNotice(Request $request)
+    {
+        $this->authorize('ems', Delivery::class);
+
+        $deliveries = $this->service->getAll();
+
+        $this->success(200010);
+
+        return $this->service->exportPdf('exports.delivery-notice', compact('deliveries'), 'notice.pdf');
+    }
 }
