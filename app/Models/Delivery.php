@@ -19,6 +19,15 @@ class Delivery extends Model
         'archive_id', 'forward', 'reason', 'status', 'receiver', 'phone', 'address', 'zipcode', 'send_at', 'had_receipt', 'creator_id', 'editor_id', 'version', 'remark',
     ];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'send_at' => 'datetime',
+    ];
+
     public function student()
     {
         return $this->belongsTo('App\Models\Student', 'sid', 'xh');

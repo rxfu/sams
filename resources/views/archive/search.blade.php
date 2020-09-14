@@ -11,7 +11,7 @@
                 <div class="card-tools">
                     @can('export', Archive::class)
                         <a href="{{ route('archives.export') }}" title="{{ __('Export') }}" class="btn btn-secondary">
-                            <i class="fas fa-file-export"></i> {{ __('Export') . __('archive.module') }}
+                            <i class="fas fa-file-export"></i> {{ __('Export') . __('archive.module') }}移交表
                         </a>
                     @endcan
                     @can('import', Archive::class)

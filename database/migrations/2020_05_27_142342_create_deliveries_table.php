@@ -19,11 +19,11 @@ class CreateDeliveriesTable extends Migration
             $table->string('forward')->nullable()->comment('转递去向');
             $table->string('reason')->nullable()->comment('转递原因');
             $table->integer('status')->default(0)->comment('投递状态，0-未投递，1-已投递，2-被退回');
-            $table->string('receiver', 128)->nullable()->comment("收件人");
             $table->string('phone', 20)->nullable()->comment("联系电话");
             $table->string('address')->nullable()->comment("地址");
             $table->string('zipcode', 6)->nullable()->comment('邮政编码');
             $table->timestamp('send_at')->nullable()->comment('寄送时间');
+            $table->string('ems', 20)->nullable()->comment("交寄单号");
             $table->boolean('had_receipt')->default(false)->comment('是否有回执，0-无，1-有');
             $table->foreignId('creator_id')
                 ->constrained('users')

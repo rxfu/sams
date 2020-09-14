@@ -44,8 +44,8 @@ class Student extends Model
         return $this->zy;
     }
 
-    public function archives()
+    public function archive()
     {
-        return $this->hasMany('App\Models\Archive', 'sid', 'xh');
+        return $this->hasOne('App\Models\Archive', 'sid', 'xh');
     }
 }

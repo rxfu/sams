@@ -16,7 +16,7 @@ class StudentRepository extends Repository
     public function doesntHaveArchive()
     {
         try {
-            return $this->model->whereDoesntHave('archives')->get();
+            return $this->model->whereDoesntHave('archive')->get();
         } catch (QueryException $e) {
             throw new InternalException($e, $this->getModel(), __FUNCTION__);
         }

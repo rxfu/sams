@@ -28,7 +28,8 @@ class Archive extends Model
     {
         return $this->belongsToMany('App\Models\Entry')
             ->withPivot('quantity')
-            ->withTimestamps();
+            ->withTimestamps()
+            ->orderBy('id');
     }
 
     public function student()

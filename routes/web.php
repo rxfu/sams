@@ -53,6 +53,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/import', 'DeliveryController@import');
         Route::get('/export', 'DeliveryController@export')->name('export');
         Route::get('/search', 'DeliveryController@search')->name('search');
+        Route::get('/export-ems', 'DeliveryController@exportEms')->name('export-ems');
+        Route::get('/export-notice', 'DeliveryController@exportNotice')->name('export-notice');
     });
 
     Route::prefix('archives')->name('archives.')->group(function () {

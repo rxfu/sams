@@ -9,9 +9,21 @@
             <div class="card-header">
                 <h3 class="card-title">{{ __('delivery.module') . __('List') }}</h3>
                 <div class="card-tools">
-                    <a href="{{ asset('storage/files/template.xlsx') }}" title="{{ __('Download') }}" class="btn btn-warning">
-                        <i class="fas fa-download"></i> {{ __('Download') . __('delivery.module') . __('template') }}
-                    </a>
+                    @can('ems', Delivery::class)
+                        <a href="{{ route('deliveries.export-ems') }}" title="{{ __('Export') }}" class="btn btn-secondary">
+                            <i class="fas fa-mail-bulk"></i> {{ __('Export') . __('delivery.module') }}机要交寄单
+                        </a>
+                    @endcan
+                    @can('notice', Delivery::class)
+                        <a href="{{ route('deliveries.export-notice') }}" title="{{ __('Export') }}" class="btn btn-primary">
+                            <i class="fas fa-flag-checkered"></i> {{ __('Export') . __('delivery.module') }}通知单
+                        </a>
+                    @endcan
+                    @can('download', Delivery::class)
+                        <a href="{{ asset('storage/files/template.xlsx') }}" title="{{ __('Download') }}" class="btn btn-warning">
+                            <i class="fas fa-download"></i> {{ __('Download') . __('delivery.module') . __('template') }}
+                        </a>
+                    @endcan
                     @can('import', Delivery::class)
                         <a href="{{ route('deliveries.import') }}" title="{{ __('Import') }}" class="btn btn-info import" data-toggle="modal" data-target="#dialog" data-whatever="{{  __('delivery.module') . __('import') }}
                     ">

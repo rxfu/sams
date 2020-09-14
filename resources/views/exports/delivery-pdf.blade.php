@@ -12,7 +12,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>选手推荐表 | {{ config('setting.name', 'Laravel') }}</title>
+        <title>学生档案转递通知单 | {{ config('setting.name', 'Laravel') }}</title>
 
         <style>
             body {

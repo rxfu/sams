@@ -8,6 +8,7 @@ use App\Services\MajorService;
 use App\Imports\DeliveryImport;
 use App\Services\StudentService;
 use App\Services\DeliveryService;
+use App\Exports\DeliveryEmsExport;
 use App\Services\DepartmentService;
 use App\Http\Requests\DeliveryStoreRequest;
 use App\Http\Requests\DeliveryUpdateRequest;
@@ -231,5 +232,22 @@ class DeliveryController extends Controller
         }
 
         return view('delivery.search', compact('departments', 'majors', 'grades', 'levels', 'attributes', 'items'));
+    }
+
+    /**
+     * Export the specified resource ems in storage.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function exportEms(Request $request)
+    {
+        $this->authorize('ems', Delivery::class);
+
+        $deliveries = $this->service->getAll();
+
+        $this->success(200010);
+
+        return $this->service->exportPdf('exports.delivery-ems', compact('deliveries'), 'ems.pdf');
     }
 }

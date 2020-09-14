@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Exceptions\LaravelExcelException;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class Service
 {
@@ -84,6 +85,13 @@ class Service
         } catch (LaravelExcelException $e) {
             throw new InternalException($e, $this->repository->getModel(), __FUNCTION__);
         }
+    }
+
+    public function exportPdf($template, $parameters, $file = 'untitle.pdf')
+    {
+        $pdf = PDF::loadView($template, $parameters);
+
+        return $pdf->download($file);
     }
 
     public function getEnableItems($isEnable = true)

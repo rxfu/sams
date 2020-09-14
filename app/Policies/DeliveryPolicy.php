@@ -27,4 +27,37 @@ class DeliveryPolicy extends ModelPolicy
     {
         return $this->service->hasPermission($user, 'delivery-search');
     }
+
+    /**
+     * Determine whether the user can download deliveries.
+     *
+     * @param  \App\Models\User  $user
+     * @return mixed
+     */
+    public function download(User $user)
+    {
+        return $this->service->hasPermission($user, 'delivery-download');
+    }
+
+    /**
+     * Determine whether the user can export deliveries ems.
+     *
+     * @param  \App\Models\User  $user
+     * @return mixed
+     */
+    public function ems(User $user)
+    {
+        return $this->service->hasPermission($user, 'delivery-ems');
+    }
+
+    /**
+     * Determine whether the user can export deliveries notice.
+     *
+     * @param  \App\Models\User  $user
+     * @return mixed
+     */
+    public function notice(User $user)
+    {
+        return $this->service->hasPermission($user, 'delivery-notice');
+    }
 }
