@@ -77,10 +77,10 @@ class StudentController extends Controller
 
         return response()->json([
             'message' => 'success',
-            'card_number' => $item->card_number,
+            'card_id' => $item->card_id,
             'name' => $item->name,
-            'department' => $item->department,
-            'major' => $item->major,
+            'department' => $item->department->name,
+            'major' => $item->major->name,
             'grade' => $item->grade,
         ]);
     }

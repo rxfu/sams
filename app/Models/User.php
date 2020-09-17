@@ -58,4 +58,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Group');
     }
+
+    public function department()
+    {
+        return $this->belongsTo('App\Models\Department');
+    }
+
+    public function majors()
+    {
+        return $this->belongsToMany('App\Models\Major');
+    }
 }

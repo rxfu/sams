@@ -14,7 +14,7 @@ class CreateMajorsTable extends Migration
     public function up()
     {
         Schema::create('majors', function (Blueprint $table) {
-            $table->string('id', 7)->unique()->comment('专业代码');
+            $table->string('id', 10)->unique()->comment('专业代码');
             $table->string('name', 64)->comment('名称');
             $table->boolean('is_enable')->default(true)->comment('是否启用，0-未启用，1-启用');
             $table->string('department_id', 10)->comment('学院ID');

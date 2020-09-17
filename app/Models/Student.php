@@ -10,42 +10,20 @@ class Student extends Model
 
     public $incrementing = false;
 
-    public $timestamps = false;
-
-    protected $primaryKey = 'xh';
-
-    public function getIdAttribute()
-    {
-        return $this->xh;
-    }
-
-    public function getNameAttribute()
-    {
-        return $this->xm;
-    }
-
-    public function getCardNumberAttribute()
-    {
-        return $this->sfzjh;
-    }
-
-    public function getGradeAttribute()
-    {
-        return $this->dqszj;
-    }
-
-    public function getDepartmentAttribute()
-    {
-        return $this->xy;
-    }
-
-    public function getMajorAttribute()
-    {
-        return $this->zy;
-    }
+    protected $primaryKey = 'id';
 
     public function archive()
     {
-        return $this->hasOne('App\Models\Archive', 'sid', 'xh');
+        return $this->hasOne('App\Models\Archive', 'sid', 'id');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo('App\Models\Department');
+    }
+
+    public function major()
+    {
+        return $this->belongsTo('App\Models\Major');
     }
 }

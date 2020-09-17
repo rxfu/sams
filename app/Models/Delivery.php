@@ -28,11 +28,6 @@ class Delivery extends Model
         'send_at' => 'datetime',
     ];
 
-    public function student()
-    {
-        return $this->belongsTo('App\Models\Student', 'sid', 'xh');
-    }
-
     public function creator()
     {
         return $this->belongsTo('App\Models\User', 'creator_id');

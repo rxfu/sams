@@ -21,4 +21,14 @@ class Major extends Model
     {
         return $this->belongsTo('App\Models\Department');
     }
+
+    public function students()
+    {
+        return $this->hasMany('App\Models\Student');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User');
+    }
 }

@@ -14,16 +14,14 @@ class CreateMajorUserTable extends Migration
     public function up()
     {
         Schema::create('major_user', function (Blueprint $table) {
-            $table->foreignId('major_id')
-                ->constrained()
-                ->onDelete('cascade')
-                ->onUpdate('cascade')
-                ->comment('专业ID');
+            $table->string('major_id')->comment('专业ID');
             $table->foreignId('user_id')
                 ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade')
                 ->comment('用户ID');
+
+            $table->foreign('major_id')->on('majors')->references('id')->onDelete('cascade')->onUpdate('cascade');
 
             $table->index(['user_id', 'major_id']);
             $table->unique(['user_id', 'major_id']);

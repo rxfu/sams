@@ -160,7 +160,7 @@
                 url: '{{ url('students') }}/' + $(this).val(),
                 success: function(result) {
                     if (result.message == 'success') {
-                        $('#card_number').html(result.card_number);
+                        $('#card_number').html(result.card_id);
                         $('#name').html(result.name);
                         $('#department').html(result.department);
                         $('#major').html(result.major);

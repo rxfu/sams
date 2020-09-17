@@ -24,7 +24,8 @@ class Entry extends Model
     {
         return $this->belongsToMany('App\Models\Archive')
             ->withPivot('quantity')
-            ->withTimestamps();
+            ->withTimestamps()
+            ->orderBy('id');
     }
 
     public function groups()

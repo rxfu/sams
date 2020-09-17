@@ -34,7 +34,7 @@ class Archive extends Model
 
     public function student()
     {
-        return $this->belongsTo('App\Models\Student', 'sid', 'xh');
+        return $this->belongsTo('App\Models\Student', 'sid', 'id');
     }
 
     public function creator()
