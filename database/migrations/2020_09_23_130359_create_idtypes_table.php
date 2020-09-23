@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDepartmentsTable extends Migration
+class CreateIdtypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateDepartmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('departments', function (Blueprint $table) {
-            $table->string('id', 10)->comment('学院代码');
+        Schema::create('idtypes', function (Blueprint $table) {
+            $table->string('id', 10)->comment('证件类型代码');
             $table->string('name', 64)->unique()->comment('名称');
             $table->boolean('is_enable')->default(true)->comment('是否启用，0-未启用，1-启用');
             $table->text('description')->nullable()->comment('描述');
-            $table->timestamps();
 
             $table->primary('id');
         });
@@ -31,6 +30,6 @@ class CreateDepartmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('departments');
+        Schema::dropIfExists('idtypes');
     }
 }

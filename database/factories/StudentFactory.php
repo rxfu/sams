@@ -21,6 +21,6 @@ $factory->define(Student::class, function (Faker $faker) {
         'grade' => $faker->year,
         'duration' => $faker->randomElement(['2', '4']),
         'status' => $faker->numberBetween(0, 1),
-        'level' => $faker->randomElement(['教务管理系统', '研究生系统']),
+        'level' => $faker->randomElement(['0', '1']),
     ];
 });
