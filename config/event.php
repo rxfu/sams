@@ -24,6 +24,12 @@ return [
         App\Models\Entry::class,
         App\Models\Archive::class,
 		App\Models\Delivery::class,
+		App\Models\Gender::class,
+		App\Models\Nation::class,
+		App\Models\Idtype::class,
+		App\Models\Department::class,
+		App\Models\Major::class,
+		App\Models\Student::class,
 		// model_here
     ],
 ];

@@ -81,5 +81,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('archives', 'ArchiveController');
     Route::resource('deliveries', 'DeliveryController');
     Route::resource('students', 'StudentController');
+    Route::resource('genders', 'GenderController');
+    Route::resource('nations', 'NationController');
+    Route::resource('idtypes', 'IdtypeController');
+    Route::resource('departments', 'DepartmentController');
+    Route::resource('majors', 'MajorController');
+    Route::resource('students', 'StudentController');
     // route_here
 });
