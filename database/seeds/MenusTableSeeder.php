@@ -169,6 +169,54 @@ class MenusTableSeeder extends Seeder
                 'parent_id' => 16,
                 'order' => 3,
             ],
+            [
+                'slug' => 'data-manage',
+                'name' => '数据管理',
+                'icon' => 'database',
+                'order' => 1,
+            ],
+            [
+                'slug' => 'student',
+                'name' => '学生管理',
+                'route' => 'students.index',
+                'parent_id' => 20,
+                'order' => 1,
+            ],
+            [
+                'slug' => 'department',
+                'name' => '学院管理',
+                'route' => 'departments.index',
+                'parent_id' => 20,
+                'order' => 2,
+            ],
+            [
+                'slug' => 'major',
+                'name' => '专业管理',
+                'route' => 'majors.index',
+                'parent_id' => 20,
+                'order' => 3,
+            ],
+            [
+                'slug' => 'nation',
+                'name' => '民族管理',
+                'route' => 'nations.index',
+                'parent_id' => 20,
+                'order' => 4,
+            ],
+            [
+                'slug' => 'idtype',
+                'name' => '证件类型管理',
+                'route' => 'idtypes.index',
+                'parent_id' => 20,
+                'order' => 5,
+            ],
+            [
+                'slug' => 'gender',
+                'name' => '性别管理',
+                'route' => 'genders.index',
+                'parent_id' => 20,
+                'order' => 6,
+            ],
         ]);
     }
 }
