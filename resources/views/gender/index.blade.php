@@ -9,6 +9,11 @@
             <div class="card-header">
                 <h3 class="card-title">{{ __('gender.module') . __('List') }}</h3>
                 <div class="card-tools">
+                    @can('sync', Gender::class)
+                        <a href="{{ route('genders.sync') }}" title="{{ __('Sync') }}" class="btn btn-primary">
+                            <i class="fas fa-sync"></i> {{ __('Sync') . __('gender.module') }}
+                        </a>
+                    @endcan
                     @can('create', Gender::class)
                         <a href="{{ route('genders.create') }}" title="{{ __('Create') }}" class="btn btn-success">
                             <i class="fas fa-plus"></i> {{ __('Create') . __('gender.module') }}
@@ -21,20 +26,20 @@
                 <table id="genders-table" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>{{ __('gender.description') }}</th>
 							<th>{{ __('gender.id') }}</th>
-							<th>{{ __('gender.is_enable') }}</th>
 							<th>{{ __('gender.name') }}</th>
+							<th>{{ __('gender.is_enable') }}</th>
+                            <th>{{ __('gender.description') }}</th>
                             <th>{{ __('Action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($items as $item)
                             <tr>
-                                <td>{{ $item->description }}</td>
 								<td>{{ $item->id }}</td>
-								<td>{{ $item->is_enable }}</td>
 								<td>{{ $item->name }}</td>
+								<td>{{ $item->is_enable }}</td>
+                                <td>{{ $item->description }}</td>
                                 <td>
                                     @can('view', $item)
                                         <a href="{{ route('genders.show', $item) }}" class="btn btn-primary btn-sm" title="{{ __('Show') }}">
@@ -57,10 +62,10 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>{{ __('gender.description') }}</th>
 							<th>{{ __('gender.id') }}</th>
-							<th>{{ __('gender.is_enable') }}</th>
 							<th>{{ __('gender.name') }}</th>
+							<th>{{ __('gender.is_enable') }}</th>
+                            <th>{{ __('gender.description') }}</th>
                             <th>{{ __('Action') }}</th>
                         </tr>
                     </tfoot>

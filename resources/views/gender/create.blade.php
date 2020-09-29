@@ -15,10 +15,10 @@
                 <div class="card-body">
                     
                     <div class="form-group row">
-                        <label for="description" class="col-sm-3 col-form-label text-right">{{ __('gender.description') }}</label>
+                        <label for="name" class="col-sm-3 col-form-label text-right">{{ __('gender.name') }}</label>
                         <div class="col-sm-9">
-                            <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="5" placeholder="{{ __('gender.description') }}">{{ old('description') }}</textarea>
-                            @error('description')
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="{{ __('gender.name') }}" value="{{ old('name') }}">
+                            @error('name')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>
@@ -44,12 +44,12 @@
                             @enderror
                         </div>
                     </div>
-
+                    
                     <div class="form-group row">
-                        <label for="name" class="col-sm-3 col-form-label text-right">{{ __('gender.name') }}</label>
+                        <label for="description" class="col-sm-3 col-form-label text-right">{{ __('gender.description') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="{{ __('gender.name') }}" value="{{ old('name') }}">
-                            @error('name')
+                            <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="5" placeholder="{{ __('gender.description') }}">{{ old('description') }}</textarea>
+                            @error('description')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>

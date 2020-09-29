@@ -54,7 +54,7 @@ class GenderController extends Controller
     public function store(GenderStoreRequest $request)
     {
         if ($request->isMethod('post')) {
-    
+
             $item = $this->service->store($request->all());
 
             return redirect()->route('genders.show', $item);
@@ -101,7 +101,7 @@ class GenderController extends Controller
     public function update(GenderUpdateRequest $request, Gender $gender)
     {
         if ($request->isMethod('put')) {
-    
+
             $this->service->update($gender, $request->all());
 
             return redirect()->route('genders.show', $gender);
@@ -129,6 +129,24 @@ class GenderController extends Controller
         }
 
         $this->error(405001);
+
+        return back();
+    }
+
+    /**
+     * Sync a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sync()
+    {
+        $this->authorize('sync');
+
+        if ($this->service->sync()) {
+            $this->success(200011);
+        } else {
+            $this->error(500011);
+        }
 
         return back();
     }

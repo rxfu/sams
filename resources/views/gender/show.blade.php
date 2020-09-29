@@ -13,16 +13,16 @@
             <div class="card-body">
                 
                 <div class="form-group row">
-                    <label for="description" class="col-sm-3 col-form-label text-right">{{ __('gender.description') }}</label>
+                    <label for="id" class="col-sm-3 col-form-label text-right">{{ __('gender.id') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->description }}</div>
+                        <div class="form-control-plaintext">{{ $item->id }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="id" class="col-sm-3 col-form-label text-right">{{ __('gender.id') }}</label>
+                    <label for="name" class="col-sm-3 col-form-label text-right">{{ __('gender.name') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->id }}</div>
+                        <div class="form-control-plaintext">{{ $item->name }}</div>
                     </div>
                 </div>
 
@@ -32,11 +32,11 @@
                         <div class="form-control-plaintext">{{ $item->is_enable }}</div>
                     </div>
                 </div>
-
+                
                 <div class="form-group row">
-                    <label for="name" class="col-sm-3 col-form-label text-right">{{ __('gender.name') }}</label>
+                    <label for="description" class="col-sm-3 col-form-label text-right">{{ __('gender.description') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->name }}</div>
+                        <div class="form-control-plaintext">{{ $item->description }}</div>
                     </div>
                 </div>
             </div>

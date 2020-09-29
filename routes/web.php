@@ -69,6 +69,14 @@ Route::middleware('auth')->group(function () {
         Route::post('/{entry}/groups', 'EntryController@assignGroup');
     });
 
+    Route::prefix('genders')->name('genders.')->group(function () {
+        Route::get('/sync', 'GenderController@sync')->name('sync');
+    });
+
+    Route::prefix('students')->name('students.')->group(function () {
+        Route::get('/sync', 'StudentController@sync')->name('sync');
+    });
+
     Route::resource('logs', 'LogController')->only(['index', 'show']);
     Route::resource('settings', 'SettingController');
     Route::resource('menus', 'MenuController');
@@ -86,6 +94,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('idtypes', 'IdtypeController');
     Route::resource('departments', 'DepartmentController');
     Route::resource('majors', 'MajorController');
-    Route::resource('students', 'StudentController');
     // route_here
 });

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class CenterIdtype extends CenterModel
+class CenterGender extends CenterModel
 {
     public $table = 'DM_GB_B_RDXBDM';
 
