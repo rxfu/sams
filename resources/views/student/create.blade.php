@@ -27,10 +27,10 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="card_type" class="col-sm-3 col-form-label text-right">{{ __('student.card_type') }}</label>
+                        <label for="idtype" class="col-sm-3 col-form-label text-right">{{ __('student.idtype') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control @error('card_type') is-invalid @enderror" name="card_type" id="card_type" placeholder="{{ __('student.card_type') }}" value="{{ old('card_type') }}">
-                            @error('card_type')
+                            <input type="text" class="form-control @error('idtype') is-invalid @enderror" name="idtype" id="idtype" placeholder="{{ __('student.idtype') }}" value="{{ old('idtype') }}">
+                            @error('idtype')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>
@@ -39,15 +39,15 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="card_id" class="col-sm-3 col-form-label text-right">{{ __('student.card_id') }}</label>
+                        <label for="idnumber" class="col-sm-3 col-form-label text-right">{{ __('student.idnumber') }}</label>
                         <div class="col-sm-9">
                             @inject('cards', 'App\Services\CardService')
-							<select name="card_id" id="card_id" class="form-control select2 select2-success @error('card_id') is-invalid @enderror" data-dropdown-css-class="select2-success">
+							<select name="idnumber" id="idnumber" class="form-control select2 select2-success @error('idnumber') is-invalid @enderror" data-dropdown-css-class="select2-success">
                                 @foreach ($cards->getAll() as $collection)
                                     <option value="{{ $collection->getKey() }}">{{ $collection->name }}</option>
                                 @endforeach
                             </select>
-                            @error('card_id')
+                            @error('idnumber')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>
@@ -56,10 +56,10 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="gender" class="col-sm-3 col-form-label text-right">{{ __('student.gender') }}</label>
+                        <label for="gender_id" class="col-sm-3 col-form-label text-right">{{ __('student.gender_id') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" id="gender" placeholder="{{ __('student.gender') }}" value="{{ old('gender') }}">
-                            @error('gender')
+                            <input type="text" class="form-control @error('gender_id') is-invalid @enderror" name="gender_id" id="gender_id" placeholder="{{ __('student.gender_id') }}" value="{{ old('gender_id') }}">
+                            @error('gender_id')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>
@@ -68,10 +68,10 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="nation" class="col-sm-3 col-form-label text-right">{{ __('student.nation') }}</label>
+                        <label for="nation_id" class="col-sm-3 col-form-label text-right">{{ __('student.nation_id') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control @error('nation') is-invalid @enderror" name="nation" id="nation" placeholder="{{ __('student.nation') }}" value="{{ old('nation') }}">
-                            @error('nation')
+                            <input type="text" class="form-control @error('nation_id') is-invalid @enderror" name="nation_id" id="nation_id" placeholder="{{ __('student.nation_id') }}" value="{{ old('nation_id') }}">
+                            @error('nation_id')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>

@@ -34,35 +34,35 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="card_number" class="col-sm-3 col-form-label text-right">{{ __('archive.card_number') }}</label>
+                    <label for="idnumber" class="col-sm-3 col-form-label text-right">{{ __('student.idnumber') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->student->card_id }}</div>
+                        <div class="form-control-plaintext">{{ $item->student->idnumber }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="name" class="col-sm-3 col-form-label text-right">{{ __('archive.name') }}</label>
+                    <label for="name" class="col-sm-3 col-form-label text-right">{{ __('student.name') }}</label>
                     <div class="col-sm-9">
                         <div class="form-control-plaintext">{{ $item->student->name }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="department_id" class="col-sm-3 col-form-label text-right">{{ __('archive.department_id') }}</label>
+                    <label for="department_id" class="col-sm-3 col-form-label text-right">{{ __('student.department_id') }}</label>
                     <div class="col-sm-9">
                         <div class="form-control-plaintext">{{ $item->student->department->name }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="major_id" class="col-sm-3 col-form-label text-right">{{ __('archive.major_id') }}</label>
+                    <label for="major_id" class="col-sm-3 col-form-label text-right">{{ __('student.major_id') }}</label>
                     <div class="col-sm-9">
                         <div class="form-control-plaintext">{{ $item->student->major->name }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="grade" class="col-sm-3 col-form-label text-right">{{ __('archive.grade') }}</label>
+                    <label for="grade" class="col-sm-3 col-form-label text-right">{{ __('student.grade') }}</label>
                     <div class="col-sm-9">
                         <div class="form-control-plaintext">{{ $item->student->grade }}</div>
                     </div>

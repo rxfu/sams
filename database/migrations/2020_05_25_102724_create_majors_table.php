@@ -19,7 +19,6 @@ class CreateMajorsTable extends Migration
             $table->boolean('is_enable')->default(true)->comment('是否启用，0-未启用，1-启用');
             $table->string('department_id', 10)->comment('学院ID');
             $table->text('description')->nullable()->comment('描述');
-            $table->timestamps();
 
             $table->primary('id');
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade')->onUpdate('cascade');

@@ -12,6 +12,10 @@ class Gender extends Model
      * @var array
      */
     protected $fillable = [
-        'description', 'is_enable', 'name', 
+        'id', 'name', 'is_enable', 'description',
     ];
+
+    public $incrementing = false;
+
+    public $timestamps = false;
 }

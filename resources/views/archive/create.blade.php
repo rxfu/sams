@@ -32,16 +32,16 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="card_number" class="col-sm-3 col-form-label text-right">{{ __('archive.card_number') }}</label>
+                        <label for="idnumber" class="col-sm-3 col-form-label text-right">{{ __('student.idnumber') }}</label>
                         <div class="col-sm-9">
                             <div class="form-control-plaintext">
-                                <span id="card_number"></span>
+                                <span id="idnumber"></span>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="name" class="col-sm-3 col-form-label text-right">{{ __('archive.name') }}</label>
+                        <label for="name" class="col-sm-3 col-form-label text-right">{{ __('student.name') }}</label>
                         <div class="col-sm-9">
                             <div class="form-control-plaintext">
                                 <span id="name"></span>
@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="department" class="col-sm-3 col-form-label text-right">{{ __('archive.department_id') }}</label>
+                        <label for="department" class="col-sm-3 col-form-label text-right">{{ __('student.department_id') }}</label>
                         <div class="col-sm-9">
                             <div class="form-control-plaintext">
                                 <span id="department"></span>
@@ -59,7 +59,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="major" class="col-sm-3 col-form-label text-right">{{ __('archive.major_id') }}</label>
+                        <label for="major" class="col-sm-3 col-form-label text-right">{{ __('student.major_id') }}</label>
                         <div class="col-sm-9">
                             <div class="form-control-plaintext">
                                 <span id="major"></span>
@@ -68,7 +68,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="grade" class="col-sm-3 col-form-label text-right">{{ __('archive.grade') }}</label>
+                        <label for="grade" class="col-sm-3 col-form-label text-right">{{ __('student.grade') }}</label>
                         <div class="col-sm-9">
                             <div class="form-control-plaintext">
                                 <span id="grade"></span>
@@ -160,7 +160,7 @@
                 url: '{{ url('students') }}/' + $(this).val(),
                 success: function(result) {
                     if (result.message == 'success') {
-                        $('#card_number').html(result.card_id);
+                        $('#idnumber').html(result.idnumber);
                         $('#name').html(result.name);
                         $('#department').html(result.department);
                         $('#major').html(result.major);

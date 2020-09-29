@@ -12,10 +12,12 @@ class Major extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'is_enable', 'department_id', 'description',
+        'id', 'name', 'is_enable', 'department_id', 'description',
     ];
 
     public $incrementing = false;
+
+    public $timestamps = false;
 
     public function department()
     {

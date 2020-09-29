@@ -12,6 +12,10 @@ class Nation extends Model
      * @var array
      */
     protected $fillable = [
-        'slug', 'name', 'is_enable', 'description', 
+        'id', 'slug', 'name', 'is_enable', 'description',
     ];
+
+    public $incrementing = false;
+
+    public $timestamps = false;
 }

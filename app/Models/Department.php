@@ -17,6 +17,8 @@ class Department extends Model
 
     public $incrementing = false;
 
+    public $timestamps = false;
+
     public function majors()
     {
         return $this->hasMany('App\Models\Major');

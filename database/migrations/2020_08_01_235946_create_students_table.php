@@ -16,10 +16,10 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->string('id', 12)->comment('学号');
             $table->string('name', 60)->comment('姓名');
-            $table->string('card_type', 10)->comment('证件类型');
-            $table->string('card_id', 18)->comment('证件号码');
-            $table->string('gender', 2)->comment('性别');
-            $table->string('nation', 20)->comment('民族');
+            $table->string('idtype', 10)->comment('证件类型');
+            $table->string('idnumber', 18)->comment('证件号码');
+            $table->string('gender_id', 2)->comment('性别');
+            $table->string('nation_id', 20)->comment('民族');
             $table->string('department_id', 10)->comment('学院ID');
             $table->string('major_id', 10)->comment('专业ID');
             $table->string('grade', 4)->comment('年级');

@@ -27,30 +27,30 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="card_type" class="col-sm-3 col-form-label text-right">{{ __('student.card_type') }}</label>
+                    <label for="idtype" class="col-sm-3 col-form-label text-right">{{ __('student.idtype') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->card_type }}</div>
+                        <div class="form-control-plaintext">{{ $item->idtype }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="card_id" class="col-sm-3 col-form-label text-right">{{ __('student.card_id') }}</label>
+                    <label for="idnumber" class="col-sm-3 col-form-label text-right">{{ __('student.idnumber') }}</label>
                     <div class="col-sm-9">
                         <div class="form-control-plaintext">{{ optional($item->card)->name }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="gender" class="col-sm-3 col-form-label text-right">{{ __('student.gender') }}</label>
+                    <label for="gender_id" class="col-sm-3 col-form-label text-right">{{ __('student.gender_id') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->gender }}</div>
+                        <div class="form-control-plaintext">{{ $item->gender_id }}</div>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="nation" class="col-sm-3 col-form-label text-right">{{ __('student.nation') }}</label>
+                    <label for="nation_id" class="col-sm-3 col-form-label text-right">{{ __('student.nation_id') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->nation }}</div>
+                        <div class="form-control-plaintext">{{ $item->nation_id }}</div>
                     </div>
                 </div>
 

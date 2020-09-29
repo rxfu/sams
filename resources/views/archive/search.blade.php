@@ -102,12 +102,12 @@
                             <tr>
                                 <th>{{ __('archive.id') }}</th>
                                 <th>{{ __('archive.sid') }}</th>
-                                <th>{{ __('archive.card_number') }}</th>
+                                <th>{{ __('student.idnumber') }}</th>
                                 <th>{{ __('archive.received_at') }}</th>
-                                <th>{{ __('archive.name') }}</th>
-                                <th>{{ __('archive.department_id') }}</th>
-                                <th>{{ __('archive.major_id') }}</th>
-                                <th>{{ __('archive.grade') }}</th>
+                                <th>{{ __('student.name') }}</th>
+                                <th>{{ __('student.department_id') }}</th>
+                                <th>{{ __('student.major_id') }}</th>
+                                <th>{{ __('student.grade') }}</th>
                                 <th>{{ __('archive.creator_id') }}</th>
                                 <th>{{ __('archive.editor_id') }}</th>
                                 <th>{{ __('archive.remark') }}</th>
@@ -119,7 +119,7 @@
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->sid }}</td>
-                                    <td>{{ $item->student->card_number }}</td>
+                                    <td>{{ $item->student->idnumber }}</td>
                                     <td>{{ $item->received_at }}</td>
                                     <td>{{ $item->student->name }}</td>
                                     <td>{{ $item->student->department }}</td>
@@ -152,12 +152,12 @@
                             <tr>
                                 <th>{{ __('archive.id') }}</th>
                                 <th>{{ __('archive.sid') }}</th>
-                                <th>{{ __('archive.card_number') }}</th>
+                                <th>{{ __('student.idnumber') }}</th>
                                 <th>{{ __('archive.received_at') }}</th>
-                                <th>{{ __('archive.name') }}</th>
-                                <th>{{ __('archive.department_id') }}</th>
-                                <th>{{ __('archive.major_id') }}</th>
-                                <th>{{ __('archive.grade') }}</th>
+                                <th>{{ __('student.name') }}</th>
+                                <th>{{ __('student.department_id') }}</th>
+                                <th>{{ __('student.major_id') }}</th>
+                                <th>{{ __('student.grade') }}</th>
                                 <th>{{ __('archive.creator_id') }}</th>
                                 <th>{{ __('archive.editor_id') }}</th>
                                 <th>{{ __('archive.remark') }}</th>

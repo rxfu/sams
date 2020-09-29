@@ -23,10 +23,10 @@
                         <tr>
                             <th>{{ __('student.id') }}</th>
 							<th>{{ __('student.name') }}</th>
-							<th>{{ __('student.card_type') }}</th>
-							<th>{{ __('student.card_id') }}</th>
-							<th>{{ __('student.gender') }}</th>
-							<th>{{ __('student.nation') }}</th>
+							<th>{{ __('student.idtype') }}</th>
+							<th>{{ __('student.idnumber') }}</th>
+							<th>{{ __('student.gender_id') }}</th>
+							<th>{{ __('student.nation_id') }}</th>
 							<th>{{ __('student.department_id') }}</th>
 							<th>{{ __('student.major_id') }}</th>
 							<th>{{ __('student.grade') }}</th>
@@ -41,10 +41,10 @@
                             <tr>
                                 <td>{{ $item->id }}</td>
 								<td>{{ $item->name }}</td>
-								<td>{{ $item->card_type }}</td>
+								<td>{{ $item->idtype }}</td>
 								<td>{{ optional($item->card)->name }}</td>
-								<td>{{ $item->gender }}</td>
-								<td>{{ $item->nation }}</td>
+								<td>{{ $item->gender_id }}</td>
+								<td>{{ $item->nation_id }}</td>
 								<td>{{ optional($item->department)->name }}</td>
 								<td>{{ optional($item->major)->name }}</td>
 								<td>{{ $item->grade }}</td>
@@ -75,10 +75,10 @@
                         <tr>
                             <th>{{ __('student.id') }}</th>
 							<th>{{ __('student.name') }}</th>
-							<th>{{ __('student.card_type') }}</th>
-							<th>{{ __('student.card_id') }}</th>
-							<th>{{ __('student.gender') }}</th>
-							<th>{{ __('student.nation') }}</th>
+							<th>{{ __('student.idtype') }}</th>
+							<th>{{ __('student.idnumber') }}</th>
+							<th>{{ __('student.gender_id') }}</th>
+							<th>{{ __('student.nation_id') }}</th>
 							<th>{{ __('student.department_id') }}</th>
 							<th>{{ __('student.major_id') }}</th>
 							<th>{{ __('student.grade') }}</th>
