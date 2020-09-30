@@ -5,22 +5,27 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GenderStoreRequest;
 use App\Http\Requests\GenderUpdateRequest;
 use App\Models\Gender;
+use App\Services\CenterGenderService;
 use App\Services\GenderService;
 use Illuminate\Http\Request;
 
 class GenderController extends Controller
 {
+    protected $centerGenderService;
+
     /**
      * Create a new controller instance.
      *
      * @param \App\Services\GenderService  $genderService
+     * @param \App\Services\CenterGenderService  $centerGenderService
      * @return void
      */
-    public function __construct(GenderService $genderService)
+    public function __construct(GenderService $genderService, CenterGenderService $centerGenderService)
     {
         $this->authorizeResource(Gender::class, 'gender');
 
         $this->service = $genderService;
+        $this->centerGenderService = $centerGenderService;
     }
 
     /**
@@ -30,7 +35,7 @@ class GenderController extends Controller
      */
     public function index()
     {
-        $items = $this->service->getAll();
+        $items = $this->centerGenderService->getAll();
 
         return view('gender.index', compact('items'));
     }
@@ -140,12 +145,10 @@ class GenderController extends Controller
      */
     public function sync()
     {
-        $this->authorize('sync');
+        $this->authorize('sync', Gender::class);
 
         if ($this->service->sync()) {
             $this->success(200011);
-        } else {
-            $this->error(500011);
         }
 
         return back();

@@ -15,23 +15,23 @@ class GenderService extends Service
         $this->centerGenders = $centerGenders;
     }
 
-    public function getAll()
-    {
-        return $this->centerGenders->findAll();
-    }
-
     public function sync()
     {
         $items = $this->centerGenders->findAll();
 
         foreach ($items as $item) {
-            $attribute = [
+            $attributes = [
                 'id' => $item->dm,
-                'name' => $item->mc,
-                'is_enable' => 'zt' == 1 ? true : false,
             ];
 
-            $this->repository->save($attribute);
+            $values = [
+                'name' => $item->mc,
+                'is_enable' => $item->zt == 1 ? true : false,
+            ];
+
+            $this->repository->updateOrCreate($attributes, $values);
         }
+
+        return true;
     }
 }
