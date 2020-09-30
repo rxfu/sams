@@ -54,7 +54,7 @@ class IdtypeController extends Controller
     public function store(IdtypeStoreRequest $request)
     {
         if ($request->isMethod('post')) {
-    
+
             $item = $this->service->store($request->all());
 
             return redirect()->route('idtypes.show', $item);
@@ -101,7 +101,7 @@ class IdtypeController extends Controller
     public function update(IdtypeUpdateRequest $request, Idtype $idtype)
     {
         if ($request->isMethod('put')) {
-    
+
             $this->service->update($idtype, $request->all());
 
             return redirect()->route('idtypes.show', $idtype);
@@ -129,6 +129,22 @@ class IdtypeController extends Controller
         }
 
         $this->error(405001);
+
+        return back();
+    }
+
+    /**
+     * Sync a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sync()
+    {
+        $this->authorize('sync', Idtype::class);
+
+        if ($this->service->sync()) {
+            $this->success(200011);
+        }
 
         return back();
     }

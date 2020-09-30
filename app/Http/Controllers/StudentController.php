@@ -139,4 +139,20 @@ class StudentController extends Controller
 
         return back();
     }
+
+    /**
+     * Sync a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sync()
+    {
+        $this->authorize('sync', Student::class);
+
+        if ($this->service->sync()) {
+            $this->success(200011);
+        }
+
+        return back();
+    }
 }

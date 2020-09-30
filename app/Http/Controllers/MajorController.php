@@ -54,7 +54,7 @@ class MajorController extends Controller
     public function store(MajorStoreRequest $request)
     {
         if ($request->isMethod('post')) {
-    
+
             $item = $this->service->store($request->all());
 
             return redirect()->route('majors.show', $item);
@@ -101,7 +101,7 @@ class MajorController extends Controller
     public function update(MajorUpdateRequest $request, Major $major)
     {
         if ($request->isMethod('put')) {
-    
+
             $this->service->update($major, $request->all());
 
             return redirect()->route('majors.show', $major);
@@ -129,6 +129,22 @@ class MajorController extends Controller
         }
 
         $this->error(405001);
+
+        return back();
+    }
+
+    /**
+     * Sync a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sync()
+    {
+        $this->authorize('sync', Major::class);
+
+        if ($this->service->sync()) {
+            $this->success(200011);
+        }
 
         return back();
     }

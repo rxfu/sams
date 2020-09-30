@@ -54,7 +54,7 @@ class DepartmentController extends Controller
     public function store(DepartmentStoreRequest $request)
     {
         if ($request->isMethod('post')) {
-    
+
             $item = $this->service->store($request->all());
 
             return redirect()->route('departments.show', $item);
@@ -101,7 +101,7 @@ class DepartmentController extends Controller
     public function update(DepartmentUpdateRequest $request, Department $department)
     {
         if ($request->isMethod('put')) {
-    
+
             $this->service->update($department, $request->all());
 
             return redirect()->route('departments.show', $department);
@@ -129,6 +129,22 @@ class DepartmentController extends Controller
         }
 
         $this->error(405001);
+
+        return back();
+    }
+
+    /**
+     * Sync a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sync()
+    {
+        $this->authorize('sync', Department::class);
+
+        if ($this->service->sync()) {
+            $this->success(200011);
+        }
 
         return back();
     }

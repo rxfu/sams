@@ -54,7 +54,7 @@ class NationController extends Controller
     public function store(NationStoreRequest $request)
     {
         if ($request->isMethod('post')) {
-    
+
             $item = $this->service->store($request->all());
 
             return redirect()->route('nations.show', $item);
@@ -101,7 +101,7 @@ class NationController extends Controller
     public function update(NationUpdateRequest $request, Nation $nation)
     {
         if ($request->isMethod('put')) {
-    
+
             $this->service->update($nation, $request->all());
 
             return redirect()->route('nations.show', $nation);
@@ -129,6 +129,22 @@ class NationController extends Controller
         }
 
         $this->error(405001);
+
+        return back();
+    }
+
+    /**
+     * Sync a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sync()
+    {
+        $this->authorize('sync', Nation::class);
+
+        if ($this->service->sync()) {
+            $this->success(200011);
+        }
 
         return back();
     }
