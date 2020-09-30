@@ -9,6 +9,11 @@
             <div class="card-header">
                 <h3 class="card-title">{{ __('nation.module') . __('List') }}</h3>
                 <div class="card-tools">
+                    @can('sync', Nation::class)
+                        <a href="{{ route('nations.sync') }}" title="{{ __('Sync') }}" class="btn btn-primary">
+                            <i class="fas fa-sync"></i> {{ __('Sync') . __('nation.module') }}
+                        </a>
+                    @endcan
                     @can('create', Nation::class)
                         <a href="{{ route('nations.create') }}" title="{{ __('Create') }}" class="btn btn-success">
                             <i class="fas fa-plus"></i> {{ __('Create') . __('nation.module') }}

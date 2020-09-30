@@ -9,6 +9,11 @@
             <div class="card-header">
                 <h3 class="card-title">{{ __('idtype.module') . __('List') }}</h3>
                 <div class="card-tools">
+                    @can('sync', Idtype::class)
+                        <a href="{{ route('idtypes.sync') }}" title="{{ __('Sync') }}" class="btn btn-primary">
+                            <i class="fas fa-sync"></i> {{ __('Sync') . __('idtype.module') }}
+                        </a>
+                    @endcan
                     @can('create', Idtype::class)
                         <a href="{{ route('idtypes.create') }}" title="{{ __('Create') }}" class="btn btn-success">
                             <i class="fas fa-plus"></i> {{ __('Create') . __('idtype.module') }}

@@ -9,6 +9,11 @@
             <div class="card-header">
                 <h3 class="card-title">{{ __('major.module') . __('List') }}</h3>
                 <div class="card-tools">
+                    @can('sync', Major::class)
+                        <a href="{{ route('majors.sync') }}" title="{{ __('Sync') }}" class="btn btn-primary">
+                            <i class="fas fa-sync"></i> {{ __('Sync') . __('major.module') }}
+                        </a>
+                    @endcan
                     @can('create', Major::class)
                         <a href="{{ route('majors.create') }}" title="{{ __('Create') }}" class="btn btn-success">
                             <i class="fas fa-plus"></i> {{ __('Create') . __('major.module') }}

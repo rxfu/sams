@@ -73,6 +73,22 @@ Route::middleware('auth')->group(function () {
         Route::get('/sync', 'GenderController@sync')->name('sync');
     });
 
+    Route::prefix('idtypes')->name('idtypes.')->group(function () {
+        Route::get('/sync', 'IdtypeController@sync')->name('sync');
+    });
+
+    Route::prefix('nations')->name('nations.')->group(function () {
+        Route::get('/sync', 'NationController@sync')->name('sync');
+    });
+
+    Route::prefix('departments')->name('departments.')->group(function () {
+        Route::get('/sync', 'DepartmentController@sync')->name('sync');
+    });
+
+    Route::prefix('majors')->name('majors.')->group(function () {
+        Route::get('/sync', 'MajorController@sync')->name('sync');
+    });
+
     Route::prefix('students')->name('students.')->group(function () {
         Route::get('/sync', 'StudentController@sync')->name('sync');
     });

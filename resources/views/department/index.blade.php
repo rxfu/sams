@@ -9,6 +9,11 @@
             <div class="card-header">
                 <h3 class="card-title">{{ __('department.module') . __('List') }}</h3>
                 <div class="card-tools">
+                    @can('sync', Department::class)
+                        <a href="{{ route('departments.sync') }}" title="{{ __('Sync') }}" class="btn btn-primary">
+                            <i class="fas fa-sync"></i> {{ __('Sync') . __('department.module') }}
+                        </a>
+                    @endcan
                     @can('create', Department::class)
                         <a href="{{ route('departments.create') }}" title="{{ __('Create') }}" class="btn btn-success">
                             <i class="fas fa-plus"></i> {{ __('Create') . __('department.module') }}
