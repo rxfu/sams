@@ -5,22 +5,27 @@ namespace App\Http\Controllers;
 use App\Http\Requests\IdtypeStoreRequest;
 use App\Http\Requests\IdtypeUpdateRequest;
 use App\Models\Idtype;
+use App\Services\CenterIdtypeService;
 use App\Services\IdtypeService;
 use Illuminate\Http\Request;
 
 class IdtypeController extends Controller
 {
+    protected $centerIdtypeService;
+
     /**
      * Create a new controller instance.
      *
      * @param \App\Services\IdtypeService  $idtypeService
+     * @param \App\Services\CenterIdtypeService  $centerIdtypeService
      * @return void
      */
-    public function __construct(IdtypeService $idtypeService)
+    public function __construct(IdtypeService $idtypeService, CenterIdtypeService $centerIdtypeService)
     {
         $this->authorizeResource(Idtype::class, 'idtype');
 
         $this->service = $idtypeService;
+        $this->centerIdtypeService = $centerIdtypeService;
     }
 
     /**
@@ -30,7 +35,7 @@ class IdtypeController extends Controller
      */
     public function index()
     {
-        $items = $this->service->getAll();
+        $items = $this->centerIdtypeService->getAll();
 
         return view('idtype.index', compact('items'));
     }

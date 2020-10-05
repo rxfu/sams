@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Laracasts\Presenter\PresentableTrait;
-
 class CenterGender extends CenterModel
 {
     protected $presenter = 'App\Presenters\CenterGenderPresenter';

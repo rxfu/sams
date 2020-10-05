@@ -26,6 +26,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('sync:gender')->everyMinute();
+        $schedule->command('sync:idtype')->everyMinute();
     }
 
     /**
