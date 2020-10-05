@@ -5,22 +5,27 @@ namespace App\Http\Controllers;
 use App\Http\Requests\NationStoreRequest;
 use App\Http\Requests\NationUpdateRequest;
 use App\Models\Nation;
+use App\Services\CenterNationService;
 use App\Services\NationService;
 use Illuminate\Http\Request;
 
 class NationController extends Controller
 {
+    protected $centerNationService;
+
     /**
      * Create a new controller instance.
      *
      * @param \App\Services\NationService  $nationService
+     * @param \App\Services\CenterNationService  $centerNationService
      * @return void
      */
-    public function __construct(NationService $nationService)
+    public function __construct(NationService $nationService, CenterNationService $centerNationService)
     {
         $this->authorizeResource(Nation::class, 'nation');
 
         $this->service = $nationService;
+        $this->centerNationService = $centerNationService;
     }
 
     /**
@@ -30,7 +35,7 @@ class NationController extends Controller
      */
     public function index()
     {
-        $items = $this->service->getAll();
+        $items = $this->centerNationService->getAll();
 
         return view('nation.index', compact('items'));
     }
