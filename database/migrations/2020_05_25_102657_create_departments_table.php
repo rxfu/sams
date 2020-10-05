@@ -15,7 +15,7 @@ class CreateDepartmentsTable extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->string('id', 10)->comment('学院代码');
-            $table->string('name', 64)->unique()->comment('名称');
+            $table->string('name', 64)->comment('名称');
             $table->boolean('is_enable')->default(true)->comment('是否启用，0-未启用，1-启用');
             $table->text('description')->nullable()->comment('描述');
 

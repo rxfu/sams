@@ -12,7 +12,16 @@ class Department extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'is_enable', 'description',
+        'id', 'name', 'is_enable', 'description',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_enable' => 'boolean',
     ];
 
     public $incrementing = false;

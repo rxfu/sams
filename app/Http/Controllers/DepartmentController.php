@@ -5,22 +5,27 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DepartmentStoreRequest;
 use App\Http\Requests\DepartmentUpdateRequest;
 use App\Models\Department;
+use App\Services\CenterDepartmentService;
 use App\Services\DepartmentService;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
+    protected $centerDepartmentService;
+
     /**
      * Create a new controller instance.
      *
      * @param \App\Services\DepartmentService  $departmentService
+     * @param \App\Services\CenterDepartmentService  $centerDepartmentService
      * @return void
      */
-    public function __construct(DepartmentService $departmentService)
+    public function __construct(DepartmentService $departmentService, CenterDepartmentService $centerDepartmentService)
     {
         $this->authorizeResource(Department::class, 'department');
 
         $this->service = $departmentService;
+        $this->centerDepartmentService = $centerDepartmentService;
     }
 
     /**
@@ -30,7 +35,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $items = $this->service->getAll();
+        $items = $this->centerDepartmentService->getAll();
 
         return view('department.index', compact('items'));
     }

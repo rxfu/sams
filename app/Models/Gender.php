@@ -6,10 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Gender extends Model
 {
-    public $incrementing = false;
-
-    public $timestamps = false;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -27,4 +23,8 @@ class Gender extends Model
     protected $casts = [
         'is_enable' => 'boolean',
     ];
+
+    public $incrementing = false;
+
+    public $timestamps = false;
 }

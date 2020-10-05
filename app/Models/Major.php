@@ -15,6 +15,15 @@ class Major extends Model
         'id', 'name', 'is_enable', 'department_id', 'description',
     ];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_enable' => 'boolean',
+    ];
+
     public $incrementing = false;
 
     public $timestamps = false;

@@ -2,24 +2,24 @@
 
 namespace App\Console\Commands;
 
-use App\Services\NationService;
+use App\Services\DepartmentService;
 use Illuminate\Console\Command;
 
-class NationSync extends Command
+class DepartmentSync extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'sync:nation';
+    protected $signature = 'sync:department';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Sync nations from network information center';
+    protected $description = 'Sync departments from network information center';
 
     /**
      * The type of class being generated.
@@ -43,7 +43,7 @@ class NationSync extends Command
      *
      * @return int
      */
-    public function handle(NationService $service)
+    public function handle(DepartmentService $service)
     {
         $service->sync();
 
