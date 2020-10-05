@@ -188,6 +188,10 @@ abstract class Repository
                 $values = is_array($attribute[1]) ? $attribute[1] : [$attribute[1]];
 
                 $query = $query->whereNotIn($field, $values);
+            } elseif ('null' === Str::lower(trim($attribute[0]))) {
+                $query = $query->whereNull($field);
+            } elseif ('not null' === Str::lower(trim($attribute[0]))) {
+                $query = $query->whereNotNull($field);
             } elseif (('like' === Str::lower($attribute[0]) && (0 !== Str::length(trim($attribute[1], '%'))))
                 || ('like' !== Str::lower($attribute[0])) && (0 !== Str::length($attribute[1]))
             ) {

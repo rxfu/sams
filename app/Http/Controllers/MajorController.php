@@ -5,22 +5,27 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MajorStoreRequest;
 use App\Http\Requests\MajorUpdateRequest;
 use App\Models\Major;
+use App\Services\CenterMajorService;
 use App\Services\MajorService;
 use Illuminate\Http\Request;
 
 class MajorController extends Controller
 {
+    protected $centerMajorService;
+
     /**
      * Create a new controller instance.
      *
      * @param \App\Services\MajorService  $majorService
+     * @param \App\Services\CenterMajorService  $centerMajorService
      * @return void
      */
-    public function __construct(MajorService $majorService)
+    public function __construct(MajorService $majorService, CenterMajorService $centerMajorService)
     {
         $this->authorizeResource(Major::class, 'major');
 
         $this->service = $majorService;
+        $this->centerMajorService = $centerMajorService;
     }
 
     /**
@@ -30,7 +35,7 @@ class MajorController extends Controller
      */
     public function index()
     {
-        $items = $this->service->getAll();
+        $items = $this->centerMajorService->getAll();
 
         return view('major.index', compact('items'));
     }

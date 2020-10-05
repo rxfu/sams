@@ -31,8 +31,8 @@ class CenterDepartmentPresenter extends Presenter
 
     public function is_enable()
     {
-        $isEnable = (1 == $this->dwyxbs) ? '已启用' : '未启用';
         $item = Department::find($this->dwh);
+        $isEnable = (1 == $this->dwyxbs) ? '已启用' : '未启用';
 
         if ($item && $item->is_enable == $this->dwyxbs) {
             return $isEnable;
@@ -43,7 +43,7 @@ class CenterDepartmentPresenter extends Presenter
 
     public function description()
     {
-        $item = Department::find($this->dm);
+        $item = Department::find($this->dwh);
 
         return optional($item)->description;
     }

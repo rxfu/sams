@@ -37,11 +37,11 @@
                     <tbody>
                         @foreach ($items as $item)
                             <tr>
-                                <td>{{ $item->id }}</td>
-								<td>{{ $item->name }}</td>
-								<td>{{ $item->is_enable }}</td>
-								<td>{{ optional($item->department)->name }}</td>
-								<td>{{ $item->description }}</td>
+								<td>{!! $item->present()->id !!}</td>
+								<td>{!! $item->present()->name !!}</td>
+								<td>{!! $item->present()->is_enable !!}</td>
+								<td>{!! $item->present()->department_name !!}</td>
+                                <td>{!! $item->present()->description !!}</td>
                                 <td>
                                     @can('view', $item)
                                         <a href="{{ route('majors.show', $item) }}" class="btn btn-primary btn-sm" title="{{ __('Show') }}">

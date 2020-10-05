@@ -31,8 +31,8 @@ class CenterIdtypePresenter extends Presenter
 
     public function is_enable()
     {
-        $isEnable = (1 == $this->zt) ? '已启用' : '未启用';
         $item = Idtype::find($this->dm);
+        $isEnable = (1 == $this->zt) ? '已启用' : '未启用';
 
         if ($item && $item->is_enable == $this->zt) {
             return $isEnable;
