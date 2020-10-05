@@ -2,23 +2,31 @@
 
 namespace App\Console\Commands;
 
+use App\Services\GenderService;
 use Illuminate\Console\Command;
 
-class CenterSync extends Command
+class GenderSync extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'sync:center {name}';
+    protected $signature = 'sync:gender';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Sync data center items';
+    protected $description = 'Sync genders from network information center';
+
+    /**
+     * The type of class being generated.
+     *
+     * @var string
+     */
+    protected $type = 'Sync';
 
     /**
      * Create a new command instance.
@@ -35,8 +43,10 @@ class CenterSync extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(GenderService $service)
     {
-        return 0;
+        $service->sync();
+
+        $this->info($this->type . 'genders successfully.');
     }
 }
