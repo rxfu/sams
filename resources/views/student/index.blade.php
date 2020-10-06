@@ -44,18 +44,18 @@
                     <tbody>
                         @foreach ($items as $item)
                             <tr>
-                                <td>{{ $item->id }}</td>
-								<td>{{ $item->name }}</td>
-								<td>{{ $item->idtype }}</td>
-								<td>{{ optional($item->card)->name }}</td>
-								<td>{{ $item->gender_id }}</td>
-								<td>{{ $item->nation_id }}</td>
-								<td>{{ optional($item->department)->name }}</td>
-								<td>{{ optional($item->major)->name }}</td>
-								<td>{{ $item->grade }}</td>
-								<td>{{ $item->duration }}</td>
-								<td>{{ $item->status }}</td>
-								<td>{{ $item->level }}</td>
+                                <td>{!! $item->present()->id !!}</td>
+								<td>{!! $item->present()->name !!}</td>
+								<td>{!! $item->present()->idtype !!}</td>
+								<td>{!! $item->present()->idnumber !!}</td>
+								<td>{!! $item->present()->gender !!}</td>
+								<td>{!! $item->present()->nation !!}</td>
+								<td>{!! $item->present()->department !!}</td>
+								<td>{!! $item->present()->major !!}</td>
+								<td>{!! $item->present()->grade !!}</td>
+								<td>{!! $item->present()->duration !!}</td>
+								<td>{!! $item->present()->status !!}</td>
+								<td>{!! $item->present()->level !!}</td>
                                 <td>
                                     @can('view', $item)
                                         <a href="{{ route('students.show', $item) }}" class="btn btn-primary btn-sm" title="{{ __('Show') }}">

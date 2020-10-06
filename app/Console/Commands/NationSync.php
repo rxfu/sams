@@ -47,6 +47,6 @@ class NationSync extends Command
     {
         $service->sync();
 
-        $this->info($this->type . 'nations successfully.');
+        $this->info($this->type . ' nations successfully.');
     }
 }

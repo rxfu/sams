@@ -33,7 +33,9 @@ class CenterMajorPresenter extends Presenter
     {
         $item = Major::find($this->zyh);
 
-        return optional($item)->is_enable;
+        if ($item) {
+            return $item->is_enable ? '已启用' : '未启用';
+        }
     }
 
     public function description()
@@ -45,7 +47,6 @@ class CenterMajorPresenter extends Presenter
 
     public function department_name()
     {
-
         $item = Major::find($this->zyh);
 
         if ($item && $item->department_id == $this->dwh) {

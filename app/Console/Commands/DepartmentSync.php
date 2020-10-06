@@ -47,6 +47,6 @@ class DepartmentSync extends Command
     {
         $service->sync();
 
-        $this->info($this->type . 'departments successfully.');
+        $this->info($this->type . ' departments successfully.');
     }
 }

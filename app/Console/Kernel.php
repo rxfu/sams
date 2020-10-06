@@ -30,6 +30,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('sync:nation')->everyMinute();
         $schedule->command('sync:department')->everyMinute();
         $schedule->command('sync:major')->everyMinute();
+        $schedule->command('sync:student')->everyMinute();
     }
 
     /**

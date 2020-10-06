@@ -47,6 +47,6 @@ class GenderSync extends Command
     {
         $service->sync();
 
-        $this->info($this->type . 'genders successfully.');
+        $this->info($this->type . ' genders successfully.');
     }
 }

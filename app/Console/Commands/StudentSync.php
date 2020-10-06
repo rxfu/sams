@@ -2,24 +2,24 @@
 
 namespace App\Console\Commands;
 
-use App\Services\MajorService;
+use App\Services\StudentService;
 use Illuminate\Console\Command;
 
-class MajorSync extends Command
+class StudentSync extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'sync:major';
+    protected $signature = 'sync:student';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Sync majors from network information cente';
+    protected $description = 'Sync students from network information center';
 
     /**
      * The type of class being generated.
@@ -43,10 +43,10 @@ class MajorSync extends Command
      *
      * @return int
      */
-    public function handle(MajorService $service)
+    public function handle(StudentService $service)
     {
         $service->sync();
 
-        $this->info($this->type . ' majors successfully.');
+        $this->info($this->type . ' students successfully.');
     }
 }

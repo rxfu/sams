@@ -47,6 +47,6 @@ class IdtypeSync extends Command
     {
         $service->sync();
 
-        $this->info($this->type . 'idtypes successfully.');
+        $this->info($this->type . ' idtypes successfully.');
     }
 }
