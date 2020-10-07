@@ -54,6 +54,10 @@ class StudentService extends Service
                 'level' => $item->sjly == '教务管理系统' ? 1 : 0,
             ];
 
+            array_walk($values, function (&$v) {
+                $v = trim($v);
+            });
+
             $this->repository->updateOrCreate($attributes, $values);
         }
 

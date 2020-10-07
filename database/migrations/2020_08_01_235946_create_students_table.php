@@ -17,7 +17,7 @@ class CreateStudentsTable extends Migration
             $table->string('id', 12)->comment('学号');
             $table->string('name', 60)->nullable()->comment('姓名');
             $table->string('idtype', 10)->nullable()->comment('证件类型');
-            $table->string('idnumber', 18)->nullable()->comment('证件号码');
+            $table->string('idnumber', 20)->nullable()->comment('证件号码');
             $table->string('gender_id', 2)->nullable()->comment('性别');
             $table->string('nation_id', 20)->nullable()->comment('民族');
             $table->string('department_id', 10)->nullable()->comment('学院ID');
