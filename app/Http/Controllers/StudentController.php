@@ -2,30 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
+use Illuminate\Http\Request;
+use App\Services\MajorService;
+use App\Services\StudentService;
+use App\Services\DepartmentService;
+use App\Services\CenterStudentService;
 use App\Http\Requests\StudentStoreRequest;
 use App\Http\Requests\StudentUpdateRequest;
-use App\Models\Student;
-use App\Services\CenterStudentService;
-use App\Services\StudentService;
-use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
     protected $centerStudentService;
+
+    protected $departmentService;
+
+    protected $majorService;
 
     /**
      * Create a new controller instance.
      *
      * @param \App\Services\StudentService  $studentService
      * @param \App\Services\CenterStudentService  $centerStudentService
+     * @param \App\Services\DepartmentService  $departmentService
+     * @param \App\Services\MajortService  $majorService
      * @return void
      */
-    public function __construct(StudentService $studentService, CenterStudentService $centerStudentService)
+    public function __construct(StudentService $studentService, CenterStudentService $centerStudentService, DepartmentService $departmentService, MajorService $majorService)
     {
         $this->authorizeResource(Student::class, 'student');
 
         $this->service = $studentService;
         $this->centerStudentService = $centerStudentService;
+        $this->departmentService = $departmentService;
+        $this->majorService = $majorService;
     }
 
     /**
@@ -160,5 +170,38 @@ class StudentController extends Controller
         }
 
         return back();
+    }
+
+    /**
+     * Search the specified resource in storage.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $this->authorize('search', Student::class);
+
+        $departments = $this->departmentService->getEnableItems();
+        $majors = $this->majorService->getEnableItems();
+        $grades = $this->service->getAllGrades();
+        $levels = $this->service->getAllLevels();
+
+        $attributes = [];
+        $items = null;
+        if ($request->hasAny(['id', 'name', 'level', 'department', 'major', 'grade'])) {
+            $attributes = [
+                'id' => $request->input('id'),
+                'name' => $request->input('name'),
+                'level' => $request->input('level'),
+                'department' => $request->input('department'),
+                'major' => $request->input('major'),
+                'grade' => $request->input('grade'),
+            ];
+
+            $items = $this->service->search($attributes, 10);
+        }
+
+        return view('student.search', compact('departments', 'majors', 'grades', 'levels', 'attributes', 'items'));
     }
 }

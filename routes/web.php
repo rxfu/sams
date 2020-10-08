@@ -91,6 +91,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('students')->name('students.')->group(function () {
         Route::get('/sync', 'StudentController@sync')->name('sync');
+        Route::get('/search', 'StudentController@search')->name('search');
     });
 
     Route::resource('logs', 'LogController')->only(['index', 'show']);

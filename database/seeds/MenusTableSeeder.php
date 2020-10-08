@@ -178,7 +178,7 @@ class MenusTableSeeder extends Seeder
             [
                 'slug' => 'student',
                 'name' => '学生管理',
-                'route' => 'students.index',
+                'route' => 'students.search',
                 'parent_id' => 20,
                 'order' => 1,
             ],
