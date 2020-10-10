@@ -192,7 +192,7 @@ class MenusTableSeeder extends Seeder
             [
                 'slug' => 'major',
                 'name' => '专业管理',
-                'route' => 'majors.index',
+                'route' => 'majors.search',
                 'parent_id' => 20,
                 'order' => 3,
             ],

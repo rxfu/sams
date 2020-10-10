@@ -35,36 +35,35 @@ abstract class Repository
         }
     }
 
-    public function findAll($order = null, $direction = 'asc', $trashed = false)
+    public function findAll($orders = null, $trashed = false)
     {
         try {
-            return $this->queryBy(null, null, $order, $direction, $trashed)->get();
+            return $this->queryBy(null, null, $orders, $trashed)->get();
         } catch (QueryException $e) {
             throw new InternalException($e, $this->getModel(), __FUNCTION__);
         }
     }
 
-    public function findWith($relations, $order = null, $direction = 'asc', $trashed = false)
+    public function findWith($relations, $orders = null, $trashed = false)
     {
         try {
-            return $this->queryBy(null, $relations, $order, $direction, $trashed)->get();
+            return $this->queryBy(null, $relations, $orders, $trashed)->get();
         } catch (QueryException $e) {
             throw new InternalException($e, $this->getModel(), __FUNCTION__);
         }
     }
 
-    public function findBy($attributes, $relations = null, $order = null, $direction = 'asc', $trashed = false)
+    public function findBy($attributes, $relations = null, $orders = null, $trashed = false)
     {
         try {
-            return $this->queryBy($attributes, $relations, $order, $direction, $trashed)->get();
+            return $this->queryBy($attributes, $relations, $orders, $trashed)->get();
         } catch (QueryException $e) {
             throw new InternalException($e, $this->getModel(), __FUNCTION__);
         }
     }
 
-    public function queryBy($attributes = null, $relations = null, $order = null, $direction = 'asc', $trashed = false)
+    public function queryBy($attributes = null, $relations = null, $orders = null, $trashed = false)
     {
-        $order = is_null($order) ? $this->model->getKeyName() : $order;
         $query = $this->model;
 
         if (!is_null($relations)) {
@@ -74,11 +73,10 @@ abstract class Repository
         }
 
         if (!is_null($attributes)) {
-            $attributes = is_array($attributes) ? $attributes : [$this->model->getKeyName() => $attributes];
             $query = $this->parseAttributes($query, $attributes);
         }
 
-        $query = $query->orderBy($order, $direction);
+        $query = $this->parseOrders($query, $orders);
 
         if ($trashed) {
             $query = $query->withTrashed();
@@ -196,6 +194,22 @@ abstract class Repository
                 || ('like' !== Str::lower($attribute[0])) && (0 !== Str::length($attribute[1]))
             ) {
                 $query = $query->where($field, $attribute[0], $attribute[1]);
+            }
+        }
+
+        return $query;
+    }
+
+    protected function parseOrders($query, $orders)
+    {
+        $orders = is_null($orders) ? $this->model->getKeyName() : $orders;
+        $orders = is_array($orders) ? $orders : [$orders => 'asc'];
+
+        foreach ($orders as $attribute => $direction) {
+            if (is_numeric($attribute)) {
+                $query = $query->orderBy($direction, 'asc');
+            } else {
+                $query = $query->orderBy($attribute, $direction);
             }
         }
 

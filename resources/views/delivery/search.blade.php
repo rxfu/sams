@@ -188,6 +188,7 @@
                             </tr>
                         </tfoot>
                     </table>
+                    {{ $items->withQueryString()->links() }}
                     @isset($items[0])
                         @can('delete', $items[0])
                             <form id="delete-form" method="post" style="display: none;">

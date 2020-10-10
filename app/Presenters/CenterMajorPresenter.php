@@ -55,4 +55,21 @@ class CenterMajorPresenter extends Presenter
             return '<span class="text-danger">' . optional($this->department)->dwmc . '</span>';
         }
     }
+
+    public function level()
+    {
+        $item = Major::find($this->zyh);
+
+        if ('教务管理系统' == $this->sjly) {
+            $level = 0;
+        } elseif ('研究生系统' == $this->sjly) {
+            $level = 1;
+        }
+
+        if ($item && $item->level == $level) {
+            return config('setting.level.' . $level);
+        } else {
+            return '<span class="text-danger">' . config('setting.level.' . $level) . '</span>';
+        }
+    }
 }

@@ -12,7 +12,7 @@ class Major extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'name', 'is_enable', 'department_id', 'description',
+        'id', 'name', 'is_enable', 'department_id', 'level', 'description',
     ];
 
     /**

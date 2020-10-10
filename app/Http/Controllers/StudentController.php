@@ -182,10 +182,17 @@ class StudentController extends Controller
     {
         $this->authorize('search', Student::class);
 
-        $departments = $this->departmentService->getEnableItems();
+        $departments = $this->departmentService->getCollege();
         $majors = $this->majorService->getEnableItems();
-        $grades = $this->service->getAllGrades();
-        $levels = $this->service->getAllLevels();
+        $grades = $this->centerStudentService->getAllGrades();
+        $levels = $this->centerStudentService->getAllLevels();
+        $levels->each(function ($item) {
+            if ('教务管理系统' == $item->level) {
+                $item->level = 0;
+            } elseif ('研究生系统' == $item->level) {
+                $item->level = 1;
+            }
+        });
 
         $attributes = [];
         $items = null;
@@ -199,7 +206,7 @@ class StudentController extends Controller
                 'grade' => $request->input('grade'),
             ];
 
-            $items = $this->service->search($attributes, 10);
+            $items = $this->centerStudentService->search($attributes, 10);
         }
 
         return view('student.search', compact('departments', 'majors', 'grades', 'levels', 'attributes', 'items'));

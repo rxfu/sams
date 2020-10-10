@@ -87,6 +87,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('majors')->name('majors.')->group(function () {
         Route::get('/sync', 'MajorController@sync')->name('sync');
+        Route::get('/search', 'MajorController@search')->name('search');
     });
 
     Route::prefix('students')->name('students.')->group(function () {

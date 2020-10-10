@@ -29,6 +29,7 @@
                             <th>{{ __('department.id') }}</th>
 							<th>{{ __('department.name') }}</th>
 							<th>{{ __('department.is_enable') }}</th>
+							<th>{{ __('department.category') }}</th>
 							<th>{{ __('department.description') }}</th>
                             <th>{{ __('Action') }}</th>
                         </tr>
@@ -39,6 +40,7 @@
 								<td>{!! $item->present()->id !!}</td>
 								<td>{!! $item->present()->name !!}</td>
 								<td>{!! $item->present()->is_enable !!}</td>
+								<td>{!! $item->present()->category !!}</td>
                                 <td>{!! $item->present()->description !!}</td>
                                 <td>
                                     @can('view', $item)
@@ -65,6 +67,7 @@
                             <th>{{ __('department.id') }}</th>
 							<th>{{ __('department.name') }}</th>
 							<th>{{ __('department.is_enable') }}</th>
+							<th>{{ __('department.category') }}</th>
 							<th>{{ __('department.description') }}</th>
                             <th>{{ __('Action') }}</th>
                         </tr>

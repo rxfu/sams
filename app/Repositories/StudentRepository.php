@@ -26,8 +26,8 @@ class StudentRepository extends Repository
     {
         try {
             return $this->model->distinct()
-                ->select('dqszj')
-                ->orderBy('dqszj')
+                ->select('grade')
+                ->orderBy('grade')
                 ->get();
         } catch (QueryException $e) {
             throw new InternalException($e, $this->getModel(), __FUNCTION__);
@@ -36,6 +36,13 @@ class StudentRepository extends Repository
 
     public function allLevels()
     {
-        return ['教务管理系统', '研究生系统'];
+        try {
+            return $this->model->distinct()
+                ->select('level')
+                ->orderBy('level')
+                ->get();
+        } catch (QueryException $e) {
+            throw new InternalException($e, $this->getModel(), __FUNCTION__);
+        }
     }
 }

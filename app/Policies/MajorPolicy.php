@@ -16,4 +16,15 @@ class MajorPolicy extends ModelPolicy
     {
         return $this->service->hasPermission($user, 'sync');
     }
+
+    /**
+     * Determine whether the user can search majors.
+     *
+     * @param  \App\Models\User  $user
+     * @return mixed
+     */
+    public function search(User $user)
+    {
+        return $this->service->hasPermission($user, 'major-search');
+    }
 }

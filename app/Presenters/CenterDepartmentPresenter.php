@@ -41,6 +41,17 @@ class CenterDepartmentPresenter extends Presenter
         }
     }
 
+    public function category()
+    {
+        $item = Department::find($this->dwh);
+
+        if ($item && config('setting.category.' . $item->category) == $this->dwlbmc) {
+            return $this->dwlbmc;
+        } else {
+            return '<span class="text-danger">' . $this->dwlbmc . '</span>';
+        }
+    }
+
     public function description()
     {
         $item = Department::find($this->dwh);

@@ -2,30 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Major;
+use Illuminate\Http\Request;
+use App\Services\MajorService;
+use App\Services\DepartmentService;
+use App\Services\CenterMajorService;
 use App\Http\Requests\MajorStoreRequest;
 use App\Http\Requests\MajorUpdateRequest;
-use App\Models\Major;
-use App\Services\CenterMajorService;
-use App\Services\MajorService;
-use Illuminate\Http\Request;
 
 class MajorController extends Controller
 {
     protected $centerMajorService;
+
+    protected $departmentService;
 
     /**
      * Create a new controller instance.
      *
      * @param \App\Services\MajorService  $majorService
      * @param \App\Services\CenterMajorService  $centerMajorService
+     * @param \App\Services\DepartmentService  $departmentService
      * @return void
      */
-    public function __construct(MajorService $majorService, CenterMajorService $centerMajorService)
+    public function __construct(MajorService $majorService, CenterMajorService $centerMajorService, DepartmentService $departmentService)
     {
         $this->authorizeResource(Major::class, 'major');
 
         $this->service = $majorService;
         $this->centerMajorService = $centerMajorService;
+        $this->departmentService = $departmentService;
     }
 
     /**
@@ -152,5 +157,40 @@ class MajorController extends Controller
         }
 
         return back();
+    }
+
+    /**
+     * Search the specified resource in storage.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $this->authorize('search', Major::class);
+
+        $departments = $this->departmentService->getCollege();
+        $levels = $this->centerMajorService->getAllLevels();
+        $levels->each(function ($item) {
+            if ('教务管理系统' == $item->level) {
+                $item->level = 0;
+            } elseif ('研究生系统' == $item->level) {
+                $item->level = 1;
+            }
+        });
+
+        $attributes = [];
+        $items = null;
+        if ($request->hasAny(['name', 'level', 'department'])) {
+            $attributes = [
+                'name' => $request->input('name'),
+                'level' => $request->input('level'),
+                'department' => $request->input('department'),
+            ];
+
+            $items = $this->centerMajorService->search($attributes, 10);
+        }
+
+        return view('major.search', compact('departments', 'levels', 'attributes', 'items'));
     }
 }

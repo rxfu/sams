@@ -38,7 +38,7 @@
                             <select id="level" name="level" class="form-control select2">
                                 <option value="all"{{ isset($attributes['level']) && ('all' === $attributes['level']) ? ' selected' : ''}}>全部培养层次</option>
                                 @foreach ($levels as $item)
-                                    <option value="{{ $item }}"{{ isset($attributes['level']) && ($item === $attributes['level']) ? ' selected' : '' }}>{{ $item }}</option>
+                                    <option value="{{ $item->level }}"{{ isset($attributes['level']) && ($item->level === $attributes['level']) ? ' selected' : '' }}>{{ config('setting.level.' . $item->level) }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -91,7 +91,7 @@
                             </div>
                         </div>
                     </div>
-                    <table id="archives-table" class="table table-bordered table-striped">
+                    <table id="students-table" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>{{ __('student.id') }}</th>
@@ -162,6 +162,7 @@
                             </tr>
                         </tfoot>
                     </table>
+                    {{ $items->withQueryString()->links() }}
                     @isset($items[0])
                         @can('delete', $items[0])
                             <form id="delete-form" method="post" style="display: none;">

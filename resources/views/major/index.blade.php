@@ -30,6 +30,7 @@
 							<th>{{ __('major.name') }}</th>
 							<th>{{ __('major.is_enable') }}</th>
 							<th>{{ __('major.department_id') }}</th>
+							<th>{{ __('major.level') }}</th>
 							<th>{{ __('major.description') }}</th>
                             <th>{{ __('Action') }}</th>
                         </tr>
@@ -41,6 +42,7 @@
 								<td>{!! $item->present()->name !!}</td>
 								<td>{!! $item->present()->is_enable !!}</td>
 								<td>{!! $item->present()->department_name !!}</td>
+								<td>{!! $item->present()->level !!}</td>
                                 <td>{!! $item->present()->description !!}</td>
                                 <td>
                                     @can('view', $item)
@@ -68,6 +70,7 @@
 							<th>{{ __('major.name') }}</th>
 							<th>{{ __('major.is_enable') }}</th>
 							<th>{{ __('major.department_id') }}</th>
+							<th>{{ __('major.level') }}</th>
 							<th>{{ __('major.description') }}</th>
                             <th>{{ __('Action') }}</th>
                         </tr>

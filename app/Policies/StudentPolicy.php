@@ -18,7 +18,7 @@ class StudentPolicy extends ModelPolicy
     }
 
     /**
-     * Determine whether the user can search archives.
+     * Determine whether the user can search students.
      *
      * @param  \App\Models\User  $user
      * @return mixed

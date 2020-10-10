@@ -27,11 +27,20 @@ class DepartmentService extends Service
             $values = [
                 'name' => $item->dwmc,
                 'is_enable' => $item->dwyxbs == 1 ? true : false,
+                'category' => array_search($item->dwlbmc, config('setting.category')),
             ];
 
             $this->repository->updateOrCreate($attributes, $values);
         }
 
         return true;
+    }
+
+    public function getCollege()
+    {
+        return $this->repository->findBy([
+            'is_enable' => true,
+            'category' => 0,
+        ]);
     }
 }

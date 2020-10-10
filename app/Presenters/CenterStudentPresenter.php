@@ -67,9 +67,9 @@ class CenterStudentPresenter extends Presenter
         $item = Student::find($this->xh);
 
         if ($item && $item->department_id == $this->dwh) {
-            return optional($this->department)->dwmc;
+            return optional($this->entity->department)->dwmc;
         } else {
-            return '<span class="text-danger">' . optional($this->department)->dwmc . '</span>';
+            return '<span class="text-danger">' . optional($this->entity->department)->dwmc . '</span>';
         }
     }
 
@@ -78,9 +78,9 @@ class CenterStudentPresenter extends Presenter
         $item = Student::find($this->xh);
 
         if ($item && $item->major_id == $this->zydm) {
-            return optional($this->major)->zymc;
+            return optional($this->entity->major)->zymc;
         } else {
-            return '<span class="text-danger">' . optional($this->major)->zymc . '</span>';
+            return '<span class="text-danger">' . optional($this->entity->major)->zymc . '</span>';
         }
     }
 
@@ -88,10 +88,10 @@ class CenterStudentPresenter extends Presenter
     {
         $item = Student::find($this->xh);
 
-        if ($item && $item->nation_id == $this->dm) {
-            return optional($this->nation)->mc;
+        if ($item && $item->nation_id == $this->mzm) {
+            return optional($this->entity->nation)->mc;
         } else {
-            return '<span class="text-danger">' . optional($this->nation)->mc . '</span>';
+            return '<span class="text-danger">' . optional($this->entity->nation)->mc . '</span>';
         }
     }
 
@@ -99,10 +99,10 @@ class CenterStudentPresenter extends Presenter
     {
         $item = Student::find($this->xh);
 
-        if ($item && $item->gender_id == $this->dm) {
-            return optional($this->gender)->mc;
+        if ($item && $item->gender_id == $this->xbm) {
+            return optional($this->entity->gender)->mc;
         } else {
-            return '<span class="text-danger">' . optional($this->gender)->mc . '</span>';
+            return '<span class="text-danger">' . optional($this->entity->gender)->mc . '</span>';
         }
     }
 
@@ -110,10 +110,10 @@ class CenterStudentPresenter extends Presenter
     {
         $item = Student::find($this->xh);
 
-        if ($item && $item->idtype_id == $this->dm) {
-            return optional($this->idtype)->mc;
+        if ($item && $item->idtype_id == $this->sfzjlxm) {
+            return optional($this->entity->idtype)->mc;
         } else {
-            return '<span class="text-danger">' . optional($this->idtype)->mc . '</span>';
+            return '<span class="text-danger">' . optional($this->entity->idtype)->mc . '</span>';
         }
     }
 
@@ -135,16 +135,14 @@ class CenterStudentPresenter extends Presenter
 
         if ('教务管理系统' == $this->sjly) {
             $level = 0;
-            $levelName = '本科生';
         } elseif ('研究生系统' == $this->sjly) {
             $level = 1;
-            $levelName = '研究生';
         }
 
         if ($item && $item->level == $level) {
-            return $levelName;
+            return config('setting.level.' . $level);
         } else {
-            return '<span class="text-danger">' . $levelName . '</span>';
+            return '<span class="text-danger">' . config('setting.level.' . $level) . '</span>';
         }
     }
 }

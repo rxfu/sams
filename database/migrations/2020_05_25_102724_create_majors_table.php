@@ -18,6 +18,7 @@ class CreateMajorsTable extends Migration
             $table->string('name', 64)->comment('名称');
             $table->boolean('is_enable')->default(true)->comment('是否启用，0-未启用，1-启用');
             $table->string('department_id', 10)->comment('学院ID');
+            $table->string('level', 20)->nullable()->comment('培养层次，0-本科生，1-研究生');
             $table->text('description')->nullable()->comment('描述');
 
             $table->primary('id');
