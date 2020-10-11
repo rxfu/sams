@@ -26,6 +26,8 @@
 							<th>{{ __('user.name') }}</th>
 							<th>{{ __('user.role') }}</th>
 							<th>{{ __('user.group') }}</th>
+							<th>{{ __('user.department') }}</th>
+							<th>{{ __('user.major') }}</th>
 							<th>{{ __('user.phone') }}</th>
 							<th>{{ __('user.email') }}</th>
 							<th>{{ __('user.is_enable') }}</th>
@@ -41,7 +43,9 @@
 								<td>{{ $item->username }}</td>
 								<td>{{ $item->name }}</td>
 								<td>{{ $item->present()->allRoles }}</td>
-								<td>{{ $item->present()->allGroups }}</td>
+                                <td>{{ $item->present()->allGroups }}</td>
+                                <td>{{ optional($item->department)->name }}</td>
+                                <td>{{ $item->present()->allMajors }}</td>
 								<td>{{ $item->phone }}</td>
 								<td>{{ $item->email }}</td>
 								<td>{{ $item->present()->isEnable }}</td>
@@ -91,6 +95,8 @@
 							<th>{{ __('user.name') }}</th>
 							<th>{{ __('user.role') }}</th>
 							<th>{{ __('user.group') }}</th>
+							<th>{{ __('user.department') }}</th>
+							<th>{{ __('user.major') }}</th>
 							<th>{{ __('user.phone') }}</th>
 							<th>{{ __('user.email') }}</th>
 							<th>{{ __('user.is_enable') }}</th>

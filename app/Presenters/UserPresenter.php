@@ -37,4 +37,15 @@ class UserPresenter extends Presenter
 
         return implode(',', $groups);
     }
+
+    public function allMajors()
+    {
+        $majors = [];
+
+        foreach ($this->majors as $major) {
+            $majors[] = $major->name;
+        }
+
+        return implode(',', $majors);
+    }
 }

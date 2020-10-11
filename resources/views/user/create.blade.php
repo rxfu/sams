@@ -88,6 +88,23 @@
                     </div>
 
                     <div class="form-group row">
+                        <label for="department_id" class="col-sm-3 col-form-label text-right">{{ __('user.department') }}</label>
+                        <div class="col-sm-9">
+                            @inject('departments', 'App\Services\DepartmentService')
+							<select name="department_id" id="department_id" class="form-control select2 select2-success @error('department_id') is-invalid @enderror" data-dropdown-css-class="select2-success">
+                                @foreach ($departments->getCollege() as $collection)
+                                    <option value="{{ $collection->getKey() }}">{{ $collection->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('department_id')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label for="is_enable" class="col-sm-3 col-form-label text-right">{{ __('user.is_enable') }}</label>
                         <div class="col-sm-9">
                             <div class="icheck-success icheck-inline">

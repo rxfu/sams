@@ -17,4 +17,6 @@ return [
 	'password_confirmation' => '确认密码',
 	'role' => '所属角色',
 	'group' => '所属组',
+	'department' => '所在单位',
+	'major' => '负责专业',
 ];

@@ -41,7 +41,7 @@ class PermissionsTableSeeder extends Seeder
         ]);
 
         $modules = [
-            'setting', 'menu', 'menuitem', 'group', 'role', 'permission', 'user',
+            'setting', 'menu', 'menuitem', 'group', 'role', 'permission', 'user', 'archive', 'delivery', 'entry', 'student', 'department', 'major', 'nation', 'gender', 'idtype',
         ];
 
         $actions = [
@@ -92,6 +92,29 @@ class PermissionsTableSeeder extends Seeder
             'name' => '分配权限',
             'action' => 'assignPermission',
             'model' => 'role',
+        ]);
+
+        foreach (['student', 'department', 'major', 'nation', 'gender', 'idtype'] as $module) {
+            Permission::create([
+                'slug' => $module . '-sync',
+                'name' => '同步' . __($module . '.module'),
+                'action' => 'sync',
+                'model' => $module,
+            ]);
+        }
+
+        Permission::create([
+            'slug' => 'student-search',
+            'name' => '检索学生信息',
+            'action' => 'search',
+            'model' => 'student',
+        ]);
+
+        Permission::create([
+            'slug' => 'major-search',
+            'name' => '检索专业信息',
+            'action' => 'search',
+            'model' => 'major',
         ]);
     }
 }
