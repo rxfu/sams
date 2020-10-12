@@ -62,9 +62,16 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="email_verified_at" class="col-sm-3 col-form-label text-right">{{ __('user.email_verified_at') }}</label>
+                    <label for="department" class="col-sm-3 col-form-label text-right">{{ __('user.department') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->email_verified_at }}</div>
+                        <div class="form-control-plaintext">{{ $item->department->name }}</div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="major" class="col-sm-3 col-form-label text-right">{{ __('user.major') }}</label>
+                    <div class="col-sm-9">
+                        <div class="form-control-plaintext">{{ $item->present()->allMajors }}</div>
                     </div>
                 </div>
 

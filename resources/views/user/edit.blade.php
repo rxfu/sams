@@ -64,6 +64,40 @@
                     </div>
 
                     <div class="form-group row">
+                        <label for="department_id" class="col-sm-3 col-form-label text-right">{{ __('user.department') }}</label>
+                        <div class="col-sm-9">
+                            @inject('departments', 'App\Services\DepartmentService')
+							<select name="department_id" id="department_id" class="form-control select2 select2-info @error('department_id') is-invalid @enderror" data-dropdown-css-class="select2-info">
+                                @foreach ($departments->getCollege() as $collection)
+                                    <option value="{{ $collection->getKey() }}"{{ old('department_id', $item->department_id) === $collection->getKey() ? ' selected' : '' }}>{{ $collection->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('department_id')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="majors" class="col-sm-3 col-form-label text-right">{{ __('user.major') }}</label>
+                        <div class="col-sm-9 select2-info">
+                            @inject('majors', 'App\Services\MajorService')
+							<select name="majors[]" id="majors" class="form-control select2 select2-info @error('majors') is-invalid @enderror" data-dropdown-css-class="select2-info" multiple="multiple">
+                                @foreach ($majors->getAll() as $collection)
+                                    <option value="{{ $collection->getKey() }}" class="{{ $collection->department_id }}"{{ in_array($collection->getKey(), $item->majors->pluck('id')->toArray()) ? ' selected' : '' }}>{{ $collection->name }}（{{ $collection->level == 0 ? '本科' : '研究生' }}）</option>
+                                @endforeach
+                            </select>
+                            @error('majors')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label for="is_enable" class="col-sm-3 col-form-label text-right">{{ __('user.is_enable') }}</label>
                         <div class="col-sm-9">
                             <div class="icheck-info icheck-inline">
@@ -95,3 +129,13 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script src="{{ asset('plugins/jquery-chained/jquery.chained.min.js') }}"></script>
+<script>
+    $(function() {
+        $('#majors').chained('#department_id');
+        $('.select2').select2();
+    })
+</script>
+@endpush

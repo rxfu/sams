@@ -61,7 +61,7 @@ class ArchiveService extends Service
         return $archive;
     }
 
-    protected function getSearchQuery($attributes, $relations, $order, $direction, $trashed)
+    protected function getSearchQuery($attributes, $relations, $orders, $trashed)
     {
         $fields = [];
 
@@ -97,7 +97,7 @@ class ArchiveService extends Service
             $fields['dqszj'] = $attributes['grade'];
         }
 
-        $students = $this->studentRepository->findBy($fields, $relations, $order, $direction, $trashed);
+        $students = $this->studentRepository->findBy($fields, $relations, $orders, $trashed);
 
         $query = $this->repository->getAllByStudentsQuery($students->pluck('xh')->toArray());
 

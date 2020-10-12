@@ -29,7 +29,7 @@ class DeliveryService extends Service
         return $this->repository->save($data);
     }
 
-    protected function getSearchQuery($attributes, $relations, $order, $direction, $trashed)
+    protected function getSearchQuery($attributes, $relations, $orders, $trashed)
     {
         $fields = [];
 
@@ -65,7 +65,7 @@ class DeliveryService extends Service
             $fields['dqszj'] = $attributes['grade'];
         }
 
-        $students = $this->studentRepository->findBy($fields, $relations, $order, $direction, $trashed);
+        $students = $this->studentRepository->findBy($fields, $relations, $orders, $trashed);
 
         $archives = $this->archiveRepository->getAllByStudents($students->pluck('xh')->toArray());
 

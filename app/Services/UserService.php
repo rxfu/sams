@@ -127,4 +127,18 @@ class UserService extends Service
     {
         return !$this->isActive($username);
     }
+
+    public function store($data)
+    {
+        $user = parent::store($data);
+
+        $user->majors()->sync($data['majors']);
+    }
+
+    public function update($model, $data)
+    {
+        $user = parent::update($model, $data);
+
+        $user->majors()->sync($data['majors']);
+    }
 }
