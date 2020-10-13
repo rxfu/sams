@@ -12,7 +12,7 @@ class Student extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'name', 'idtype', 'idnumber', 'gender_id', 'nation_id', 'department_id', 'major_id', 'grade', 'duration', 'status', 'level',
+        'id', 'name', 'idtype_id', 'idnumber', 'gender_id', 'nation_id', 'department_id', 'major_id', 'grade', 'duration', 'status', 'level',
     ];
 
     public $incrementing = false;

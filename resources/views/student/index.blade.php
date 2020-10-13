@@ -28,7 +28,7 @@
                         <tr>
                             <th>{{ __('student.id') }}</th>
 							<th>{{ __('student.name') }}</th>
-							<th>{{ __('student.idtype') }}</th>
+							<th>{{ __('student.idtype_id') }}</th>
 							<th>{{ __('student.idnumber') }}</th>
 							<th>{{ __('student.gender_id') }}</th>
 							<th>{{ __('student.nation_id') }}</th>

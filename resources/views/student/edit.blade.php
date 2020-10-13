@@ -28,10 +28,10 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="idtype" class="col-sm-3 col-form-label text-right">{{ __('student.idtype') }}</label>
+                        <label for="idtype_id" class="col-sm-3 col-form-label text-right">{{ __('student.idtype_id') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control @error('idtype') is-invalid @enderror" name="idtype" id="idtype" placeholder="{{ __('student.idtype') }}" value="{{ old('idtype', $item->idtype) }}">
-                            @error('idtype')
+                            <input type="text" class="form-control @error('idtype_id') is-invalid @enderror" name="idtype_id" id="idtype_id" placeholder="{{ __('student.idtype_id') }}" value="{{ old('idtype_id', $item->idtype_id) }}">
+                            @error('idtype_id')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>

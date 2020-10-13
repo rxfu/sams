@@ -44,7 +44,7 @@
                             <select id="level" name="level" class="form-control select2">
                                 <option value="all"{{ isset($attributes['level']) && ('all' === $attributes['level']) ? ' selected' : ''}}>全部培养层次</option>
                                 @foreach ($levels as $item)
-                                    <option value="{{ $item }}"{{ isset($attributes['level']) && ($item === $attributes['level']) ? ' selected' : '' }}>{{ $item }}</option>
+                                    <option value="{{ $item->level }}"{{ isset($attributes['level']) && ($item->level === $attributes['level']) ? ' selected' : '' }}>{{ config('setting.level.' . $item->level) }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -122,8 +122,8 @@
                                     <td>{{ $item->student->idnumber }}</td>
                                     <td>{{ $item->received_at }}</td>
                                     <td>{{ $item->student->name }}</td>
-                                    <td>{{ $item->student->department }}</td>
-                                    <td>{{ $item->student->major }}</td>
+                                    <td>{{ $item->student->department->name }}</td>
+                                    <td>{{ $item->student->major->name }}</td>
                                     <td>{{ $item->student->grade }}</td>
                                     <td>{{ $item->creator->name }}</td>
                                     <td>{{ $item->editor->name }}</td>

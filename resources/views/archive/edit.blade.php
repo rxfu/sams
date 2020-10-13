@@ -39,14 +39,14 @@
                     <div class="form-group row">
                         <label for="department_id" class="col-sm-3 col-form-label text-right">{{ __('student.department_id') }}</label>
                         <div class="col-sm-9">
-                            <div class="form-control-plaintext">{{ $item->student->department }}</div>
+                            <div class="form-control-plaintext">{{ $item->student->department->name }}</div>
                         </div>
                     </div>
     
                     <div class="form-group row">
                         <label for="major_id" class="col-sm-3 col-form-label text-right">{{ __('student.major_id') }}</label>
                         <div class="col-sm-9">
-                            <div class="form-control-plaintext">{{ $item->student->major }}</div>
+                            <div class="form-control-plaintext">{{ $item->student->major->name }}</div>
                         </div>
                     </div>
     

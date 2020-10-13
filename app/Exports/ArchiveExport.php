@@ -22,7 +22,7 @@ class ArchiveExport extends DefaultValueBinder implements FromView, WithCustomVa
             ->get();
 
         $students = Student::with(['archive', 'archive.entries'])
-            ->orderBy('xh')
+            ->orderBy('id')
             ->get();
 
         return view('exports.archive', compact('entries', 'students'));

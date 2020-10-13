@@ -54,8 +54,8 @@
                                 <td>{{ $item->student->idnumber }}</td>
                                 <td>{{ $item->received_at }}</td>
                                 <td>{{ $item->student->name }}</td>
-                                <td>{{ $item->student->department }}</td>
-                                <td>{{ $item->student->major }}</td>
+                                <td>{{ $item->student->department->name }}</td>
+                                <td>{{ $item->student->major->name }}</td>
                                 <td>{{ $item->student->grade }}</td>
                                 <td>{{ optional($item->creator)->name }}</td>
                                 <td>{{ optional($item->editor)->name }}</td>

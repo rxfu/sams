@@ -27,9 +27,9 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="idtype" class="col-sm-3 col-form-label text-right">{{ __('student.idtype') }}</label>
+                    <label for="idtype_id" class="col-sm-3 col-form-label text-right">{{ __('student.idtype_id') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->idtype }}</div>
+                        <div class="form-control-plaintext">{{ $item->idtype_id }}</div>
                     </div>
                 </div>
 

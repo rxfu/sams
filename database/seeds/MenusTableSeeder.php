@@ -151,14 +151,14 @@ class MenusTableSeeder extends Seeder
             [
                 'slug' => 'archive',
                 'name' => '档案管理',
-                'route' => 'archives.index',
+                'route' => 'archives.search',
                 'parent_id' => 16,
                 'order' => 1,
             ],
             [
                 'slug' => 'delivery',
                 'name' => '档案去向管理',
-                'route' => 'deliveries.index',
+                'route' => 'deliveries.search',
                 'parent_id' => 16,
                 'order' => 2,
             ],

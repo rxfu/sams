@@ -210,7 +210,7 @@ class ArchiveController extends Controller
     {
         $this->authorize('search', Archive::class);
 
-        $departments = $this->departmentService->getEnableItems();
+        $departments = $this->departmentService->getCollege();
         $majors = $this->majorService->getEnableItems();
         $grades = $this->studentService->getAllGrades();
         $levels = $this->studentService->getAllLevels();

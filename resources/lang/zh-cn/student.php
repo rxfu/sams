@@ -4,7 +4,7 @@ return [
 	'module' => '学生',
 	'id' => '学号',
 	'name' => '姓名',
-	'idtype' => '证件类型',
+	'idtype_id' => '证件类型',
 	'idnumber' => '证件号码',
 	'gender_id' => '性别',
 	'nation_id' => '民族',

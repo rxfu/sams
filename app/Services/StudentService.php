@@ -41,7 +41,7 @@ class StudentService extends Service
 
             $values = [
                 'name' => $item->xm,
-                'idtype' => $item->sfzjlxm,
+                'idtype_id' => $item->sfzjlxm,
                 'name' => $item->xm,
                 'idnumber' => $item->sfzjh,
                 'gender_id' => $item->xbm,

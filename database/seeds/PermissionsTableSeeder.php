@@ -104,6 +104,20 @@ class PermissionsTableSeeder extends Seeder
         }
 
         Permission::create([
+            'slug' => 'archive-search',
+            'name' => '检索档案信息',
+            'action' => 'search',
+            'model' => 'archive',
+        ]);
+
+        Permission::create([
+            'slug' => 'delivery-search',
+            'name' => '检索档案去向',
+            'action' => 'search',
+            'model' => 'delivery',
+        ]);
+
+        Permission::create([
             'slug' => 'student-search',
             'name' => '检索学生信息',
             'action' => 'search',

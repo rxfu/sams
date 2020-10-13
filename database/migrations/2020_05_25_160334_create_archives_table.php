@@ -15,7 +15,7 @@ class CreateArchivesTable extends Migration
     {
         Schema::create('archives', function (Blueprint $table) {
             $table->string('id', 20)->comment('档案编号');
-            $table->string('sid', 12)->comment('学号');
+            $table->string('sid', 12)->unique()->comment('学号');
             $table->date('received_at')->nullable()->comment('接收时间');
             $table->foreignId('creator_id')
                 ->constrained('users')
