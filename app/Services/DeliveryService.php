@@ -35,39 +35,39 @@ class DeliveryService extends Service
 
         if (!is_null($attributes['sid'])) {
             if (is_array($attributes['sid'])) {
-                $fields['xh'] = $attributes['sid'];
+                $fields['id'] = $attributes['sid'];
             } elseif (!empty($attributes['sid'])) {
-                $fields['xh'] = ['like', '%' . $attributes['sid'] . '%'];
+                $fields['id'] = ['like', '%' . $attributes['sid'] . '%'];
             }
         }
 
         if (!is_null($attributes['name'])) {
             if (is_array($attributes['name'])) {
-                $fields['xm'] = $attributes['name'];
+                $fields['name'] = $attributes['name'];
             } elseif (!empty($attributes['name'])) {
-                $fields['xm'] = ['like', '%' . $attributes['name'] . '%'];
+                $fields['name'] = ['like', '%' . $attributes['name'] . '%'];
             }
         }
 
         if ('all' !== $attributes['level']) {
-            $fields['sjly'] = $attributes['level'];
+            $fields['level'] = $attributes['level'];
         }
 
         if ('all' !== $attributes['department']) {
-            $fields['dwh'] = $attributes['department'];
+            $fields['department_id'] = $attributes['department'];
         }
 
         if ('all' !== $attributes['major']) {
-            $fields['zydm'] = $attributes['major'];
+            $fields['major_id'] = $attributes['major'];
         }
 
         if ('all' !== $attributes['grade']) {
-            $fields['dqszj'] = $attributes['grade'];
+            $fields['grade'] = $attributes['grade'];
         }
 
         $students = $this->studentRepository->findBy($fields, $relations, $orders, $trashed);
 
-        $archives = $this->archiveRepository->getAllByStudents($students->pluck('xh')->toArray());
+        $archives = $this->archiveRepository->getAllByStudents($students->pluck('id')->toArray());
 
         $query = $this->repository->getAllByArchives($archives->pluck('id')->toArray());
 

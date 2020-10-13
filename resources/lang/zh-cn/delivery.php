@@ -17,4 +17,5 @@ return [
 	'editor_id' => '最后修改者',
 	'version' => '转递次数',
 	'remark' => '备注',
+	'ems' => '交寄单号',
 ];

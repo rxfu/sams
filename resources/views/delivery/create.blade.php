@@ -20,7 +20,7 @@
                             @inject('archives', 'App\Services\ArchiveService')
 							<select name="archive_id" id="archive_id" class="form-control select2 select2-success @error('archive_id') is-invalid @enderror" data-dropdown-css-class="select2-success">
                                 @foreach ($archives->getAll() as $collection)
-                                    <option value="{{ $collection->getKey() }}">{{ $collection->getKey() }} - {{ $collection->sid }}（{{ $collection->student->xm }}）</option>
+                                    <option value="{{ $collection->getKey() }}">{{ $collection->getKey() }} - {{ $collection->sid }}（{{ optional($collection->student)->name }}）</option>
                                 @endforeach
                             </select>
                             @error('archive_id')
@@ -79,10 +79,10 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="receiver" class="col-sm-3 col-form-label text-right">{{ __('delivery.receiver') }}</label>
+                        <label for="ems" class="col-sm-3 col-form-label text-right">{{ __('delivery.ems') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control @error('receiver') is-invalid @enderror" name="receiver" id="receiver" placeholder="{{ __('delivery.receiver') }}" value="{{ old('receiver') }}">
-                            @error('receiver')
+                            <input type="text" class="form-control @error('ems') is-invalid @enderror" name="ems" id="ems" placeholder="{{ __('delivery.ems') }}" value="{{ old('ems') }}">
+                            @error('ems')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>

@@ -2,8 +2,9 @@
 
 namespace App\Services;
 
-use App\Repositories\CenterDepartmentRepository;
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\DepartmentRepository;
+use App\Repositories\CenterDepartmentRepository;
 
 class DepartmentService extends Service
 {
@@ -38,9 +39,15 @@ class DepartmentService extends Service
 
     public function getCollege()
     {
-        return $this->repository->findBy([
+        $attributes = [
             'is_enable' => true,
             'category' => 0,
-        ]);
+        ];
+
+        if (!Auth::user()->is_super) {
+            $attributes['id'] = Auth::user()->department_id;
+        }
+
+        return $this->repository->findBy($attributes);
     }
 }

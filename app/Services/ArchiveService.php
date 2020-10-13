@@ -114,4 +114,15 @@ class ArchiveService extends Service
 
         return $query;
     }
+
+    public function getAll()
+    {
+        if (!Auth::user()->is_super) {
+            return $this->repository->with(['student' => function ($query) {
+                $query->whereIn('major_id', Auth::user()->majors->pluck('id')->toArray());
+            }])->get();
+        }
+
+        return parent::getAll();
+    }
 }

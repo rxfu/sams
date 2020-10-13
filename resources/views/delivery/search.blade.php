@@ -54,7 +54,7 @@
                             <select id="level" name="level" class="form-control select2">
                                 <option value="all"{{ isset($attributes['level']) && ('all' === $attributes['level']) ? ' selected' : ''}}>全部培养层次</option>
                                 @foreach ($levels as $item)
-                                    <option value="{{ $item }}"{{ isset($attributes['level']) && ($item === $attributes['level']) ? ' selected' : '' }}>{{ $item }}</option>
+                                    <option value="{{ $item->level }}"{{ isset($attributes['level']) && ($item->level === $attributes['level']) ? ' selected' : '' }}>{{ config('setting.level.' . $item->level) }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -113,13 +113,13 @@
                                 <th>{{ __('delivery.id') }}</th>
                                 <th>{{ __('delivery.archive_id') }}</th>
                                 <th>{{ __('archive.sid') }}</th>
-                                <th>{{ __('archive.name') }}</th>
-                                <th>{{ __('archive.department_id') }}</th>
-                                <th>{{ __('archive.major_id') }}</th>
-                                <th>{{ __('archive.grade') }}</th>
+                                <th>{{ __('student.name') }}</th>
+                                <th>{{ __('student.department_id') }}</th>
+                                <th>{{ __('student.major_id') }}</th>
+                                <th>{{ __('student.grade') }}</th>
                                 <th>{{ __('delivery.forward') }}</th>
                                 <th>{{ __('delivery.status') }}</th>
-                                <th>{{ __('delivery.receiver') }}</th>
+                                <th>{{ __('delivery.ems') }}</th>
                                 <th>{{ __('delivery.phone') }}</th>
                                 <th>{{ __('delivery.address') }}</th>
                                 <th>{{ __('delivery.had_receipt') }}</th>
@@ -137,8 +137,8 @@
                                     <td>{{ $item->archive_id }}</td>
                                     <td>{{ $item->archive->sid }}</td>
                                     <td>{{ $item->archive->student->name }}</td>
-                                    <td>{{ $item->archive->student->department }}</td>
-                                    <td>{{ $item->archive->student->major }}</td>
+                                    <td>{{ $item->archive->student->department->name }}</td>
+                                    <td>{{ $item->archive->student->major->name }}</td>
                                     <td>{{ $item->archive->student->grade }}</td>
                                     <td>{{ $item->forward }}</td>
                                     <td>{{ $item->present()->hasStatus }}</td>
@@ -174,9 +174,14 @@
                             <tr>
                                 <th>{{ __('delivery.id') }}</th>
                                 <th>{{ __('delivery.archive_id') }}</th>
+                                <th>{{ __('archive.sid') }}</th>
+                                <th>{{ __('student.name') }}</th>
+                                <th>{{ __('student.department_id') }}</th>
+                                <th>{{ __('student.major_id') }}</th>
+                                <th>{{ __('student.grade') }}</th>
                                 <th>{{ __('delivery.forward') }}</th>
                                 <th>{{ __('delivery.status') }}</th>
-                                <th>{{ __('delivery.receiver') }}</th>
+                                <th>{{ __('delivery.ems') }}</th>
                                 <th>{{ __('delivery.phone') }}</th>
                                 <th>{{ __('delivery.address') }}</th>
                                 <th>{{ __('delivery.had_receipt') }}</th>

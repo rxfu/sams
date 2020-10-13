@@ -4,10 +4,12 @@ namespace App\Services;
 
 use App\Repositories\CenterMajorRepository;
 use App\Repositories\MajorRepository;
+use Illuminate\Support\Facades\Auth;
 
 class MajorService extends Service
 {
     protected $centerMajors;
+
     public function __construct(MajorRepository $majors, CenterMajorRepository $centerMajors)
     {
         $this->repository = $majors;
@@ -36,5 +38,16 @@ class MajorService extends Service
         }
 
         return true;
+    }
+
+    public function getEnableItems($isEnable = true)
+    {
+        if (!Auth::user()->is_super) {
+            return $this->repository->findBy([
+                'id' => ['in', Auth::user()->majors->pluck('id')->toArray()],
+            ]);
+        }
+
+        return parent::getEnableItems($isEnable);
     }
 }
