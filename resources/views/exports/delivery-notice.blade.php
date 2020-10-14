@@ -88,6 +88,7 @@
                     <span class="text-left">{{ $delivery->address }}</span>
                     <span class="text-right">No.{{ $delivery->archive_id }}</span>
                 </div>
+                <div class="clear"></div>
                 <div>
                     <p>现将&nbsp;&nbsp;{{ $delivery->archive->student->name }}&nbsp;&nbsp;同学的档案共&nbsp;&nbsp;壹&nbsp;&nbsp;袋，材料共&nbsp;&nbsp;{{ $delivery->archive->entries->sum('pivot.quantity') }}&nbsp;&nbsp;份转去，请按档案内所列目录清点查收，并将回执退回。</p>
                 </div>
@@ -113,8 +114,8 @@
                     <tr>
                         <td>{{ $delivery->archive->student->name }}</td>
                         <td>{{ $delivery->archive->student->id }}</td>
-                        <td>{{ $delivery->archive->student->department }}</td>
-                        <td>{{ $delivery->archive->student->major }}</td>
+                        <td>{{ $delivery->archive->student->department->name }}</td>
+                        <td>{{ $delivery->archive->student->major->name }}</td>
                         <td>{{ $delivery->archive->student->grade }}</td>
                         <td>{{ $delivery->reason }}</td>
                         <td></td>
@@ -129,6 +130,7 @@
                     <span class="text-left">{{ $delivery->address }}</span>
                     <span class="text-right">No.{{ $delivery->archive_id }}</span>
                 </div>
+                <div class="clear"></div>
                 <div>
                     <p>现将&nbsp;&nbsp;{{ $delivery->archive->student->name }}&nbsp;&nbsp;同学的档案共&nbsp;&nbsp;壹&nbsp;&nbsp;袋，材料共&nbsp;&nbsp;{{ $delivery->archive->entries->sum('pivot.quantity') }}&nbsp;&nbsp;份转去，请按档案内所列目录清点查收，并将回执退回。</p>
                 </div>
@@ -154,8 +156,8 @@
                     <tr>
                         <td>{{ $delivery->archive->student->name }}</td>
                         <td>{{ $delivery->archive->student->id }}</td>
-                        <td>{{ $delivery->archive->student->department }}</td>
-                        <td>{{ $delivery->archive->student->major }}</td>
+                        <td>{{ $delivery->archive->student->department->name }}</td>
+                        <td>{{ $delivery->archive->student->major->name }}</td>
                         <td>{{ $delivery->archive->student->grade }}</td>
                         <td>{{ $delivery->reason }}</td>
                         <td></td>
