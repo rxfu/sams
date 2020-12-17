@@ -46,7 +46,7 @@
                             </tr>
                         @endforeach
                     </tbody>
-                    <thead>
+                    <tfoot>
                         <tr>
                             <th>{{ __('log.id') }}</th>
                             <th>{{ __('log.created_at') }}</th>
@@ -59,8 +59,9 @@
 							<th>{{ __('log.model_id') }}</th>
                             <th>{{ __('Action') }}</th>
                         </tr>
-                    </thead>
+                    </tfoot>
                 </table>
+                {{ $items->withQueryString()->links() }}
             </div>
         </div>
     </div>
@@ -69,7 +70,7 @@
 
 @push('scripts')
 <script>
-	$('#logs-table').DataTable({
+	$('#logs-tables').DataTable({
         'paging': true,
         'lengthChange': true,
         'searching': true,

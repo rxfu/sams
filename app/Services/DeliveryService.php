@@ -31,46 +31,10 @@ class DeliveryService extends Service
 
     protected function getSearchQuery($attributes, $relations, $orders, $trashed)
     {
-        $fields = [];
-
-        if (!is_null($attributes['sid'])) {
-            if (is_array($attributes['sid'])) {
-                $fields['id'] = $attributes['sid'];
-            } elseif (!empty($attributes['sid'])) {
-                $fields['id'] = ['like', '%' . $attributes['sid'] . '%'];
-            }
-        }
-
-        if (!is_null($attributes['name'])) {
-            if (is_array($attributes['name'])) {
-                $fields['name'] = $attributes['name'];
-            } elseif (!empty($attributes['name'])) {
-                $fields['name'] = ['like', '%' . $attributes['name'] . '%'];
-            }
-        }
-
-        if ('all' !== $attributes['level']) {
-            $fields['level'] = $attributes['level'];
-        }
-
-        if ('all' !== $attributes['department']) {
-            $fields['department_id'] = $attributes['department'];
-        }
-
-        if ('all' !== $attributes['major']) {
-            $fields['major_id'] = $attributes['major'];
-        }
-
-        if ('all' !== $attributes['grade']) {
-            $fields['grade'] = $attributes['grade'];
-        }
-
-        $students = $this->studentRepository->findBy($fields, $relations, $orders, $trashed);
+        $students = $this->studentRepository->allStudentsBy($attributes, $relations, $orders, $trashed);
 
         $archives = $this->archiveRepository->getAllByStudents($students->pluck('id')->toArray());
 
-        $query = $this->repository->getAllByArchives($archives->pluck('id')->toArray());
-
-        return $query;
+        return $this->repository->getAllByArchives($archives->pluck('id')->toArray());
     }
 }

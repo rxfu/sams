@@ -15,19 +15,15 @@
                 <div class="card-body">
                     
                     <div class="form-group row">
-                        <label for="sid" class="col-sm-3 col-form-label text-right">{{ __('archive.sid') }}</label>
+                        <label for="student" class="col-sm-3 col-form-label text-right">{{ __('archive.sid') }}</label>
                         <div class="col-sm-9">
-                            @inject('students', 'App\Services\StudentService')
-							<select name="sid" id="sid" class="form-control select2 select2-success @error('sid') is-invalid @enderror" data-dropdown-css-class="select2-success">
-                                @foreach ($students->getAllByNoArchive() as $collection)
-                                    <option value="{{ $collection->getKey() }}">{{ $collection->id }}（{{ $collection->name }}）</option>
-                                @endforeach
-                            </select>
-                            @error('sid')
+                            <input type="text" name="student" id="student" class="form-control @error('student') is-invalid @enderror" placeholder="{{ __('student.id') }}" value="{{ old('student') }}" data-provide="typeahead" onfocus="this.select()" autocomplete="off" autofocus required>
+                            @error('student')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
+                            <input type="hidden" name="sid" id="sid">
                         </div>
                     </div>
 
@@ -151,26 +147,68 @@
 @endsection
 
 @push('scripts')
+<script src="{{ asset('plugins/bootstrap-typeahead/bootstrap-typeahead.js') }}"></script>
 <script>
     $(function () {
-        $('#sid').change(function() {
-            $.ajax({
-                type: 'get',
-                dataType: 'json',
-                url: '{{ url('students') }}/' + $(this).val(),
-                success: function(result) {
-                    if (result.message == 'success') {
-                        $('#idnumber').html(result.idnumber);
-                        $('#name').html(result.name);
-                        $('#department').html(result.department);
-                        $('#major').html(result.major);
-                        $('#grade').html(result.grade);
-                    }
-                }
-            })
-        });
+        $('#student').typeahead({
+            menu: '<ul class="typeahead dropdown-menu"></ul>',
+            item: '<li><a class="dropdown-item" href="#"></a></li>',
+            items: 5,
 
-        $('#sid').trigger('change');
+            source: function(query, process) {
+                var parameter = { q: query };
+
+                $.ajax({
+                    url: "{{ route('students.list') }}",
+                    type: 'get',
+                    data: {
+                        q: query
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        var results = data.map(function(item) {
+                            var student = {
+                                id: item.id,
+                                name: item.name,
+                                idnumber: item.idnumber,
+                                department: item.department,
+                                major: item.major,
+                                grade: item.grade
+                            };
+
+                            return JSON.stringify(student);
+                        });
+                        
+                        process(results);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                })
+            },
+
+            highlighter: function(obj) {
+                var item = JSON.parse(obj);
+
+                var query = this.query.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&')
+                return item.id.replace(new RegExp('(' + query + ')', 'ig'), function ($1, match) {
+                    return '<strong>' + match + '</strong>';
+                }) + '(' + item.name + ')';
+            },
+
+            updater: function(obj) {
+                var item = JSON.parse(obj);
+
+                $('#sid').attr('value', item.id);
+                $('#idnumber').text(item.idnumber);
+                $('#name').text(item.name);
+                $('#department').text(item.department);
+                $('#major').text(item.major);
+                $('#grade').text(item.grade);
+
+                return item.id;
+            }
+        })
     })
 </script>
 @endpush

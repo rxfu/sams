@@ -23,6 +23,48 @@
                     </div>
 
                     <div class="form-group row">
+                        <label for="sid" class="col-sm-3 col-form-label text-right">{{ __('archive.sid') }}</label>
+                        <div class="col-sm-9">
+                            <div class="form-control-plaintext">{{ $item->archive->sid }}</div>
+                        </div>
+                    </div>
+    
+                    <div class="form-group row">
+                        <label for="idnumber" class="col-sm-3 col-form-label text-right">{{ __('student.idnumber') }}</label>
+                        <div class="col-sm-9">
+                            <div class="form-control-plaintext">{{ $item->archive->student->idnumber }}</div>
+                        </div>
+                    </div>
+    
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-3 col-form-label text-right">{{ __('student.name') }}</label>
+                        <div class="col-sm-9">
+                            <div class="form-control-plaintext">{{ $item->archive->student->name }}</div>
+                        </div>
+                    </div>
+    
+                    <div class="form-group row">
+                        <label for="department_id" class="col-sm-3 col-form-label text-right">{{ __('student.department_id') }}</label>
+                        <div class="col-sm-9">
+                            <div class="form-control-plaintext">{{ $item->archive->student->department->name }}</div>
+                        </div>
+                    </div>
+    
+                    <div class="form-group row">
+                        <label for="major_id" class="col-sm-3 col-form-label text-right">{{ __('student.major_id') }}</label>
+                        <div class="col-sm-9">
+                            <div class="form-control-plaintext">{{ $item->archive->student->major->name }}</div>
+                        </div>
+                    </div>
+    
+                    <div class="form-group row">
+                        <label for="grade" class="col-sm-3 col-form-label text-right">{{ __('student.grade') }}</label>
+                        <div class="col-sm-9">
+                            <div class="form-control-plaintext">{{ $item->archive->student->grade }}</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label for="forward" class="col-sm-3 col-form-label text-right">{{ __('delivery.forward') }}</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control @error('forward') is-invalid @enderror" name="forward" id="forward" placeholder="{{ __('delivery.forward') }}" value="{{ old('forward', $item->forward) }}">
@@ -70,10 +112,10 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="receiver" class="col-sm-3 col-form-label text-right">{{ __('delivery.receiver') }}</label>
+                        <label for="ems" class="col-sm-3 col-form-label text-right">{{ __('delivery.ems') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control @error('receiver') is-invalid @enderror" name="receiver" id="receiver" placeholder="{{ __('delivery.receiver') }}" value="{{ old('receiver', $item->receiver) }}">
-                            @error('receiver')
+                            <input type="text" class="form-control @error('ems') is-invalid @enderror" name="ems" id="ems" placeholder="{{ __('delivery.ems') }}" value="{{ old('ems', $item->ems) }}">
+                            @error('ems')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>

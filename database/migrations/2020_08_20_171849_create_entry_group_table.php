@@ -25,8 +25,7 @@ class CreateEntryGroupTable extends Migration
                 ->onUpdate('cascade')
                 ->comment('组ID');
 
-            $table->index(['group_id', 'entry_id']);
-            $table->unique(['group_id', 'entry_id']);
+            $table->primary(['group_id', 'entry_id']);
         });
     }
 

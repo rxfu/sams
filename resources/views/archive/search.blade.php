@@ -10,7 +10,8 @@
                 <h3 class="card-title">{{ __('archive.module') . __('List') }}</h3>
                 <div class="card-tools">
                     @can('export', Archive::class)
-                        <a href="{{ route('archives.export') }}" title="{{ __('Export') }}" class="btn btn-secondary">
+                        <a href="{{ route('archives.export') }}" title="{{ __('Export') }}" class="btn btn-secondary export" data-toggle="modal" data-target="#dialog" data-whatever="{{  __('archive.module') }}移交表{{ __('export') }}
+                        ">
                             <i class="fas fa-file-export"></i> {{ __('Export') . __('archive.module') }}移交表
                         </a>
                     @endcan

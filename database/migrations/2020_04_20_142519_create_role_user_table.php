@@ -25,8 +25,7 @@ class CreateRoleUserTable extends Migration
                 ->onUpdate('cascade')
                 ->comment('用户ID');
 
-            $table->index(['user_id', 'role_id']);
-            $table->unique(['user_id', 'role_id']);
+            $table->primary(['user_id', 'role_id']);
         });
     }
 

@@ -9,7 +9,7 @@ return [
 	'status' => '投递状态',
 	'receiver' => '收件人',
 	'phone' => '联系电话',
-	'address' => '地址',
+	'address' => '接收单位',
 	'zipcode' => '邮政编码',
 	'send_at' => '寄送时间',
 	'had_receipt' => '是否有回执',

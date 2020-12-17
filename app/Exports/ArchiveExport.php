@@ -13,6 +13,16 @@ use Maatwebsite\Excel\Concerns\WithCustomValueBinder;
 
 class ArchiveExport extends DefaultValueBinder implements FromView, WithCustomValueBinder
 {
+    protected $studentService;
+
+    protected $attributes;
+
+    public function __construct($studentService, $attributes)
+    {
+        $this->studentService = $studentService;
+        $this->attributes = $attributes;
+    }
+
     /**
      * @return View
      */
@@ -21,9 +31,7 @@ class ArchiveExport extends DefaultValueBinder implements FromView, WithCustomVa
         $entries = Entry::orderBy('order')
             ->get();
 
-        $students = Student::with(['archive', 'archive.entries'])
-            ->orderBy('id')
-            ->get();
+        $students = $this->studentService->getAllStudents($this->attributes, ['archive', 'archive.entries'], 'id');
 
         return view('exports.archive', compact('entries', 'students'));
     }

@@ -74,45 +74,9 @@ class ArchiveService extends Service
 
     protected function getSearchQuery($attributes, $relations, $orders, $trashed)
     {
-        $fields = [];
+        $students = $this->studentRepository->allStudentsBy($attributes, $relations, $orders, $trashed);
 
-        if (!is_null($attributes['sid'])) {
-            if (is_array($attributes['sid'])) {
-                $fields['id'] = $attributes['sid'];
-            } elseif (!empty($attributes['sid'])) {
-                $fields['id'] = ['like', '%' . $attributes['sid'] . '%'];
-            }
-        }
-
-        if (!is_null($attributes['name'])) {
-            if (is_array($attributes['name'])) {
-                $fields['name'] = $attributes['name'];
-            } elseif (!empty($attributes['name'])) {
-                $fields['name'] = ['like', '%' . $attributes['name'] . '%'];
-            }
-        }
-
-        if ('all' !== $attributes['level']) {
-            $fields['level'] = $attributes['level'];
-        }
-
-        if ('all' !== $attributes['department']) {
-            $fields['department_id'] = $attributes['department'];
-        }
-
-        if ('all' !== $attributes['major']) {
-            $fields['major_id'] = $attributes['major'];
-        }
-
-        if ('all' !== $attributes['grade']) {
-            $fields['grade'] = $attributes['grade'];
-        }
-
-        $students = $this->studentRepository->findBy($fields, $relations, $orders, $trashed);
-
-        $query = $this->repository->getAllByStudentsQuery($students->pluck('id')->toArray());
-
-        return $query;
+        return $this->repository->getAllByStudentsQuery($students->pluck('id')->toArray());
     }
 
     public function getAll()
@@ -124,5 +88,10 @@ class ArchiveService extends Service
         }
 
         return parent::getAll();
+    }
+
+    public function list($keyword)
+    {
+        return $this->studentRepository->haveArchive($keyword);
     }
 }

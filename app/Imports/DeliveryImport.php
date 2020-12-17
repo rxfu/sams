@@ -33,7 +33,7 @@ class DeliveryImport implements OnEachRow, WithStartRow
         $this->deliveryService->store([
             'archive_id' => $archiveId,
             'forward' => $row[1],
-            'receiver' => $row[2],
+            'ems' => $row[2],
             'phone' => $row[3],
             'address' => $row[4],
             'remark' => $row[5],

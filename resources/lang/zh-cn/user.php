@@ -19,4 +19,5 @@ return [
 	'group' => '所属组',
 	'department' => '所在单位',
 	'major' => '负责专业',
+	'grade' => '负责年级',
 ];

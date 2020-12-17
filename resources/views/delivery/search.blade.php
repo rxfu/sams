@@ -10,12 +10,14 @@
                 <h3 class="card-title">{{ __('delivery.module') . __('List') }}</h3>
                 <div class="card-tools">
                     @can('ems', Delivery::class)
-                        <a href="{{ route('deliveries.export-ems') }}" title="{{ __('Export') }}" class="btn btn-secondary">
+                        <a href="{{ route('deliveries.export-ems') }}" title="{{ __('Export') }}" class="btn btn-secondary export" data-toggle="modal" data-target="#dialog" data-whatever="{{  __('delivery.module') }}机要交寄单{{ __('export') }}
+                        ">
                             <i class="fas fa-mail-bulk"></i> {{ __('Export') . __('delivery.module') }}机要交寄单
                         </a>
                     @endcan
                     @can('notice', Delivery::class)
-                        <a href="{{ route('deliveries.export-notice') }}" title="{{ __('Export') }}" class="btn btn-primary">
+                        <a href="{{ route('deliveries.export-notice') }}" title="{{ __('Export') }}" class="btn btn-primary export" data-toggle="modal" data-target="#dialog" data-whatever="{{  __('delivery.module') }}通知单{{ __('export') }}
+                        ">
                             <i class="fas fa-flag-checkered"></i> {{ __('Export') . __('delivery.module') }}通知单
                         </a>
                     @endcan

@@ -25,8 +25,7 @@ class CreateGroupUserTable extends Migration
                 ->onUpdate('cascade')
                 ->comment('用户ID');
 
-            $table->index(['user_id', 'group_id']);
-            $table->unique(['user_id', 'group_id']);
+            $table->primary(['user_id', 'group_id']);
         });
     }
 

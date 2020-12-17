@@ -44,6 +44,6 @@ class LogService extends Service
 
     public function getAll()
     {
-        return $this->repository->findAll('created_at', 'desc');
+        return $this->repository->findAll(['created_at' => 'desc']);
     }
 }

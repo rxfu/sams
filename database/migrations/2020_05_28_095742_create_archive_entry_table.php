@@ -14,7 +14,6 @@ class CreateArchiveEntryTable extends Migration
     public function up()
     {
         Schema::create('archive_entry', function (Blueprint $table) {
-            $table->id();
             $table->string('archive_id', 20)->comment('档案编号');
             $table->foreignId('entry_id')
                 ->constrained()
@@ -36,7 +35,7 @@ class CreateArchiveEntryTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->unique(['archive_id', 'entry_id']);
+            $table->primary(['archive_id', 'entry_id']);
         });
     }
 

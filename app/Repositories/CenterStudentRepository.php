@@ -36,4 +36,15 @@ class CenterStudentRepository extends Repository
             throw new InternalException($e, $this->getModel(), __FUNCTION__);
         }
     }
+
+    public function necessary()
+    {
+        try {
+            return $this->model
+                ->whereRaw('LENGTH(xh) = 10 OR LENGTH(xh) = 12')
+                ->get();
+        } catch (QueryException $e) {
+            throw new InternalException($e, $this->getModel(), __FUNCTION__);
+        }
+    }
 }

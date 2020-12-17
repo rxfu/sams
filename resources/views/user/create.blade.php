@@ -64,6 +64,23 @@
                     </div>
 
                     <div class="form-group row">
+                        <label for="roles" class="col-sm-3 col-form-label text-right">{{ __('user.role') }}</label>
+                        <div class="col-sm-9 select2-success">
+                            @inject('roles', 'App\Services\RoleService')
+							<select name="roles[]" id="roles" class="form-control select2 select2-success @error('roles') is-invalid @enderror" data-dropdown-css-class="select2-success" multiple="multiple">
+                                @foreach ($roles->getAll() as $collection)
+                                    <option value="{{ $collection->getKey() }}">{{ $collection->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('roles')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label for="phone" class="col-sm-3 col-form-label text-right">{{ __('user.phone') }}</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="{{ __('user.phone') }}" value="{{ old('phone') }}">
@@ -114,6 +131,23 @@
                                 @endforeach
                             </select>
                             @error('majors')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="grades" class="col-sm-3 col-form-label text-right">{{ __('user.grade') }}</label>
+                        <div class="col-sm-9 select2-success">
+                            @inject('students', 'App\Services\StudentService')
+							<select name="grades[]" id="grades" class="form-control select2 select2-success @error('grades') is-invalid @enderror" data-dropdown-css-class="select2-success" multiple="multiple">
+                                @foreach ($students->getAllGrades() as $collection)
+                                    <option value="{{ $collection->grade }}">{{ $collection->grade }}</option>
+                                @endforeach
+                            </select>
+                            @error('grades')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>

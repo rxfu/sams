@@ -32,7 +32,7 @@ class StudentService extends Service
 
     public function sync()
     {
-        $items = $this->centerStudent->findAll();
+        $items = $this->centerStudent->necessary();
 
         foreach ($items as $item) {
             $attributes = [
@@ -51,7 +51,7 @@ class StudentService extends Service
                 'grade' => $item->dqszj,
                 'duration' => $item->xz,
                 'status' => $item->sfzx == '在校' ? 1 : 0,
-                'level' => $item->sjly == '教务管理系统' ? 1 : 0,
+                'level' => $item->sjly == '教务管理系统' ? 0 : 1,
             ];
 
             array_walk($values, function (&$v) {
@@ -62,5 +62,15 @@ class StudentService extends Service
         }
 
         return true;
+    }
+
+    public function list($keyword)
+    {
+        return $this->repository->doesntHaveArchive($keyword);
+    }
+
+    public function getAllStudents($attributes = null, $relations = null, $orders = null, $trashed = false)
+    {
+        return $this->repository->allStudentsBy($attributes, $relations, $orders, $trashed);
     }
 }

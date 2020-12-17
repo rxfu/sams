@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Log;
 use App\Services\LogService;
+use Illuminate\Http\Request;
 
 class LogController extends Controller
 {
@@ -25,9 +26,9 @@ class LogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $items = $this->service->getAll();
+        $items = $this->service->search(null, 10, null, ['created_at' => 'desc']);
 
         return view('log.index', compact('items'));
     }

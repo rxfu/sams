@@ -28,6 +28,7 @@
 							<th>{{ __('user.group') }}</th>
 							<th>{{ __('user.department') }}</th>
 							<th>{{ __('user.major') }}</th>
+							<th>{{ __('user.grade') }}</th>
 							<th>{{ __('user.phone') }}</th>
 							<th>{{ __('user.email') }}</th>
 							<th>{{ __('user.is_enable') }}</th>
@@ -46,6 +47,7 @@
                                 <td>{{ $item->present()->allGroups }}</td>
                                 <td>{{ optional($item->department)->name }}</td>
                                 <td>{{ $item->present()->allMajors }}</td>
+                                <td>{{ $item->grade }}</td>
 								<td>{{ $item->phone }}</td>
 								<td>{{ $item->email }}</td>
 								<td>{{ $item->present()->isEnable }}</td>
@@ -97,6 +99,7 @@
 							<th>{{ __('user.group') }}</th>
 							<th>{{ __('user.department') }}</th>
 							<th>{{ __('user.major') }}</th>
+							<th>{{ __('user.grade') }}</th>
 							<th>{{ __('user.phone') }}</th>
 							<th>{{ __('user.email') }}</th>
 							<th>{{ __('user.is_enable') }}</th>

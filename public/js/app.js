@@ -44,7 +44,7 @@ $(function () {
 
             $(this).off('show.bs.modal');
         }).on('click', '#btn-confirmed', function () {
-            $form.submit();
+            $form.trigger('submit');
         });
     });
 
@@ -64,11 +64,11 @@ $(function () {
 
             $(this).off('show.bs.modal');
         }).on('click', '#btn-confirmed', function () {
-            $('#reset-form').submit();
+            $('#reset-form').trigger('submit');
         });
     });
 
-    $('.import').click(function (e) {
+    $('.import').on('click', function (e) {
         e.preventDefault();
 
         var href = $(this).attr('href');
@@ -86,7 +86,30 @@ $(function () {
 
             $(this).off('show.bs.modal');
         }).on('click', '#btn-confirmed', function () {
-            $('#import-form').submit();
+            $('#import-form').trigger('submit');
+        });
+    });
+
+    $('.export').on('click', function (e) {
+        e.preventDefault();
+
+        var href = $(this).attr('href');
+
+        $('#dialog').on('show.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var title = button.data('whatever');
+            var modal = $(this);
+
+            modal.find('.modal-content').removeClass().addClass('modal-content bg-secondary');
+            modal.find('.modal-title').text(title);
+            modal.find('.modal-body').load(href, function (result) {
+                $('#export-form').attr('action', href);
+                // $(result).find('script').appendTo('.wrapper');
+            });
+
+            $(this).off('show.bs.modal');
+        }).on('click', '#btn-confirmed', function () {
+            $('#export-form').trigger('submit');
         });
     });
 

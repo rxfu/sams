@@ -186,6 +186,23 @@ class ArchiveController extends Controller
     }
 
     /**
+     * Show the form for exporting the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showExportForm()
+    {
+        $this->authorize('export', Archive::class);
+
+        $departments = $this->departmentService->getCollege();
+        $majors = $this->majorService->getEnableItems();
+        $grades = $this->studentService->getAllGrades();
+        $levels = $this->studentService->getAllLevels();
+
+        return view('shared.export', compact('departments', 'majors', 'grades', 'levels'));
+    }
+
+    /**
      * Export the specified resource in storage.
      *
      * @param  Illuminate\Http\Request  $request
@@ -195,9 +212,19 @@ class ArchiveController extends Controller
     {
         $this->authorize('export', Archive::class);
 
+        $attributes = [];
+        if ($request->hasAny(['level', 'department', 'major', 'grade'])) {
+            $attributes = [
+                'level' => $request->input('level'),
+                'department' => $request->input('department'),
+                'major' => $request->input('major'),
+                'grade' => $request->input('grade'),
+            ];
+        }
+
         $this->success(200010);
 
-        return $this->service->exportExcel(new ArchiveExport, 'export.xlsx');
+        return $this->service->exportExcel(new ArchiveExport($this->studentService, $attributes), 'export.xlsx');
     }
 
     /**
@@ -231,5 +258,22 @@ class ArchiveController extends Controller
         }
 
         return view('archive.search', compact('departments', 'majors', 'grades', 'levels', 'attributes', 'items'));
+    }
+
+    /**
+     * List the specified resource in storage.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function list(Request $request)
+    {
+        if ($request->ajax()) {
+            $keyword = $request->input('q');
+
+            $result = $this->service->list($keyword);
+
+            return response()->json($result);
+        }
     }
 }

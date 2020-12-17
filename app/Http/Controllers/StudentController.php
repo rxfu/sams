@@ -98,6 +98,7 @@ class StudentController extends Controller
             'department' => $item->department->name,
             'major' => $item->major->name,
             'grade' => $item->grade,
+            'aid' => $item->aid,
         ]);
     }
 
@@ -210,5 +211,22 @@ class StudentController extends Controller
         }
 
         return view('student.search', compact('departments', 'majors', 'grades', 'levels', 'attributes', 'items'));
+    }
+
+    /**
+     * List the specified resource in storage.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function list(Request $request)
+    {
+        if ($request->ajax()) {
+            $keyword = $request->input('q');
+
+            $result = $this->service->list($keyword);
+
+            return response()->json($result);
+        }
     }
 }

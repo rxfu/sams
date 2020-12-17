@@ -15,19 +15,69 @@
                 <div class="card-body">
                     
                     <div class="form-group row">
-                        <label for="archive_id" class="col-sm-3 col-form-label text-right">{{ __('delivery.archive_id') }}</label>
+                        <label for="student" class="col-sm-3 col-form-label text-right">{{ __('archive.sid') }}</label>
                         <div class="col-sm-9">
-                            @inject('archives', 'App\Services\ArchiveService')
-							<select name="archive_id" id="archive_id" class="form-control select2 select2-success @error('archive_id') is-invalid @enderror" data-dropdown-css-class="select2-success">
-                                @foreach ($archives->getAll() as $collection)
-                                    <option value="{{ $collection->getKey() }}">{{ $collection->getKey() }} - {{ $collection->sid }}（{{ optional($collection->student)->name }}）</option>
-                                @endforeach
-                            </select>
-                            @error('archive_id')
+                            <input type="text" name="student" id="student" class="form-control @error('student') is-invalid @enderror" placeholder="{{ __('archive.sid') }}" value="{{ old('student') }}" data-provide="typeahead" onfocus="this.select()" autocomplete="off" autofocus required>
+                            @error('student')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>
                             @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="archive" class="col-sm-3 col-form-label text-right">{{ __('delivery.archive_id') }}</label>
+                        <div class="col-sm-9">
+                            <div class="form-control-plaintext">
+                                <span id="archive"></span>
+                            </div>
+                            <input type="hidden" name="archive_id" id="archive_id">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="idnumber" class="col-sm-3 col-form-label text-right">{{ __('student.idnumber') }}</label>
+                        <div class="col-sm-9">
+                            <div class="form-control-plaintext">
+                                <span id="idnumber"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-3 col-form-label text-right">{{ __('student.name') }}</label>
+                        <div class="col-sm-9">
+                            <div class="form-control-plaintext">
+                                <span id="name"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="department" class="col-sm-3 col-form-label text-right">{{ __('student.department_id') }}</label>
+                        <div class="col-sm-9">
+                            <div class="form-control-plaintext">
+                                <span id="department"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="major" class="col-sm-3 col-form-label text-right">{{ __('student.major_id') }}</label>
+                        <div class="col-sm-9">
+                            <div class="form-control-plaintext">
+                                <span id="major"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="grade" class="col-sm-3 col-form-label text-right">{{ __('student.grade') }}</label>
+                        <div class="col-sm-9">
+                            <div class="form-control-plaintext">
+                                <span id="grade"></span>
+                            </div>
                         </div>
                     </div>
 
@@ -191,3 +241,72 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script src="{{ asset('plugins/bootstrap-typeahead/bootstrap-typeahead.js') }}"></script>
+<script>
+    $(function () {
+        $('#student').typeahead({
+            menu: '<ul class="typeahead dropdown-menu"></ul>',
+            item: '<li><a class="dropdown-item" href="#"></a></li>',
+            items: 5,
+
+            source: function(query, process) {
+                var parameter = { q: query };
+
+                $.ajax({
+                    url: "{{ route('archives.list') }}",
+                    type: 'get',
+                    data: {
+                        q: query
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        var results = data.map(function(item) {
+                            var student = {
+                                id: item.id,
+                                name: item.name,
+                                idnumber: item.idnumber,
+                                department: item.department,
+                                major: item.major,
+                                grade: item.grade,
+                                aid: item.aid
+                            };
+
+                            return JSON.stringify(student);
+                        });
+
+                        process(results);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                })
+            },
+
+            highlighter: function(obj) {
+                var item = JSON.parse(obj);
+
+                var query = this.query.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&')
+                return item.id.replace(new RegExp('(' + query + ')', 'ig'), function ($1, match) {
+                    return '<strong>' + match + '</strong>';
+                }) + '(' + item.name + ')';
+            },
+
+            updater: function(obj) {
+                var item = JSON.parse(obj);
+
+                $('#archive_id').attr('value', item.aid);
+                $('#archive').text(item.aid);
+                $('#idnumber').text(item.idnumber);
+                $('#name').text(item.name);
+                $('#department').text(item.department);
+                $('#major').text(item.major);
+                $('#grade').text(item.grade);
+
+                return item.id;
+            }
+        })
+    })
+</script>
+@endpush

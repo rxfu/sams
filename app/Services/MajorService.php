@@ -31,7 +31,7 @@ class MajorService extends Service
                 'name' => $item->zymc,
                 'is_enable' => true,
                 'department_id' => $item->dwh,
-                'level' => $item->sjly == '教务管理系统' ? 1 : 0,
+                'level' => $item->sjly == '教务管理系统' ? 0 : 1,
             ];
 
             $this->repository->updateOrCreate($attributes, $values);

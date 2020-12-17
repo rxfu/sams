@@ -14,7 +14,7 @@ class Archive extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'sid', 'card_number', 'received_at', 'name', 'department_id', 'major_id', 'grade', 'creator_id', 'editor_id', 'remark',
+        'id', 'sid', 'received_at', 'name', 'creator_id', 'editor_id', 'remark',
     ];
 
     /**

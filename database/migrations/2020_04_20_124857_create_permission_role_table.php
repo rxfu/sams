@@ -25,8 +25,7 @@ class CreatePermissionRoleTable extends Migration
                 ->onUpdate('cascade')
                 ->comment('角色ID');
 
-            $table->index(['role_id', 'permission_id']);
-            $table->unique(['role_id', 'permission_id']);
+            $table->primary(['role_id', 'permission_id']);
         });
     }
 

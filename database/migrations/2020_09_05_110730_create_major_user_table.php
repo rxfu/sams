@@ -23,8 +23,7 @@ class CreateMajorUserTable extends Migration
 
             $table->foreign('major_id')->on('majors')->references('id')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->index(['user_id', 'major_id']);
-            $table->unique(['user_id', 'major_id']);
+            $table->primary(['user_id', 'major_id']);
         });
     }
 

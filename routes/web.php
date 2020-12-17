@@ -51,17 +51,22 @@ Route::middleware('auth')->group(function () {
     Route::prefix('deliveries')->name('deliveries.')->group(function () {
         Route::get('/import', 'DeliveryController@showImportForm')->name('import');
         Route::post('/import', 'DeliveryController@import');
-        Route::get('/export', 'DeliveryController@export')->name('export');
+        Route::get('/export', 'DeliveryController@showExportForm')->name('export');
+        Route::get('/export', 'DeliveryController@export');
         Route::get('/search', 'DeliveryController@search')->name('search');
-        Route::get('/export-ems', 'DeliveryController@exportEms')->name('export-ems');
-        Route::get('/export-notice', 'DeliveryController@exportNotice')->name('export-notice');
+        Route::get('/export-ems', 'DeliveryController@showExportEmsForm')->name('export-ems');
+        Route::post('/export-ems', 'DeliveryController@exportEms');
+        Route::get('/export-notice', 'DeliveryController@showExportNoticeForm')->name('export-notice');
+        Route::post('/export-notice', 'DeliveryController@exportNotice');
     });
 
     Route::prefix('archives')->name('archives.')->group(function () {
         Route::get('/import', 'ArchiveController@showImportForm')->name('import');
         Route::post('/import', 'ArchiveController@import');
-        Route::get('/export', 'ArchiveController@export')->name('export');
+        Route::get('/export', 'ArchiveController@showExportForm')->name('export');
+        Route::post('/export', 'ArchiveController@export');
         Route::get('/search', 'ArchiveController@search')->name('search');
+        Route::get('/list', 'ArchiveController@list')->name('list');
     });
 
     Route::prefix('entries')->name('entries.')->group(function () {
@@ -93,6 +98,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('students')->name('students.')->group(function () {
         Route::get('/sync', 'StudentController@sync')->name('sync');
         Route::get('/search', 'StudentController@search')->name('search');
+        Route::get('/list', 'StudentController@list')->name('list');
     });
 
     Route::resource('logs', 'LogController')->only(['index', 'show']);

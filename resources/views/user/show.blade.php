@@ -76,6 +76,13 @@
                 </div>
 
                 <div class="form-group row">
+                    <label for="grade" class="col-sm-3 col-form-label text-right">{{ __('user.grade') }}</label>
+                    <div class="col-sm-9">
+                        <div class="form-control-plaintext">{{ $item->grade }}</div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label for="is_enable" class="col-sm-3 col-form-label text-right">{{ __('user.is_enable') }}</label>
                     <div class="col-sm-9">
                         <div class="form-control-plaintext">{{ $item->present()->isEnable }}</div>
