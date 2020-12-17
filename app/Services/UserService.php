@@ -130,21 +130,37 @@ class UserService extends Service
 
     public function store($data)
     {
-        $data['grade'] = implode(',', $data['grades']);
+        if (isset($data['grades'])) {
+            $data['grade'] = implode(',', $data['grades']);
+        }
+
         $user = parent::store($data);
 
-        $user->majors()->sync($data['majors']);
-        $user->roles()->sync($data['roles']);
+        if (isset($data['majors'])) {
+            $user->majors()->sync($data['majors']);
+        }
+
+        if (isset($data['roles'])) {
+            $user->roles()->sync($data['roles']);
+        }
 
         return $user;
     }
 
     public function update($model, $data)
     {
-        $data['grade'] = implode(',', $data['grades']);
+        if (isset($data['grades'])) {
+            $data['grade'] = implode(',', $data['grades']);
+        }
+
         $user = parent::update($model, $data);
 
-        $user->majors()->sync($data['majors']);
-        $user->roles()->sync($data['roles']);
+        if (isset($data['majors'])) {
+            $user->majors()->sync($data['majors']);
+        }
+
+        if (isset($data['roles'])) {
+            $user->roles()->sync($data['roles']);
+        }
     }
 }
