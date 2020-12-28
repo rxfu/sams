@@ -81,6 +81,23 @@
                     </div>
 
                     <div class="form-group row">
+                        <label for="groups" class="col-sm-3 col-form-label text-right">{{ __('user.group') }}</label>
+                        <div class="col-sm-9 select2-success">
+                            @inject('groups', 'App\Services\GroupService')
+							<select name="groups[]" id="groups" class="form-control select2 select2-success @error('groups') is-invalid @enderror" data-dropdown-css-class="select2-success">
+                                @foreach ($groups->getAll() as $collection)
+                                    <option value="{{ $collection->getKey() }}">{{ $collection->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('groups')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label for="phone" class="col-sm-3 col-form-label text-right">{{ __('user.phone') }}</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="{{ __('user.phone') }}" value="{{ old('phone') }}">
@@ -127,7 +144,7 @@
                             @inject('majors', 'App\Services\MajorService')
 							<select name="majors[]" id="majors" class="form-control select2 select2-success @error('majors') is-invalid @enderror" data-dropdown-css-class="select2-success" multiple="multiple">
                                 @foreach ($majors->getAll() as $collection)
-                                    <option value="{{ $collection->getKey() }}" class="{{ $collection->department_id }}">{{ $collection->name }}（{{ $collection->level == 0 ? '本科' : '研究生' }}）</option>
+                                    <option value="{{ $collection->getKey() }}" data-chained="{{ $collection->level }}+{{ $collection->department_id }}">{{ $collection->name }}（{{ $collection->group->name }}）</option>
                                 @endforeach
                             </select>
                             @error('majors')
@@ -192,7 +209,7 @@
 <script src="{{ asset('plugins/jquery-chained/jquery.chained.min.js') }}"></script>
 <script>
     $(function() {
-        $('#majors').chained('#department_id');
+        $('#majors').chained('#groups, #department_id');
         $('.select2').select2();
     })
 </script>

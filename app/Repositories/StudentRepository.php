@@ -26,7 +26,8 @@ class StudentRepository extends Repository
                 ->limit($limit);
 
             if (!Auth::user()->is_super) {
-                $model = $model->whereIn('major_id', Auth::user()->majors->pluck('id')->toArray());
+                $model = $model->whereIn('major_id', Auth::user()->majors->pluck('id')->toArray())
+                    ->whereIn('grade', explode(',', Auth::user()->grade));
             }
 
             return $model->get();
@@ -47,7 +48,8 @@ class StudentRepository extends Repository
                 ->limit($limit);
 
             if (!Auth::user()->is_super) {
-                $model = $model->whereIn('major_id', Auth::user()->majors->pluck('id')->toArray());
+                $model = $model->whereIn('major_id', Auth::user()->majors->pluck('id')->toArray())
+                    ->whereIn('grade', explode(',', Auth::user()->grade));
             }
 
             return $model->get();
@@ -59,8 +61,13 @@ class StudentRepository extends Repository
     public function allGrades()
     {
         try {
-            return $this->model->distinct()
-                ->select('grade')
+            $model = $this->model->distinct();
+
+            if (!Auth::user()->is_super) {
+                $model = $model->whereIn('grade', explode(',', Auth::user()->grade));
+            }
+
+            return $model->select('grade')
                 ->orderBy('grade', 'desc')
                 ->get();
         } catch (QueryException $e) {
@@ -71,8 +78,13 @@ class StudentRepository extends Repository
     public function allLevels()
     {
         try {
-            return $this->model->distinct()
-                ->select('level')
+            $model = $this->model->distinct();
+
+            if (!Auth::user()->is_super) {
+                $model = $model->whereIn('level', Auth::user()->groups->pluck('id')->toArray());
+            }
+
+            return $model->select('level')
                 ->orderBy('level')
                 ->get();
         } catch (QueryException $e) {
@@ -100,19 +112,46 @@ class StudentRepository extends Repository
             }
         }
 
-        if (isset($attributes['level']) && 'all' !== $attributes['level']) {
-            $fields['level'] = $attributes['level'];
+        if (isset($attributes['level'])) {
+            if ('all' === $attributes['level']) {
+                if (!Auth::user()->is_super) {
+                    $levels = Auth::user()->groups->pluck('id')->toArray();
+                    $fields['level'] = ['in', $levels];
+                }
+            } else {
+                $fields['level'] = $attributes['level'];
+            }
         }
 
-        if (isset($attributes['department']) && 'all' !== $attributes['department']) {
-            $fields['department_id'] = $attributes['department'];
+        if (isset($attributes['department'])) {
+            if ('all' === $attributes['department']) {
+                if (!Auth::user()->is_super) {
+                    $fields['department_id'] = Auth::user()->department_id;
+                }
+            } else {
+                $fields['department_id'] = $attributes['department'];
+            }
         }
 
-        if (isset($attributes['major']) && 'all' !== $attributes['major']) {
-            $fields['major_id'] = $attributes['major'];
+        if (isset($attributes['major'])) {
+            if ('all' === $attributes['major']) {
+                if (!Auth::user()->is_super) {
+                    $majors = Auth::user()->majors->pluck('id')->toArray();
+                    $fields['major_id'] = ['in', $majors];
+                }
+            } else {
+                $fields['major_id'] = $attributes['major'];
+            }
         }
 
-        if (isset($attributes['grade']) && 'all' !== $attributes['grade']) {
+        if (isset($attributes['grade'])) {
+            if ('all' === $attributes['grade']) {
+                if (!Auth::user()->is_super) {
+                    $grades = explode(',', Auth::user()->grade);
+                    $fields['grade'] = ['in', $grades];
+                }
+            }
+        } else {
             $fields['grade'] = $attributes['grade'];
         }
 

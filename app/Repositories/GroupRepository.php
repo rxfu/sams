@@ -10,4 +10,11 @@ class GroupRepository extends Repository
     {
         $this->model = $group;
     }
+
+    public function slug($slug)
+    {
+        return $this->queryBy([
+            'slug' => $slug
+        ])->first();
+    }
 }

@@ -42,4 +42,9 @@ class Major extends Model
     {
         return $this->belongsToMany('App\Models\User');
     }
+
+    public function group()
+    {
+        return $this->belongsTo('App\Models\Group', 'level');
+    }
 }

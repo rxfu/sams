@@ -35,7 +35,6 @@ class ArchiveService extends Service
     public function store($data)
     {
         $userId = Auth::id();
-        $student = $this->studentRepository->find($data['sid']);
         $data['id'] = $this->generateId();
         $data['creator_id'] = $userId;
         $data['editor_id'] = $userId;

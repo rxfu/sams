@@ -8,10 +8,10 @@ use App\Services\MajorService;
 use App\Imports\DeliveryImport;
 use App\Services\StudentService;
 use App\Services\DeliveryService;
-use App\Exports\DeliveryEmsExport;
 use App\Services\DepartmentService;
 use App\Http\Requests\DeliveryStoreRequest;
 use App\Http\Requests\DeliveryUpdateRequest;
+use App\Services\GroupService;
 
 class DeliveryController extends Controller
 {
@@ -28,9 +28,10 @@ class DeliveryController extends Controller
      * @param \App\Services\StudenttService  $studentService
      * @param \App\Services\DepartmentService  $departmentService
      * @param \App\Services\MajortService  $majorService
+     * @param \App\Services\GrouptService  $groupService
      * @return void
      */
-    public function __construct(DeliveryService $deliveryService, StudentService $studentService, DepartmentService $departmentService, MajorService $majorService)
+    public function __construct(DeliveryService $deliveryService, StudentService $studentService, DepartmentService $departmentService, MajorService $majorService, GroupService $groupService)
     {
         $this->authorizeResource(Delivery::class, 'delivery');
 
@@ -38,6 +39,7 @@ class DeliveryController extends Controller
         $this->studentService = $studentService;
         $this->departmentService = $departmentService;
         $this->majorService = $majorService;
+        $this->groupService = $groupService;
     }
 
     /**
@@ -214,7 +216,7 @@ class DeliveryController extends Controller
         $departments = $this->departmentService->getCollege();
         $majors = $this->majorService->getEnableItems();
         $grades = $this->studentService->getAllGrades();
-        $levels = $this->studentService->getAllLevels();
+        $levels = $this->groupService->getAll();
 
         $attributes = [];
         $items = null;
@@ -246,7 +248,7 @@ class DeliveryController extends Controller
         $departments = $this->departmentService->getCollege();
         $majors = $this->majorService->getEnableItems();
         $grades = $this->studentService->getAllGrades();
-        $levels = $this->studentService->getAllLevels();
+        $levels = $this->groupService->getAll();
 
         return view('shared.export', compact('departments', 'majors', 'grades', 'levels'));
     }
@@ -290,7 +292,7 @@ class DeliveryController extends Controller
         $departments = $this->departmentService->getCollege();
         $majors = $this->majorService->getEnableItems();
         $grades = $this->studentService->getAllGrades();
-        $levels = $this->studentService->getAllLevels();
+        $levels = $this->groupService->getAll();
 
         return view('shared.export', compact('departments', 'majors', 'grades', 'levels'));
     }

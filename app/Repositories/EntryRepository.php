@@ -13,10 +13,16 @@ class EntryRepository extends Repository
         $this->model = $entry;
     }
 
-    public function activeItems()
+    public function activeItems($groupId = null)
     {
         try {
-            return $this->model->whereIsEnable(true)
+            $model = $this->model;
+            if (!is_null($groupId)) {
+                $model = $model->whereHas('groups', function ($query) use ($groupId) {
+                    $query->whereId($groupId);
+                });
+            }
+            return $model->whereIsEnable(true)
                 ->orderBy('order')
                 ->get();
         } catch (QueryException $e) {

@@ -9,7 +9,7 @@
  * Project home:
  *   http://www.appelsiini.net/projects/chained
  *
- * Version: 1.0.1
+ * Version: 2.0.0-beta.3
  *
  */
 
@@ -75,6 +75,7 @@
                     }
 
                     request = $.getJSON(settings.url, data, function(json) {
+                        json = settings.data(json);
                         build.call(self, json);
                         /* Force updating the children. */
                         $(self).trigger("change");
@@ -83,61 +84,51 @@
 
                 /* If we have bootstrapped data given in options. */
                 if (settings.bootstrap) {
-                     build.call(self, settings.bootstrap);
-                     settings.bootstrap = null;
-                 }
+                    build.call(self, settings.bootstrap);
+                    settings.bootstrap = null;
+                }
             });
 
             /* Build the select from given data. */
             function build(json) {
                 /* If select already had something selected, preserve it. */
-                var selected_key = $(":selected", self).val();
+                var selectedKey = $(":selected", self).val();
 
                 /* Clear the select. */
                 $("option", self).remove();
 
-                var option_list = [];
                 if ($.isArray(json)) {
-                    if ($.isArray(json[0])) {
-                        /* JSON is already an array of arrays. */
-                        /* [["","--"],["series-1","1 series"],["series-3","3 series"]] */
-                        option_list = json;
-                    } else {
-                        /* JSON is an array of objects. */
-                        /* [{"":"--"},{"series-1":"1 series"},{"series-3":"3 series"}] */
-                        option_list = $.map(json, function(value) {
-                            return $.map(value, function(value, index) {
-                                return [[index, value]];
-                            });
+                    /* Add new options from json which is an array of objects. */
+                    /* [ {"":"--"},{"series-1":"1 series"},{"series-3"}:{"3 series"}] */
+                    $.each(json, function(key, value) {
+                        $.each(value, function(key, value) {
+                            if ("selected" === key) {
+                                selectedKey = value;
+                            } else {
+                                var option = $("<option />").val(key).append(value);
+                                $(self).append(option);
+                            }
                         });
-                    }
+                    });
                 } else {
-                    /* JSON is an JavaScript object. Rebuild it as an array. */
+                    /* Add new options from json which is an object. */
                     /* {"":"--","series-1":"1 series","series-3":"3 series"} */
-                    for (var index in json) {
-                        if (json.hasOwnProperty(index)) {
-                            option_list.push([index, json[index]]);
+                    $.each(json, function(key, value) {
+                        if (json.hasOwnProperty(key)) {
+                            /* Set the selected option from JSON. */
+                            if ("selected" === key) {
+                                selectedKey = value;
+                            } else {
+                                var option = $("<option />").val(key).append(value);
+                                $(self).append(option);
+                            }
                         }
-                    }
-                }
-
-                /* Add new options from json. */
-                for (var i=0; i!==option_list.length; i++) {
-                    var key = option_list[i][0];
-                    var value = option_list[i][1];
-
-                    /* Set the selected option from JSON. */
-                    if ("selected" === key) {
-                        selected_key = value;
-                        continue;
-                    }
-                    var option = $("<option />").val(key).append(value);
-                    $(self).append(option);
+                    });
                 }
 
                 /* Loop option again to set selected. IE needed this... */
                 $(self).children().each(function() {
-                    if ($(this).val() === selected_key + "") {
+                    if ($(this).val() === selectedKey + "") {
                         $(this).attr("selected", "selected");
                     }
                 });
@@ -158,10 +149,11 @@
     /* Default settings for plugin. */
     $.fn.remoteChained.defaults = {
         attribute: "name",
-        depends : null,
-        bootstrap : null,
-        loading : null,
-        clear : false
+        depends: null,
+        bootstrap: null,
+        loading: null,
+        clear: false,
+        data: function(json) { return json; }
     };
 
 })(window.jQuery || window.Zepto, window, document);

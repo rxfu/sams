@@ -51,7 +51,7 @@ class EntriesTableSeeder extends Seeder
             Entry::create([
                 'name' => $entry,
                 'order' => $i,
-            ]);
+            ])->groups()->sync([1, 2]);
         }
 
         // factory(Entry::class, 30)->create();

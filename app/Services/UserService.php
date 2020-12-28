@@ -144,6 +144,10 @@ class UserService extends Service
             $user->roles()->sync($data['roles']);
         }
 
+        if (isset($data['groups'])) {
+            $user->groups()->sync($data['groups']);
+        }
+
         return $user;
     }
 
@@ -161,6 +165,10 @@ class UserService extends Service
 
         if (isset($data['roles'])) {
             $user->roles()->sync($data['roles']);
+        }
+
+        if (isset($data['groups'])) {
+            $user->groups()->sync($data['groups']);
         }
     }
 }

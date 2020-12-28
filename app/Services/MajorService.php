@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\CenterMajorRepository;
+use App\Repositories\GroupRepository;
 use App\Repositories\MajorRepository;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,10 +11,13 @@ class MajorService extends Service
 {
     protected $centerMajors;
 
-    public function __construct(MajorRepository $majors, CenterMajorRepository $centerMajors)
+    protected $groups;
+
+    public function __construct(MajorRepository $majors, CenterMajorRepository $centerMajors, GroupRepository $groups)
     {
         $this->repository = $majors;
         $this->centerMajors = $centerMajors;
+        $this->groups = $groups;
     }
 
     public function sync()
@@ -21,6 +25,11 @@ class MajorService extends Service
         $items = $this->centerMajors->findBy([
             'dwh' => ['not null'],
         ]);
+
+        $levels = [
+            '教务管理系统' => $this->groups->slug('bachelor')->id,
+            '研究生系统' => $this->groups->slug('master')->id,
+        ];
 
         foreach ($items as $item) {
             $attributes = [
@@ -31,7 +40,7 @@ class MajorService extends Service
                 'name' => $item->zymc,
                 'is_enable' => true,
                 'department_id' => $item->dwh,
-                'level' => $item->sjly == '教务管理系统' ? 0 : 1,
+                'level' => $levels[$item->sjly],
             ];
 
             $this->repository->updateOrCreate($attributes, $values);

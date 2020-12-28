@@ -105,8 +105,6 @@
                         </div>
                     </div>
 
-                    <hr>
-
                     @inject('entries', 'App\Services\EntryService')
                     @foreach ($entries->getActiveItems() as $entry)
                         @if ($loop->index % 3 === 0)

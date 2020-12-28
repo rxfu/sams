@@ -130,5 +130,47 @@ class PermissionsTableSeeder extends Seeder
             'action' => 'search',
             'model' => 'major',
         ]);
+
+        Permission::create([
+            'slug' => 'archive-import',
+            'name' => '导入档案',
+            'action' => 'import',
+            'model' => 'archive',
+        ]);
+
+        Permission::create([
+            'slug' => 'archive-export',
+            'name' => '导出档案移交表',
+            'action' => 'export',
+            'model' => 'archive',
+        ]);
+
+        Permission::create([
+            'slug' => 'delivery-import',
+            'name' => '导入档案去向',
+            'action' => 'import',
+            'model' => 'delivery',
+        ]);
+
+        Permission::create([
+            'slug' => 'delivery-download',
+            'name' => '下载档案去向模板',
+            'action' => 'download',
+            'model' => 'delivery',
+        ]);
+
+        Permission::create([
+            'slug' => 'delivery-ems',
+            'name' => '导出档案去向机要交寄单',
+            'action' => 'ems',
+            'model' => 'delivery',
+        ]);
+
+        Permission::create([
+            'slug' => 'delivery-notice',
+            'name' => '导出档案去向通知单',
+            'action' => 'notice',
+            'model' => 'delivery',
+        ]);
     }
 }

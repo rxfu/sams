@@ -3,16 +3,20 @@
 namespace App\Services;
 
 use App\Repositories\CenterStudentRepository;
+use App\Repositories\GroupRepository;
 use App\Repositories\StudentRepository;
 
 class StudentService extends Service
 {
     protected $centerStudent;
 
-    public function __construct(StudentRepository $students, CenterStudentRepository $centerStudent)
+    protected $groups;
+
+    public function __construct(StudentRepository $students, CenterStudentRepository $centerStudent, GroupRepository $groups)
     {
         $this->repository = $students;
         $this->centerStudent = $centerStudent;
+        $this->groups = $groups;
     }
 
     public function getAllByNoArchive()
@@ -34,6 +38,16 @@ class StudentService extends Service
     {
         $items = $this->centerStudent->necessary();
 
+        $status = [
+            '不在校' => 0,
+            '在校' => 1,
+        ];
+
+        $levels = [
+            '教务管理系统' => $this->groups->slug('bachelor')->id,
+            '研究生系统' => $this->groups->slug('master')->id,
+        ];
+
         foreach ($items as $item) {
             $attributes = [
                 'id' => $item->xh,
@@ -50,8 +64,8 @@ class StudentService extends Service
                 'major_id' => $item->zydm,
                 'grade' => $item->dqszj,
                 'duration' => $item->xz,
-                'status' => $item->sfzx == '在校' ? 1 : 0,
-                'level' => $item->sjly == '教务管理系统' ? 0 : 1,
+                'status' => $status[$item->sfzx],
+                'level' => $levels[$item->sjly],
             ];
 
             array_walk($values, function (&$v) {

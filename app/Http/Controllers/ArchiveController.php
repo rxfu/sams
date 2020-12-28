@@ -12,6 +12,7 @@ use App\Services\StudentService;
 use App\Services\DepartmentService;
 use App\Http\Requests\ArchiveStoreRequest;
 use App\Http\Requests\ArchiveUpdateRequest;
+use App\Services\GroupService;
 
 class ArchiveController extends Controller
 {
@@ -21,6 +22,8 @@ class ArchiveController extends Controller
 
     protected $majorService;
 
+    protected $groupService;
+
     /**
      * Create a new controller instance.
      *
@@ -28,9 +31,10 @@ class ArchiveController extends Controller
      * @param \App\Services\StudenttService  $studentService
      * @param \App\Services\DepartmentService  $departmentService
      * @param \App\Services\MajortService  $majorService
+     * @param \App\Services\GroupService  $groupService
      * @return void
      */
-    public function __construct(ArchiveService $archiveService, StudentService $studentService, DepartmentService $departmentService, MajorService $majorService)
+    public function __construct(ArchiveService $archiveService, StudentService $studentService, DepartmentService $departmentService, MajorService $majorService, GroupService $groupService)
     {
         $this->authorizeResource(Archive::class, 'archive');
 
@@ -38,6 +42,7 @@ class ArchiveController extends Controller
         $this->studentService = $studentService;
         $this->departmentService = $departmentService;
         $this->majorService = $majorService;
+        $this->groupService = $groupService;
     }
 
     /**
@@ -197,7 +202,7 @@ class ArchiveController extends Controller
         $departments = $this->departmentService->getCollege();
         $majors = $this->majorService->getEnableItems();
         $grades = $this->studentService->getAllGrades();
-        $levels = $this->studentService->getAllLevels();
+        $levels = $this->groupService->getAll();
 
         return view('shared.export', compact('departments', 'majors', 'grades', 'levels'));
     }
@@ -240,7 +245,7 @@ class ArchiveController extends Controller
         $departments = $this->departmentService->getCollege();
         $majors = $this->majorService->getEnableItems();
         $grades = $this->studentService->getAllGrades();
-        $levels = $this->studentService->getAllLevels();
+        $levels = $this->groupService->getAll();
 
         $attributes = [];
         $items = null;

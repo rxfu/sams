@@ -11,9 +11,9 @@ class EntryService extends Service
         $this->repository = $entries;
     }
 
-    public function getActiveItems()
+    public function getActiveItems($groupId = null)
     {
-        return $this->repository->activeItems();
+        return $this->repository->activeItems($groupId);
     }
 
     public function assignGroup($entry, $groups)

@@ -90,8 +90,6 @@
                         </div>
                     </div>
 
-                    <hr>
-
                     @inject('entries', 'App\Services\EntryService')
                     @foreach ($item->entries as $entry)
                         @if ($loop->index % 3 === 0)

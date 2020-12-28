@@ -25,6 +25,6 @@ class UsersTableSeeder extends Seeder
             'password' => '123456',
             'name' => '辅导员',
             'department_id' => '051',
-        ]);
+        ])->roles()->sync([2]);
     }
 }

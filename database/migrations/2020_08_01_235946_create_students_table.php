@@ -25,7 +25,7 @@ class CreateStudentsTable extends Migration
             $table->string('grade', 4)->nullable()->comment('年级');
             $table->string('duration', 1)->nullable()->comment('学制');
             $table->string('status', 20)->nullable()->comment('学籍状态，0-不在校，1-在校');
-            $table->string('level', 20)->nullable()->comment('培养层次，0-本科生，1-研究生');
+            $table->string('level', 20)->nullable()->comment('培养层次，1-本科生，2-研究生');
             $table->timestamps();
 
             $table->primary('id');
