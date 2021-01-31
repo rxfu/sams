@@ -1,35 +1,13 @@
 @extends('layouts.app')
 
-@section('title', __('archive.module') . __('List'))
+@section('title', __('history.module') . __('List'))
 
 @section('content')
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">{{ __('archive.module') . __('List') }}</h3>
-                <div class="card-tools">
-                    @can('create', History::class)
-                        <a href="{{ route('archived.create') }}" title="{{ __('Archive') }}" class="btn btn-warning archive" data-toggle="modal" data-target="#dialog" data-whatever="批量{{ __('Archive') }}">
-                            <i class="fas fa-archive"></i> 批量{{ __('Archive') }}
-                        </a>
-                    @endcan
-                    @can('export', Archive::class)
-                        <a href="{{ route('archives.export') }}" title="{{ __('Export') }}" class="btn btn-secondary export" data-toggle="modal" data-target="#dialog" data-whatever="{{  __('archive.module') }}移交表{{ __('export') }}">
-                            <i class="fas fa-file-export"></i> {{ __('Export') . __('archive.module') }}移交表
-                        </a>
-                    @endcan
-                    @can('import', Archive::class)
-                        <a href="{{ route('archives.import') }}" title="{{ __('Import') }}" class="btn btn-info import" data-toggle="modal" data-target="#dialog" data-whatever="{{  __('archive.module') . __('import') }}">
-                            <i class="fas fa-file-import"></i> {{ __('Import') . __('archive.module') }}
-                        </a>
-                    @endcan
-                    @can('create', Archive::class)
-                        <a href="{{ route('archives.create') }}" title="{{ __('Create') }}" class="btn btn-success">
-                            <i class="fas fa-plus"></i> {{ __('Create') . __('archive.module') }}
-                        </a>
-                    @endcan
-                </div>
+                <h3 class="card-title">{{ __('history.module') . __('List') }}</h3>
             </div>
 
             <div class="card-body">
@@ -101,20 +79,21 @@
                             </div>
                         </div>
                     </div>
-                    <table id="archives-table" class="table table-bordered table-striped">
+                    <table id="histories-table" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>{{ __('archive.id') }}</th>
-                                <th>{{ __('archive.sid') }}</th>
-                                <th>{{ __('student.idnumber') }}</th>
-                                <th>{{ __('archive.received_at') }}</th>
-                                <th>{{ __('student.name') }}</th>
-                                <th>{{ __('student.department_id') }}</th>
-                                <th>{{ __('student.major_id') }}</th>
-                                <th>{{ __('student.grade') }}</th>
-                                <th>{{ __('archive.creator_id') }}</th>
-                                <th>{{ __('archive.editor_id') }}</th>
-                                <th>{{ __('archive.remark') }}</th>
+                                <th>{{ __('history.id') }}</th>
+                                <th>{{ __('history.name') }}</th>
+                                <th>{{ __('history.idtype') }}</th>
+                                <th>{{ __('history.idnumber') }}</th>
+                                <th>{{ __('history.gender') }}</th>
+                                <th>{{ __('history.nation') }}</th>
+                                <th>{{ __('history.department') }}</th>
+                                <th>{{ __('history.major') }}</th>
+                                <th>{{ __('history.grade') }}</th>
+                                <th>{{ __('history.duration') }}</th>
+                                <th>{{ __('history.level') }}</th>
+                                <th>{{ __('history.archive_id') }}</th>
                                 <th>{{ __('Action') }}</th>
                             </tr>
                         </thead>
@@ -122,62 +101,41 @@
                             @foreach ($items as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
-                                    <td>{{ $item->sid }}</td>
-                                    <td>{{ $item->student->idnumber }}</td>
-                                    <td>{{ $item->received_at }}</td>
-                                    <td>{{ $item->student->name }}</td>
-                                    <td>{{ $item->student->department->name }}</td>
-                                    <td>{{ $item->student->major->name }}</td>
-                                    <td>{{ $item->student->grade }}</td>
-                                    <td>{{ $item->creator->name }}</td>
-                                    <td>{{ $item->editor->name }}</td>
-                                    <td>{{ $item->remark }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->idtype }}</td>
+                                    <td>{{ $item->idnumber }}</td>
+                                    <td>{{ $item->gender }}</td>
+                                    <td>{{ $item->nation }}</td>
+                                    <td>{{ $item->department }}</td>
+                                    <td>{{ $item->major }}</td>
+                                    <td>{{ $item->grade }}</td>
+                                    <td>{{ $item->duration }}</td>
+                                    <td>{{ $item->level }}</td>
+                                    <td>{{ $item->archive_id}}</td>
                                     <td>
-                                        @if ($item->is_archived)
-                                            数据已归档
-                                        @else
-                                            @can('create', History::class)
-                                                <a href="{{ route('archived.create') }}" title="{{ __('Archive') }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#dialog" data-whatever="{{ __('Confirm') . __('Archive') }}" data-archive-id="{{ $item->id }}">
-                                                    <i class="fas fa-archive"></i> {{ __('Archive') }}
-                                                </a>
-                                                <form id="archive-form-{{ $item->id }}" method="post" style="display: none;">
-                                                    @csrf
-                                                    <input type="hidden" name="archive_id" value="{{ $item->id }}">
-                                                </form>
-                                            @endcan
-                                            @can('view', $item)
-                                                <a href="{{ route('archives.show', $item) }}" class="btn btn-primary btn-sm" title="{{ __('Show') }}">
-                                                    <i class="fas fa-folder"></i> {{ __('Show') }}
-                                                </a>
-                                            @endcan
-                                            @can('update', $item)
-                                                <a href="{{ route('archives.edit', $item) }}" class="btn btn-info btn-sm" title="{{ __('Edit') }}">
-                                                    <i class="fas fa-pencil-alt"></i> {{ __('Edit') }}
-                                                </a>
-                                            @endcan
-                                            @can('delete', $item)
-                                                <a href="{{ route('archives.destroy', $item) }}" class="btn btn-danger btn-sm delete" title="{{ __('Delete') }}" data-toggle="modal" data-target="#dialog" data-whatever="{{ __('Confirm') . __('Delete') }}">
-                                                    <i class="fas fa-trash"></i> {{ __('Delete') }}
-                                                </a>
-                                            @endcan
-                                        @endif
+                                        @can('delete', $item)
+                                            <a href="{{ route('archived.destroy', $item) }}" class="btn btn-danger btn-sm unarchive" title="{{ __('Unarchive') }}" data-toggle="modal" data-target="#dialog" data-whatever="{{ __('Confirm') . __('Unarchive') }}">
+                                                <i class="fas fa-trash-restore"></i> {{ __('Unarchive') }}
+                                            </a>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>{{ __('archive.id') }}</th>
-                                <th>{{ __('archive.sid') }}</th>
-                                <th>{{ __('student.idnumber') }}</th>
-                                <th>{{ __('archive.received_at') }}</th>
-                                <th>{{ __('student.name') }}</th>
-                                <th>{{ __('student.department_id') }}</th>
-                                <th>{{ __('student.major_id') }}</th>
-                                <th>{{ __('student.grade') }}</th>
-                                <th>{{ __('archive.creator_id') }}</th>
-                                <th>{{ __('archive.editor_id') }}</th>
-                                <th>{{ __('archive.remark') }}</th>
+                                <th>{{ __('history.id') }}</th>
+                                <th>{{ __('history.name') }}</th>
+                                <th>{{ __('history.idtype') }}</th>
+                                <th>{{ __('history.idnumber') }}</th>
+                                <th>{{ __('history.gender') }}</th>
+                                <th>{{ __('history.nation') }}</th>
+                                <th>{{ __('history.department') }}</th>
+                                <th>{{ __('history.major') }}</th>
+                                <th>{{ __('history.grade') }}</th>
+                                <th>{{ __('history.duration') }}</th>
+                                <th>{{ __('history.level') }}</th>
+                                <th>{{ __('history.archive_id') }}</th>
                                 <th>{{ __('Action') }}</th>
                             </tr>
                         </tfoot>

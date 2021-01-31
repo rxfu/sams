@@ -57,5 +57,9 @@
     "Sync": "同步",
     "sync": "同步",
     "ems": "导出机要交寄单",
-    "notice": "导出通知单"
+    "notice": "导出通知单",
+    "Archive": "归档",
+    "archive": "归档",
+    "Unarchive": "取消归档",
+    "unarchive": "取消归档"
 }

@@ -30,6 +30,7 @@ return [
 		App\Models\Department::class,
 		App\Models\Major::class,
 		App\Models\Student::class,
+		App\Models\History::class,
 		// model_here
     ],
 ];

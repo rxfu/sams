@@ -10,7 +10,7 @@
                 <h3 class="card-title">{{ __('archive.module') . __('List') }}</h3>
                 <div class="card-tools">
                     @can('export', Archive::class)
-                        <a href="{{ route('archives.export') }}" title="{{ __('Export') }}" class="btn btn-secondary">
+                        <a href="{{ route('archives.export') }}" title="{{ __('Export') }}" class="btn btn-secondary export">
                             <i class="fas fa-file-export"></i> {{ __('Export') . __('archive.module') }}
                         </a>
                     @endcan

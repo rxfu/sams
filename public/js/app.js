@@ -113,6 +113,72 @@ $(function () {
         });
     });
 
+    $('.archive').on('click', function (e) {
+        e.preventDefault();
+
+        var href = $(this).attr('href');
+
+        $('#dialog').on('show.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var title = button.data('whatever');
+            var modal = $(this);
+
+            modal.find('.modal-content').removeClass().addClass('modal-content bg-warning');
+            modal.find('.modal-title').text(title);
+            modal.find('.modal-body').load(href, function (result) {
+                $('#export-form').attr('action', href);
+            });
+
+            $(this).off('show.bs.modal');
+        }).on('click', '#btn-confirmed', function () {
+            $('#export-form').trigger('submit');
+        });
+    });
+
+    $('.table').on('click', '.unarchive', function (e) {
+        e.preventDefault();
+
+        var href = $(this).attr('href');
+        var $form = $('#delete-form').attr('action', href);
+
+        $('#dialog').on('show.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var title = button.data('whatever');
+            var message = '请问确定取消该条记录的归档数据，还原到原数据表中吗？';
+            var modal = $(this);
+
+            modal.find('.modal-content').removeClass().addClass('modal-content bg-danger');
+            modal.find('.modal-title').text(title);
+            modal.find('.modal-body').html(message);
+
+            $(this).off('show.bs.modal');
+        }).on('click', '#btn-confirmed', function () {
+            $form.trigger('submit');
+        });
+    });
+
+    $('.table').on('click', '.archive', function (e) {
+        e.preventDefault();
+
+        var href = $(this).attr('href');
+        var $form = $('#archive-form-' + $(e.relatedTarget).data('archive-id')).attr('action', href);
+
+        $('#dialog').on('show.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var title = button.data('whatever');
+            var message = '记录将进行归档，归档后该记录不可再修改，请问确定归档该条记录吗？';
+            var modal = $(this);
+
+            modal.find('.modal-content').removeClass().addClass('modal-content bg-warning');
+            modal.find('.modal-title').text(title);
+            modal.find('.modal-body').html(message);
+
+            $(this).off('show.bs.modal');
+        }).on('click', '#btn-confirmed', function () {
+            $form.trigger('submit');
+        });
+    });
+
     $('.datepicker').daterangepicker({
         singleDatePicker: true,
         locale: {

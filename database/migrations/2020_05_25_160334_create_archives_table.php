@@ -23,6 +23,7 @@ class CreateArchivesTable extends Migration
             $table->foreignId('editor_id')
                 ->constrained('users')
                 ->comment('修改者ID');
+            $table->boolean('is_archived')->default(false)->comment('是否归档，0-未归档，1-已归档');
             $table->text('remark')->nullable()->comment('备注');
             $table->timestamps();
 

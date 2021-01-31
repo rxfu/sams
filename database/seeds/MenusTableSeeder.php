@@ -170,6 +170,20 @@ class MenusTableSeeder extends Seeder
                 'order' => 3,
             ],
             [
+                'slug' => 'history',
+                'name' => '归档数据管理',
+                'route' => 'archived.index',
+                'parent_id' => 16,
+                'order' => 4,
+            ],
+            [
+                'slug' => 'legacy',
+                'name' => '旧系统数据管理',
+                'route' => 'legacies.index',
+                'parent_id' => 16,
+                'order' => 5,
+            ],
+            [
                 'slug' => 'data-manage',
                 'name' => '数据管理',
                 'icon' => 'database',

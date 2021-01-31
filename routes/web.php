@@ -118,5 +118,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('idtypes', 'IdtypeController');
     Route::resource('departments', 'DepartmentController');
     Route::resource('majors', 'MajorController');
+    Route::resource('archived', 'HistoryController');
     // route_here
 });
