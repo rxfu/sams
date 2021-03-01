@@ -27,7 +27,36 @@ class DeliveryRepository extends Repository
         try {
             $ids = is_array($aid) ? $aid : [$aid];
 
-            return $this->model->with(['archive', 'archive.student'])->whereIn('archive_id', $ids);
+            return $this->model->with(['archive', 'archive.student'])
+                ->whereIn('archive_id', $ids);
+        } catch (QueryException $e) {
+            throw new InternalException($e, $this->getModel(), __FUNCTION__);
+        }
+    }
+
+    public function getDeliveredByArchives($aid)
+    {
+        try {
+            $ids = is_array($aid) ? $aid : [$aid];
+
+            return $this->model->with(['archive', 'archive.student'])
+                ->whereIn('archive_id', $ids)
+                ->whereStatus('1');
+        } catch (QueryException $e) {
+            throw new InternalException($e, $this->getModel(), __FUNCTION__);
+        }
+    }
+
+    public function getAllBySendAtAndStatus($aid, $sendAt, $status)
+    {
+        try {
+            $ids = is_array($aid) ? $aid : [$aid];
+
+            return $this->model->with(['archive', 'archive.student'])
+                ->whereIn('archive_id', $ids)
+                ->whereSendAt($sendAt)
+                ->whereStatus($status)
+                ->get();
         } catch (QueryException $e) {
             throw new InternalException($e, $this->getModel(), __FUNCTION__);
         }

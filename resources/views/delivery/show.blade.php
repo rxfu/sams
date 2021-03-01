@@ -27,23 +27,16 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="forward" class="col-sm-3 col-form-label text-right">{{ __('delivery.forward') }}</label>
-                    <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->forward }}</div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="status" class="col-sm-3 col-form-label text-right">{{ __('delivery.status') }}</label>
-                    <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->present()->hasStatus }}</div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
                     <label for="receiver" class="col-sm-3 col-form-label text-right">{{ __('delivery.receiver') }}</label>
                     <div class="col-sm-9">
                         <div class="form-control-plaintext">{{ $item->receiver }}</div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="address" class="col-sm-3 col-form-label text-right">{{ __('delivery.address') }}</label>
+                    <div class="col-sm-9">
+                        <div class="form-control-plaintext">{{ $item->address }}</div>
                     </div>
                 </div>
 
@@ -55,9 +48,58 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="address" class="col-sm-3 col-form-label text-right">{{ __('delivery.address') }}</label>
+                    <label for="zipcode" class="col-sm-3 col-form-label text-right">{{ __('delivery.zipcode') }}</label>
                     <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->address }}</div>
+                        <div class="form-control-plaintext">{{ $item->zipcode }}</div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="employment" class="col-sm-3 col-form-label text-right">{{ __('delivery.employment') }}</label>
+                    <div class="col-sm-9">
+                        <div class="form-control-plaintext">{{ $item->employment }}</div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="reason" class="col-sm-3 col-form-label text-right">{{ __('delivery.reason') }}</label>
+                    <div class="col-sm-9">
+                        <div class="form-control-plaintext">{{ $item->reason }}</div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="ems" class="col-sm-3 col-form-label text-right">{{ __('delivery.ems') }}</label>
+                    <div class="col-sm-9">
+                        <div class="form-control-plaintext">{{ $item->ems }}</div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="version" class="col-sm-3 col-form-label text-right">{{ __('delivery.version') }}</label>
+                    <div class="col-sm-9">
+                        <div class="form-control-plaintext">{{ $item->version }}</div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="remark" class="col-sm-3 col-form-label text-right">{{ __('delivery.remark') }}</label>
+                    <div class="col-sm-9">
+                        <div class="form-control-plaintext">{{ $item->remark }}</div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="send_at" class="col-sm-3 col-form-label text-right">{{ __('delivery.send_at') }}</label>
+                    <div class="col-sm-9">
+                        <div class="form-control-plaintext">{{ $item->send_at->format('Y-m-d') }}</div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="status" class="col-sm-3 col-form-label text-right">{{ __('delivery.status') }}</label>
+                    <div class="col-sm-9">
+                        <div class="form-control-plaintext">{{ $item->present()->hasStatus }}</div>
                     </div>
                 </div>
 
@@ -79,20 +121,6 @@
                     <label for="editor_id" class="col-sm-3 col-form-label text-right">{{ __('delivery.editor_id') }}</label>
                     <div class="col-sm-9">
                         <div class="form-control-plaintext">{{ optional($item->editor)->name }}</div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="version" class="col-sm-3 col-form-label text-right">{{ __('delivery.version') }}</label>
-                    <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->version }}</div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="remark" class="col-sm-3 col-form-label text-right">{{ __('delivery.remark') }}</label>
-                    <div class="col-sm-9">
-                        <div class="form-control-plaintext">{{ $item->remark }}</div>
                     </div>
                 </div>
             </div>

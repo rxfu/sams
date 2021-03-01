@@ -16,7 +16,7 @@ class Delivery extends Model
      * @var array
      */
     protected $fillable = [
-        'archive_id', 'forward', 'reason', 'status', 'ems', 'phone', 'address', 'zipcode', 'send_at', 'had_receipt', 'creator_id', 'editor_id', 'version', 'remark',
+        'archive_id', 'receiver', 'employment', 'reason', 'status', 'ems', 'phone', 'address', 'zipcode', 'send_at', 'had_receipt', 'receiver', 'creator_id', 'editor_id', 'version', 'remark',
     ];
 
     /**
@@ -25,7 +25,7 @@ class Delivery extends Model
      * @var array
      */
     protected $casts = [
-        'send_at' => 'datetime',
+        'send_at' => 'date',
     ];
 
     public function creator()

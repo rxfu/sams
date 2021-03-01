@@ -15,7 +15,12 @@
                         </a>
                     @endcan
                     @can('export', Archive::class)
-                        <a href="{{ route('archives.export') }}" title="{{ __('Export') }}" class="btn btn-secondary export" data-toggle="modal" data-target="#dialog" data-whatever="{{  __('archive.module') }}移交表{{ __('export') }}">
+                        <a href="{{ route('archives.export') }}" title="{{ __('Export') }}" class="btn btn-secondary export" data-toggle="modal" data-target="#dialog" data-whatever="{{  __('archive.module') }}移交表m欧版{{ __('export') }}">
+                            <i class="fas fa-file-export"></i> {{ __('Export') . __('archive.module') }}移交表模板
+                        </a>
+                    @endcan
+                    @can('transfer', Archive::class)
+                        <a href="{{ route('archives.export-transfer') }}" title="{{ __('Export') }}" class="btn btn-primary export" data-toggle="modal" data-target="#dialog" data-whatever="{{  __('archive.module') }}移交表{{ __('export') }}">
                             <i class="fas fa-file-export"></i> {{ __('Export') . __('archive.module') }}移交表
                         </a>
                     @endcan

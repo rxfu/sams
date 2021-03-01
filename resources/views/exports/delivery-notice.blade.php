@@ -73,6 +73,10 @@
                 font-size: 90%;
                 font-style: normal;
             }
+            .no-wrap {
+                word-break: keep-all;
+                white-space: nowrap;
+            }
         </style>
     </head>
     <body>
@@ -85,7 +89,7 @@
                     <h1>广西师范大学学生档案转递通知单存根</h1>
                 </header>
                 <div>
-                    <span class="text-left">{{ $delivery->address }}</span>
+                    <span class="text-left">{{ $delivery->receiver }}</span>
                     <span class="text-right">No.{{ $delivery->archive_id }}</span>
                 </div>
                 <div class="clear"></div>
@@ -103,22 +107,22 @@
                 <div class="interval"></div>
                 <table cellspacing="0" cellpadding="0" align="center">
                     <tr>
-                        <th>姓名</th>
-                        <th>学号</th>
-                        <th>学院</th>
-                        <th>专业</th>
-                        <th>年级</th>
-                        <th>转递原因</th>
-                        <th>档案材料</th>
+                        <th class="no-wrap">姓名</th>
+                        <th class="no-wrap">学号</th>
+                        <th class="no-wrap">学院</th>
+                        <th class="no-wrap">专业</th>
+                        <th class="no-wrap">年级</th>
+                        <th class="no-wrap">转递原因</th>
+                        <th class="no-wrap">档案材料</th>
                     </tr>
                     <tr>
-                        <td>{{ $delivery->archive->student->name }}</td>
-                        <td>{{ $delivery->archive->student->id }}</td>
+                        <td class="no-wrap">{{ $delivery->archive->student->name }}</td>
+                        <td class="no-wrap">{{ $delivery->archive->student->id }}</td>
                         <td>{{ $delivery->archive->student->department->name }}</td>
                         <td>{{ $delivery->archive->student->major->name }}</td>
-                        <td>{{ $delivery->archive->student->grade }}</td>
+                        <td class="no-wrap">{{ $delivery->archive->student->grade }}</td>
                         <td>{{ $delivery->reason }}</td>
-                        <td></td>
+                        <td>{{ $delivery->archive->entries->sum('pivot.quantity') }}</td>
                     </tr>
                 </table>
                 <div class="interval"></div>
@@ -127,7 +131,7 @@
                     <h1>广西师范大学学生档案转递通知单</h1>
                 </header>
                 <div>
-                    <span class="text-left">{{ $delivery->address }}</span>
+                    <span class="text-left">{{ $delivery->receiver }}</span>
                     <span class="text-right">No.{{ $delivery->archive_id }}</span>
                 </div>
                 <div class="clear"></div>
@@ -145,22 +149,22 @@
                 <div class="interval"></div>
                 <table cellspacing="0" cellpadding="0" align="center">
                     <tr>
-                        <th>姓名</th>
-                        <th>学号</th>
-                        <th>学院</th>
-                        <th>专业</th>
-                        <th>年级</th>
-                        <th>转递原因</th>
-                        <th>档案材料</th>
+                        <th class="no-wrap">姓名</th>
+                        <th class="no-wrap">学号</th>
+                        <th class="no-wrap">学院</th>
+                        <th class="no-wrap">专业</th>
+                        <th class="no-wrap">年级</th>
+                        <th class="no-wrap">转递原因</th>
+                        <th class="no-wrap">档案材料</th>
                     </tr>
                     <tr>
-                        <td>{{ $delivery->archive->student->name }}</td>
-                        <td>{{ $delivery->archive->student->id }}</td>
+                        <td class="no-wrap">{{ $delivery->archive->student->name }}</td>
+                        <td class="no-wrap">{{ $delivery->archive->student->id }}</td>
                         <td>{{ $delivery->archive->student->department->name }}</td>
                         <td>{{ $delivery->archive->student->major->name }}</td>
-                        <td>{{ $delivery->archive->student->grade }}</td>
+                        <td class="no-wrap">{{ $delivery->archive->student->grade }}</td>
                         <td>{{ $delivery->reason }}</td>
-                        <td></td>
+                        <td>{{ $delivery->archive->entries->sum('pivot.quantity') }}</td>
                     </tr>
                 </table>
                 <div class="interval"></div>
@@ -175,10 +179,10 @@
                                 <span class="text-right">No.{{ $delivery->archive_id }}</span>
                             </div>
                             <div>
-                                <p>你处于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日转来&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;同学的档案共&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;袋材料共&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份已全部收到，现将回执寄回。</p>
+                                <p>你处于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日转来&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;同学的档案共&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;袋材料共&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份已全部收到，现将回执寄回。</p>
                             </div>
                             <div>
-                                <span class="text-right">收件人签名：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;收件机关盖章：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <span class="text-right">收件人签名：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;收件机关盖章：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                             </div>
                             <div class="clear"></div>
                             <div>

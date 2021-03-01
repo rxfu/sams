@@ -10,16 +10,16 @@ class DeliveryPresenter extends Presenter
     {
         switch ($this->status) {
             case 0:
-                return '未投递';
+                return '未寄送';
 
             case 1:
-                return '已投递';
+                return '已寄送';
 
             case 2:
                 return '被退回';
 
             default:
-                return '未投递';
+                return '未寄送';
         }
     }
 

@@ -63,54 +63,64 @@
         </style>
     </head>
     <body>
-        <main>
-            <header>
-                <p>邮(5008)甲</p>
-                <h2 class="text-center">学生档案EMS寄档交寄单</h2>
-                <h3>寄件单位：广西师范大学档案馆</h3>
-                <hr>
-            </header>
-            <div>发出日期：{{ $deliveries[0]->send_at->format('Y-m-d') }}</div>
-            <table cellspacing="0" cellpadding="0">
-                <thead>
-                    <tr>
-                        <th rowspan="2">格数</th>
-                        <th rowspan="2">收件单位收件单位名称及住地</th>
-                        <th rowspan="2">档案号</th>
-                        <th colspan="3">件数</th>
-                        <th rowspan="2">邮寄号</th>
-                        <th rowspan="2">备注</th>
-                    </tr>
-                    <tr>
-                        <th>绝</th>
-                        <th>机</th>
-                        <th>密</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($deliveries as $delivery)
+        @isset ($deliveries)
+            <main>
+                <header>
+                    <p>邮(5008)甲</p>
+                    <h2 class="text-center">学生档案EMS寄档交寄单</h2>
+                    <h3>寄件单位：广西师范大学档案馆</h3>
+                    <hr>
+                </header>
+                <div>发出日期：{{ $deliveries[0]->send_at->format('Y-m-d') }}</div>
+                <table cellspacing="0" cellpadding="0">
+                    <thead>
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td class="text-left">{{ $delivery->address }}</td>
-                            <td style="white-space: nowrap">{{ $delivery->archive_id }}</td>
-                            <td></td>
-                            <td>1</td>
-                            <td></td>
-                            <td>{{ $delivery->ems }}</td>
-                            <td>{{ $delivery->remark }}</td>
+                            <th rowspan="2">格数</th>
+                            <th rowspan="2">收件单位名称及住地</th>
+                            <th rowspan="2">档案号</th>
+                            <th colspan="3">件数</th>
+                            <th rowspan="2">邮寄号</th>
+                            <th rowspan="2">备注</th>
                         </tr>
-                    @endforeach
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="4" class="text-left">本页合计 {{ $deliveries->count() }} 件</td>
-                        <td colspan="4" class="text-left">接收人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;接收日戳（章）</td>
-                    </tr>
-                    <tr>
-                        <td colspan="8" class="text-left">登记人：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;送件人：</td>
-                    </tr>
-                </tfoot>
-            </table>
-        </main>
+                        <tr>
+                            <th>绝</th>
+                            <th>机</th>
+                            <th>密</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($deliveries as $delivery)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td class="text-left">{{ $delivery->receiver }}</td>
+                                <td style="white-space: nowrap">{{ $delivery->archive_id }}</td>
+                                <td></td>
+                                <td>1</td>
+                                <td></td>
+                                <td>{{ $delivery->ems }}</td>
+                                <td>{{ $delivery->remark }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-left">本页合计 {{ $deliveries->count() }} 件</td>
+                            <td rowspan="3" colspan="5" class="text-left" valign="top">
+                                <p>接收人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;接收日戳（章）</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-left">本号单共计&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;件</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-left">文件资费&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;￥</td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" class="text-left">登记人：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;送件人：</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </main>
+        @endisset
     </body>
 </html>

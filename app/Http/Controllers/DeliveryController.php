@@ -180,7 +180,7 @@ class DeliveryController extends Controller
 
             $this->success(200009);
 
-            return redirect()->route('deliveries.index');
+            return redirect()->route('deliveries.search');
         }
 
         $this->error(405001);
@@ -237,50 +237,6 @@ class DeliveryController extends Controller
     }
 
     /**
-     * Show the form for exporting the ems specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showExportEmsForm()
-    {
-        $this->authorize('ems', Delivery::class);
-
-        $departments = $this->departmentService->getCollege();
-        $majors = $this->majorService->getEnableItems();
-        $grades = $this->studentService->getAllGrades();
-        $levels = $this->groupService->getAll();
-
-        return view('shared.export', compact('departments', 'majors', 'grades', 'levels'));
-    }
-
-    /**
-     * Export the specified resource ems in storage.
-     *
-     * @param  Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function exportEms(Request $request)
-    {
-        $this->authorize('ems', Delivery::class);
-
-        $attributes = [];
-        if ($request->hasAny(['level', 'department', 'major', 'grade'])) {
-            $attributes = [
-                'level' => $request->input('level'),
-                'department' => $request->input('department'),
-                'major' => $request->input('major'),
-                'grade' => $request->input('grade'),
-            ];
-        }
-
-        $deliveries = $this->service->search($attributes);
-
-        $this->success(200010);
-
-        return $this->service->exportPdf('exports.delivery-ems', compact('deliveries'), 'ems.pdf');
-    }
-
-    /**
      * Show the form for exporting the notice specified resource.
      *
      * @return \Illuminate\Http\Response
@@ -294,7 +250,7 @@ class DeliveryController extends Controller
         $grades = $this->studentService->getAllGrades();
         $levels = $this->groupService->getAll();
 
-        return view('shared.export', compact('departments', 'majors', 'grades', 'levels'));
+        return view('shared.send', compact('departments', 'majors', 'grades', 'levels'));
     }
 
     /**
@@ -308,19 +264,66 @@ class DeliveryController extends Controller
         $this->authorize('notice', Delivery::class);
 
         $attributes = [];
-        if ($request->hasAny(['level', 'department', 'major', 'grade'])) {
+        if ($request->hasAny(['level', 'department', 'major', 'grade', 'send_at'])) {
             $attributes = [
                 'level' => $request->input('level'),
                 'department' => $request->input('department'),
                 'major' => $request->input('major'),
                 'grade' => $request->input('grade'),
+                'send_at' => $request->input('send_at')
             ];
         }
 
-        $deliveries = $this->service->getAll();
+        $deliveries = $this->service->getAllByStatus($attributes, false);
+        $this->service->sent($deliveries);
 
         $this->success(200010);
 
         return $this->service->exportPdf('exports.delivery-notice', compact('deliveries'), 'notice.pdf');
+    }
+
+    /**
+     * Show the form for exporting the ems specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showExportEmsForm()
+    {
+        $this->authorize('ems', Delivery::class);
+
+        $departments = $this->departmentService->getCollege();
+        $majors = $this->majorService->getEnableItems();
+        $grades = $this->studentService->getAllGrades();
+        $levels = $this->groupService->getAll();
+
+        return view('shared.send', compact('departments', 'majors', 'grades', 'levels'));
+    }
+
+    /**
+     * Export the specified resource ems in storage.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function exportEms(Request $request)
+    {
+        $this->authorize('ems', Delivery::class);
+
+        $attributes = [];
+        if ($request->hasAny(['level', 'department', 'major', 'grade', 'send_at'])) {
+            $attributes = [
+                'level' => $request->input('level'),
+                'department' => $request->input('department'),
+                'major' => $request->input('major'),
+                'grade' => $request->input('grade'),
+                'send_at' => $request->input('send_at'),
+            ];
+        }
+
+        $deliveries = $this->service->getAllByStatus($attributes, true);
+
+        $this->success(200010);
+
+        return $this->service->exportPdf('exports.delivery-ems', compact('deliveries'), 'ems.pdf');
     }
 }

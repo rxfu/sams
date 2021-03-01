@@ -65,6 +65,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/import', 'ArchiveController@import');
         Route::get('/export', 'ArchiveController@showExportForm')->name('export');
         Route::post('/export', 'ArchiveController@export');
+        Route::get('/export-transfer', 'ArchiveController@showExportTransferForm')->name('export-transfer');
+        Route::post('/export-transfer', 'ArchiveController@exportTransfer');
         Route::get('/search', 'ArchiveController@search')->name('search');
         Route::get('/list', 'ArchiveController@list')->name('list');
     });
@@ -119,5 +121,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('departments', 'DepartmentController');
     Route::resource('majors', 'MajorController');
     Route::resource('archived', 'HistoryController');
+    Route::resource('legacies', 'LegacyController');
     // route_here
 });

@@ -65,69 +65,10 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="forward" class="col-sm-3 col-form-label text-right">{{ __('delivery.forward') }}</label>
+                        <label for="receiver" class="col-sm-3 col-form-label text-right">{{ __('delivery.receiver') }}</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control @error('forward') is-invalid @enderror" name="forward" id="forward" placeholder="{{ __('delivery.forward') }}" value="{{ old('forward', $item->forward) }}">
-                            @error('forward')
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="reason" class="col-sm-3 col-form-label text-right">{{ __('delivery.reason') }}</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control @error('reason') is-invalid @enderror" name="reason" id="reason" placeholder="{{ __('delivery.reason') }}" value="{{ old('reason', $item->reason) }}">
-                            @error('reason')
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="status" class="col-sm-3 col-form-label text-right">{{ __('delivery.status') }}</label>
-                        <div class="col-sm-9">
-                            <div class="icheck-info icheck-inline">
-                                <input type="radio" name="status" id="status0" class="form-check-input @error('status') is-invalid @enderror" value="0"{{ $item->status === 0 ? ' checked' : '' }}>
-                                <label class="form-check-label" for="status0">未投递</label>
-                            </div>
-                            <div class="icheck-info icheck-inline">
-                                <input type="radio" name="status" id="status1" class="form-check-input @error('status') is-invalid @enderror" value="1"{{ $item->status === 1 ? ' checked' : '' }}>
-                                <label class="form-check-label" for="status1">已投递</label>
-                            </div>
-                            <div class="icheck-info icheck-inline">
-                                <input type="radio" name="status" id="status2" class="form-check-input @error('status') is-invalid @enderror" value="2"{{ $item->status === 2 ? ' checked' : '' }}>
-                                <label class="form-check-label" for="status2">被退回</label>
-                            </div>
-                            @error('status')
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="ems" class="col-sm-3 col-form-label text-right">{{ __('delivery.ems') }}</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control @error('ems') is-invalid @enderror" name="ems" id="ems" placeholder="{{ __('delivery.ems') }}" value="{{ old('ems', $item->ems) }}">
-                            @error('ems')
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="phone" class="col-sm-3 col-form-label text-right">{{ __('delivery.phone') }}</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="{{ __('delivery.phone') }}" value="{{ old('phone', $item->phone) }}">
-                            @error('phone')
+                            <input type="text" class="form-control @error('receiver') is-invalid @enderror" name="receiver" id="receiver" placeholder="{{ __('delivery.receiver') }}" value="{{ old('receiver', $item->receiver) }}">
+                            @error('receiver')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>
@@ -148,10 +89,58 @@
                     </div>
 
                     <div class="form-group row">
+                        <label for="phone" class="col-sm-3 col-form-label text-right">{{ __('delivery.phone') }}</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="{{ __('delivery.phone') }}" value="{{ old('phone', $item->phone) }}">
+                            @error('phone')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label for="zipcode" class="col-sm-3 col-form-label text-right">{{ __('delivery.zipcode') }}</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control @error('zipcode') is-invalid @enderror" name="zipcode" id="zipcode" placeholder="{{ __('delivery.zipcode') }}" value="{{ old('zipcode', $item->zipcode) }}">
                             @error('zipcode')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="employment" class="col-sm-3 col-form-label text-right">{{ __('delivery.employment') }}</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control @error('employment') is-invalid @enderror" name="employment" id="employment" placeholder="{{ __('delivery.employment') }}" value="{{ old('employment', $item->employment) }}">
+                            @error('employment')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="reason" class="col-sm-3 col-form-label text-right">{{ __('delivery.reason') }}</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control @error('reason') is-invalid @enderror" name="reason" id="reason" placeholder="{{ __('delivery.reason') }}" value="{{ old('reason', $item->reason) }}">
+                            @error('reason')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="ems" class="col-sm-3 col-form-label text-right">{{ __('delivery.ems') }}</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control @error('ems') is-invalid @enderror" name="ems" id="ems" placeholder="{{ __('delivery.ems') }}" value="{{ old('ems', $item->ems) }}">
+                            @error('ems')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>
@@ -173,6 +162,29 @@
                                 </div>
                             </div>
                             @error('send_at')
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="status" class="col-sm-3 col-form-label text-right">{{ __('delivery.status') }}</label>
+                        <div class="col-sm-9">
+                            <div class="icheck-info icheck-inline">
+                                <input type="radio" name="status" id="status0" class="form-check-input @error('status') is-invalid @enderror" value="0"{{ $item->status === 0 ? ' checked' : '' }}>
+                                <label class="form-check-label" for="status0">未寄送</label>
+                            </div>
+                            <div class="icheck-info icheck-inline">
+                                <input type="radio" name="status" id="status1" class="form-check-input @error('status') is-invalid @enderror" value="1"{{ $item->status === 1 ? ' checked' : '' }}>
+                                <label class="form-check-label" for="status1">已寄送</label>
+                            </div>
+                            <div class="icheck-info icheck-inline">
+                                <input type="radio" name="status" id="status2" class="form-check-input @error('status') is-invalid @enderror" value="2"{{ $item->status === 2 ? ' checked' : '' }}>
+                                <label class="form-check-label" for="status2">被退回</label>
+                            </div>
+                            @error('status')
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>

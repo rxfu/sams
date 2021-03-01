@@ -87,9 +87,9 @@ class Service
         }
     }
 
-    public function exportPdf($template, $parameters, $file = 'untitle.pdf')
+    public function exportPdf($template, $parameters, $file = 'untitle.pdf', $options = [], $orientation = 'portrait')
     {
-        $pdf = PDF::loadView($template, $parameters);
+        $pdf = PDF::loadView($template, $parameters)->setOptions($options);
 
         return $pdf->download($file);
     }

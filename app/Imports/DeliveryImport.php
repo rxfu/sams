@@ -2,10 +2,13 @@
 
 namespace App\Imports;
 
+use Carbon\Carbon;
+use ErrorException;
 use App\Models\Archive;
 use Maatwebsite\Excel\Row;
 use App\Services\DeliveryService;
 use Maatwebsite\Excel\Concerns\OnEachRow;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 
 class DeliveryImport implements OnEachRow, WithStartRow
@@ -30,14 +33,20 @@ class DeliveryImport implements OnEachRow, WithStartRow
         $sid = $row[0];
         $archiveId = Archive::whereSid($sid)->first()->id;
 
-        $this->deliveryService->store([
+        $data = [
             'archive_id' => $archiveId,
-            'forward' => $row[1],
-            'ems' => $row[2],
-            'phone' => $row[3],
-            'address' => $row[4],
-            'remark' => $row[5],
-        ]);
+            'receiver' => $row[7],
+            'phone' => $row[8],
+            'zipcode' => $row[9],
+            'employment' => $row[10],
+            'reasone' => $row[11],
+            'ems' => $row[12],
+            'send_at' => is_null($row[13]) ? null : $this->transformDateTime($row[13]),
+            'remark' => $row[14],
+            'version' => $this->deliveryService->getMaxVersion($archiveId) + 1,
+        ];
+
+        $this->deliveryService->store($data);
     }
 
     /**
@@ -46,5 +55,14 @@ class DeliveryImport implements OnEachRow, WithStartRow
     public function startRow(): int
     {
         return 2;
+    }
+
+    protected function transformDateTime(string $value, string $format = 'Y-m-d')
+    {
+        try {
+            return Carbon::instance(Date::excelToDateTimeObject($value))->format($format);
+        } catch (ErrorException $e) {
+            return Carbon::createFromFormat($format, $value);
+        }
     }
 }

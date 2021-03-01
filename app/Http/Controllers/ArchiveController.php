@@ -12,6 +12,7 @@ use App\Services\StudentService;
 use App\Services\DepartmentService;
 use App\Http\Requests\ArchiveStoreRequest;
 use App\Http\Requests\ArchiveUpdateRequest;
+use App\Services\EntryService;
 use App\Services\GroupService;
 
 class ArchiveController extends Controller
@@ -24,6 +25,8 @@ class ArchiveController extends Controller
 
     protected $groupService;
 
+    protected $entryService;
+
     /**
      * Create a new controller instance.
      *
@@ -32,9 +35,10 @@ class ArchiveController extends Controller
      * @param \App\Services\DepartmentService  $departmentService
      * @param \App\Services\MajortService  $majorService
      * @param \App\Services\GroupService  $groupService
+     * @param \App\Services\EntryService  $entryService
      * @return void
      */
-    public function __construct(ArchiveService $archiveService, StudentService $studentService, DepartmentService $departmentService, MajorService $majorService, GroupService $groupService)
+    public function __construct(ArchiveService $archiveService, StudentService $studentService, DepartmentService $departmentService, MajorService $majorService, GroupService $groupService, EntryService $entryService)
     {
         $this->authorizeResource(Archive::class, 'archive');
 
@@ -43,6 +47,7 @@ class ArchiveController extends Controller
         $this->departmentService = $departmentService;
         $this->majorService = $majorService;
         $this->groupService = $groupService;
+        $this->entryService = $entryService;
     }
 
     /**
@@ -230,6 +235,60 @@ class ArchiveController extends Controller
         $this->success(200010);
 
         return $this->service->exportExcel(new ArchiveExport($this->studentService, $attributes), 'export.xlsx');
+    }
+
+    /**
+     * Show the form for exporting the specified resource by pdf.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showExportTransferForm()
+    {
+        $this->authorize('transfer', Archive::class);
+
+        $departments = $this->departmentService->getCollege();
+        $majors = $this->majorService->getEnableItems();
+        $grades = $this->studentService->getAllGrades();
+        $levels = $this->groupService->getAll();
+
+        return view('shared.export', compact('departments', 'majors', 'grades', 'levels'));
+    }
+
+    /**
+     * Export the specified resource by pdf in storage.
+     *
+     * @param  Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function exportTransfer(Request $request)
+    {
+        $this->authorize('transfer', Archive::class);
+
+        $attributes = [];
+        if ($request->hasAny(['level', 'department', 'major', 'grade'])) {
+            $attributes = [
+                'level' => $request->input('level'),
+                'department' => $request->input('department'),
+                'major' => $request->input('major'),
+                'grade' => $request->input('grade'),
+            ];
+        }
+
+        $entries = $this->entryService->getActiveItems();
+
+        $students = $this->studentService->getAllStudents($attributes, ['archive', 'archive.entries'], 'id');
+
+        $this->success(200010);
+
+        $options = [
+            'footer-center' => '- [page] -',
+            'footer-font-size' => 5,
+            'footer-spacing' => 5,
+            'footer-left' => '注：此表一式两份，移交单位保管一份，档案馆保管一份。',
+            'orientation' => 'landscape',
+        ];
+
+        return $this->service->exportPdf('exports.archive-transfer', compact('students', 'entries'), 'transfer.pdf', $options);
     }
 
     /**

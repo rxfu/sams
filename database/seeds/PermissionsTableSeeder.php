@@ -140,7 +140,7 @@ class PermissionsTableSeeder extends Seeder
 
         Permission::create([
             'slug' => 'archive-export',
-            'name' => '导出档案移交表',
+            'name' => '导出档案移交表excel模板',
             'action' => 'export',
             'model' => 'archive',
         ]);
@@ -171,6 +171,13 @@ class PermissionsTableSeeder extends Seeder
             'name' => '导出档案去向通知单',
             'action' => 'notice',
             'model' => 'delivery',
+        ]);
+
+        Permission::create([
+            'slug' => 'archive-transfer',
+            'name' => '导出档案移交表pdf文件',
+            'action' => 'transfer',
+            'model' => 'archive',
         ]);
     }
 }

@@ -32,11 +32,11 @@
                         <tr>
                             <th>{{ __('delivery.id') }}</th>
 							<th>{{ __('delivery.archive_id') }}</th>
-							<th>{{ __('delivery.forward') }}</th>
-							<th>{{ __('delivery.status') }}</th>
 							<th>{{ __('delivery.receiver') }}</th>
 							<th>{{ __('delivery.phone') }}</th>
-							<th>{{ __('delivery.address') }}</th>
+							<th>{{ __('delivery.employment') }}</th>
+							<th>{{ __('delivery.ems') }}</th>
+							<th>{{ __('delivery.status') }}</th>
 							<th>{{ __('delivery.had_receipt') }}</th>
 							<th>{{ __('delivery.creator_id') }}</th>
 							<th>{{ __('delivery.editor_id') }}</th>
@@ -50,11 +50,11 @@
                             <tr>
                                 <td>{{ $item->id }}</td>
 								<td>{{ $item->archive_id }}</td>
-								<td>{{ $item->forward }}</td>
-								<td>{{ $item->present()->hasStatus }}</td>
 								<td>{{ $item->receiver }}</td>
 								<td>{{ $item->phone }}</td>
-								<td>{{ $item->address }}</td>
+								<td>{{ $item->employment }}</td>
+								<td>{{ $item->ems }}</td>
+								<td>{{ $item->present()->hasStatus }}</td>
 								<td>{{ $item->present()->hadReceipt }}</td>
 								<td>{{ optional($item->creator)->name }}</td>
 								<td>{{ optional($item->editor)->name }}</td>
@@ -84,11 +84,11 @@
                         <tr>
                             <th>{{ __('delivery.id') }}</th>
 							<th>{{ __('delivery.archive_id') }}</th>
-							<th>{{ __('delivery.forward') }}</th>
-							<th>{{ __('delivery.status') }}</th>
 							<th>{{ __('delivery.receiver') }}</th>
 							<th>{{ __('delivery.phone') }}</th>
-							<th>{{ __('delivery.address') }}</th>
+							<th>{{ __('delivery.employment') }}</th>
+							<th>{{ __('delivery.ems') }}</th>
+							<th>{{ __('delivery.status') }}</th>
 							<th>{{ __('delivery.had_receipt') }}</th>
 							<th>{{ __('delivery.creator_id') }}</th>
 							<th>{{ __('delivery.editor_id') }}</th>

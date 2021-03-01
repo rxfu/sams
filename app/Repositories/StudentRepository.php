@@ -150,9 +150,9 @@ class StudentRepository extends Repository
                     $grades = explode(',', Auth::user()->grade);
                     $fields['grade'] = ['in', $grades];
                 }
+            } else {
+                $fields['grade'] = $attributes['grade'];
             }
-        } else {
-            $fields['grade'] = $attributes['grade'];
         }
 
         return $this->findBy($fields, $relations, $orders, $trashed);

@@ -29,6 +29,17 @@ class ArchivePolicy extends ModelPolicy
     }
 
     /**
+     * Determine whether the user can export archives transfer.
+     *
+     * @param  \App\Models\User  $user
+     * @return mixed
+     */
+    public function transfer(User $user)
+    {
+        return $this->service->hasPermission($user, 'archive-transfer');
+    }
+
+    /**
      * Determine whether the user can search archives.
      *
      * @param  \App\Models\User  $user
