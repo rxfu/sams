@@ -11,7 +11,7 @@
             </div>
 
             <div class="card-body">
-                <form id="search-form" name="search-form" action="{{ route('archives.search') }}" method="get">
+                <form id="search-form" name="search-form" action="{{ route('archived.index') }}" method="get">
                     <div class="form-row justify-content-center">
                         <div class="form-group col-md-4">
                             <label for="id">学号</label>
@@ -37,7 +37,7 @@
                             <select id="level" name="level" class="form-control select2">
                                 <option value="all"{{ isset($attributes['level']) && ('all' === $attributes['level']) ? ' selected' : ''}}>全部培养层次</option>
                                 @foreach ($levels as $item)
-                                    <option value="{{ $item->id }}"{{ isset($attributes['level']) && ($item->id === $attributes['level']) ? ' selected' : '' }}>{{ $item->name }}</option>
+                                    <option value="{{ $item->level }}"{{ isset($attributes['level']) && ($item->level === $attributes['level']) ? ' selected' : '' }}>{{ $item->level }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -46,16 +46,16 @@
                             <select id="department" name="department" class="form-control select2">
                                 <option value="all"{{ isset($attributes['department']) && ('all' === $attributes['department']) ? ' selected' : ''}}>全部学院</option>
                                 @foreach ($departments as $item)
-                                    <option value="{{ $item->id }}"{{ isset($attributes['department']) && ($item->id === $attributes['department']) ? ' selected' : '' }}>{{ $item->name }}</option>
+                                    <option value="{{ $item->department_id }}"{{ isset($attributes['department']) && ($item->department_id === $attributes['department']) ? ' selected' : '' }}>{{ $item->department }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="major">专业</label>
                             <select id="major" name="major" class="form-control select2">
-                                <option value="all" data-chained="all {{ $departments->implode('id', ' ') }} {{ $levels->implode('id', ' ') }}"{{ isset($attributes['major']) && ('all' === $attributes['major']) ? ' selected' : ''}}>全部专业</option>
+                                <option value="all" data-chained="all {{ $departments->implode('department_id', ' ') }} {{ $levels->implode('level', ' ') }}"{{ isset($attributes['major']) && ('all' === $attributes['major']) ? ' selected' : ''}}>全部专业</option>
                                 @foreach ($majors as $item)
-                                    <option value="{{ $item->id }}" data-chained="{{ $item->level }}+{{ $item->department_id }}"{{ isset($attributes['major']) && ($item->id === $attributes['major']) ? ' selected' : '' }}>{{ $item->name }}</option>
+                                    <option value="{{ $item->major_id }}" data-chained="{{ $item->level }}+{{ $item->department_id }}"{{ isset($attributes['major']) && ($item->major_id === $attributes['major']) ? ' selected' : '' }}>{{ $item->major }}</option>
                                 @endforeach
                             </select>
                         </div>

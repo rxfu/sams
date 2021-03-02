@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Archive;
 use App\Models\History;
 use Illuminate\Http\Request;
 use App\Services\GroupService;
@@ -93,9 +94,10 @@ class HistoryController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\HistoryStoreRequest  $request
+     * @param  Archive  $archive
      * @return \Illuminate\Http\Response
      */
-    public function store(HistoryStoreRequest $request)
+    public function store(HistoryStoreRequest $request, Archive $archive = null)
     {
         if ($request->isMethod('post')) {
 
@@ -109,9 +111,11 @@ class HistoryController extends Controller
                 ];
             }
 
-            $item = $this->service->store($attributes);
+            $attributes['archive'] = $archive;
 
-            return redirect()->route('histories.show', $item);
+            $this->service->store($attributes);
+
+            return redirect()->route('archived.index');
         }
 
         $this->error(405001);
@@ -179,7 +183,7 @@ class HistoryController extends Controller
 
             $this->service->delete($history);
 
-            return redirect()->route('histories.index');
+            return redirect()->route('archived.index');
         }
 
         $this->error(405001);

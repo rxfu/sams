@@ -103,6 +103,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/list', 'StudentController@list')->name('list');
     });
 
+    Route::prefix('archived')->name('archived.')->group(function () {
+        Route::get('/', 'HistoryController@index')->name('index');
+        Route::get('/create', 'HistoryController@create')->name('create');
+        Route::post('/{archive?}', 'HistoryController@store')->name('store');
+        Route::delete('/{history}', 'HistoryController@destroy')->name('destroy');
+    });
+
     Route::resource('logs', 'LogController')->only(['index', 'show']);
     Route::resource('settings', 'SettingController');
     Route::resource('menus', 'MenuController');
@@ -120,7 +127,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('idtypes', 'IdtypeController');
     Route::resource('departments', 'DepartmentController');
     Route::resource('majors', 'MajorController');
-    Route::resource('archived', 'HistoryController');
     Route::resource('legacies', 'LegacyController');
     // route_here
 });

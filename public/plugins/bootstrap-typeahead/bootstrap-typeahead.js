@@ -172,7 +172,7 @@
         prev = this.$menu.find('li').last()
       }
 
-      prev.chidlrent('a').addClass('active')
+      prev.children('a').addClass('active')
       // prev.addClass('active')
     }
 

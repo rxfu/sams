@@ -10,12 +10,12 @@
                 <h3 class="card-title">{{ __('archive.module') . __('List') }}</h3>
                 <div class="card-tools">
                     @can('create', History::class)
-                        <a href="{{ route('archived.create') }}" title="{{ __('Archive') }}" class="btn btn-warning archive" data-toggle="modal" data-target="#dialog" data-whatever="批量{{ __('Archive') }}">
+                        <a href="{{ route('archived.create') }}" title="{{ __('Archive') }}" class="btn btn-warning archive" data-toggle="modal" data-target="#dialog" data-whatever="批量{{ __('Archive') }}" data-href="{{ route('archived.store') }}">
                             <i class="fas fa-archive"></i> 批量{{ __('Archive') }}
                         </a>
                     @endcan
                     @can('export', Archive::class)
-                        <a href="{{ route('archives.export') }}" title="{{ __('Export') }}" class="btn btn-secondary export" data-toggle="modal" data-target="#dialog" data-whatever="{{  __('archive.module') }}移交表m欧版{{ __('export') }}">
+                        <a href="{{ route('archives.export') }}" title="{{ __('Export') }}" class="btn btn-secondary export" data-toggle="modal" data-target="#dialog" data-whatever="{{  __('archive.module') }}移交表模板{{ __('export') }}">
                             <i class="fas fa-file-export"></i> {{ __('Export') . __('archive.module') }}移交表模板
                         </a>
                     @endcan
@@ -142,13 +142,9 @@
                                             数据已归档
                                         @else
                                             @can('create', History::class)
-                                                <a href="{{ route('archived.create') }}" title="{{ __('Archive') }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#dialog" data-whatever="{{ __('Confirm') . __('Archive') }}" data-archive-id="{{ $item->id }}">
+                                                <a href="{{ route('archived.store', $item) }}" class="btn btn-warning btn-sm archive" title="{{ __('Archive') }}" data-toggle="modal" data-target="#dialog" data-whatever="{{ __('Confirm') . __('Archive') }}">
                                                     <i class="fas fa-archive"></i> {{ __('Archive') }}
                                                 </a>
-                                                <form id="archive-form-{{ $item->id }}" method="post" style="display: none;">
-                                                    @csrf
-                                                    <input type="hidden" name="archive_id" value="{{ $item->id }}">
-                                                </form>
                                             @endcan
                                             @can('view', $item)
                                                 <a href="{{ route('archives.show', $item) }}" class="btn btn-primary btn-sm" title="{{ __('Show') }}">
@@ -196,6 +192,11 @@
                             </form>
                         @endcan
                     @endisset
+                    @can('create', History::class)
+                        <form id="archive-form" method="post" style="display: none;">
+                            @csrf
+                        </form>
+                    @endcan
                 @endif
             @endisset
         </div>

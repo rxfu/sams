@@ -27,7 +27,8 @@ class ArchiveRepository extends Repository
         try {
             $ids = is_array($sid) ? $sid : [$sid];
 
-            return $this->model->with('student')->whereIn('sid', $ids);
+            return $this->model->with('student')
+                ->whereIn('sid', $ids);
         } catch (QueryException $e) {
             throw new InternalException($e, $this->getModel(), __FUNCTION__);
         }
@@ -37,6 +38,20 @@ class ArchiveRepository extends Repository
     {
         try {
             return $this->getAllByStudentsQuery($sid)->get();
+        } catch (QueryException $e) {
+            throw new InternalException($e, $this->getModel(), __FUNCTION__);
+        }
+    }
+
+    public function getUnarchivedByStudents($sid)
+    {
+        try {
+            $ids = is_array($sid) ? $sid : [$sid];
+
+            return $this->model->with(['student', 'student.idtype', 'student.department', 'student.major', 'student.nation'])
+                ->whereIn('sid', $ids)
+                ->whereIsArchived(false)
+                ->get();
         } catch (QueryException $e) {
             throw new InternalException($e, $this->getModel(), __FUNCTION__);
         }

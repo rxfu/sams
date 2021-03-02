@@ -28,8 +28,8 @@ class HistoryRepository extends Repository
     public function major()
     {
         try {
-            return $this->model->select('major_id', 'major', 'department_id')
-                ->groupBy('major_id', 'major', 'department_id')
+            return $this->model->select('major_id', 'major', 'department_id', 'level')
+                ->groupBy('major_id', 'major', 'department_id', 'level')
                 ->orderBy('major_id')
                 ->get();
         } catch (QueryException $e) {

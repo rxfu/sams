@@ -14,7 +14,7 @@ class Archive extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'sid', 'received_at', 'name', 'creator_id', 'editor_id', 'remark',
+        'id', 'sid', 'received_at', 'name', 'creator_id', 'editor_id', 'remark', 'is_archived',
     ];
 
     /**
@@ -23,6 +23,15 @@ class Archive extends Model
      * @var array
      */
     protected $guarded = ['entry'];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_archived' => 'boolean',
+    ];
 
     public function entries()
     {

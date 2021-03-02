@@ -122,11 +122,12 @@ $(function () {
             var button = $(e.relatedTarget);
             var title = button.data('whatever');
             var modal = $(this);
-
+            var dataHref = button.data('href');
+            
             modal.find('.modal-content').removeClass().addClass('modal-content bg-warning');
             modal.find('.modal-title').text(title);
             modal.find('.modal-body').load(href, function (result) {
-                $('#export-form').attr('action', href);
+                $('#export-form').attr('action', dataHref);
             });
 
             $(this).off('show.bs.modal');
@@ -161,7 +162,7 @@ $(function () {
         e.preventDefault();
 
         var href = $(this).attr('href');
-        var $form = $('#archive-form-' + $(e.relatedTarget).data('archive-id')).attr('action', href);
+        var $form = $('#archive-form').attr('action', href);
 
         $('#dialog').on('show.bs.modal', function (e) {
             var button = $(e.relatedTarget);
