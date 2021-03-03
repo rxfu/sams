@@ -19,7 +19,7 @@ class MajorSync extends Command
      *
      * @var string
      */
-    protected $description = 'Sync majors from network information cente';
+    protected $description = 'Sync majors from network information center';
 
     /**
      * The type of class being generated.

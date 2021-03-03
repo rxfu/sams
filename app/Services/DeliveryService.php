@@ -23,8 +23,9 @@ class DeliveryService extends Service
 
     public function store($data)
     {
-        $data['creator_id'] = Auth::id();
-        $data['editor_id'] = Auth::id();
+        $userId = Auth::id() ?? 1;
+        $data['creator_id'] = $userId;
+        $data['editor_id'] = $userId;
         $data['version'] = $this->repository->maxVersion($data['archive_id']) + 1;
 
         return $this->repository->save($data);

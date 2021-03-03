@@ -34,7 +34,7 @@ class ArchiveService extends Service
 
     public function store($data)
     {
-        $userId = Auth::id();
+        $userId = Auth::id() ?? 1;
         $data['id'] = $this->generateId();
         $data['creator_id'] = $userId;
         $data['editor_id'] = $userId;
@@ -55,7 +55,7 @@ class ArchiveService extends Service
 
     public function update($model, $data)
     {
-        $userId = Auth::id();
+        $userId = Auth::id() ?? 1;
         $data['editor_id'] = $userId;
 
         $entries = array_map(function ($number) use ($userId) {
