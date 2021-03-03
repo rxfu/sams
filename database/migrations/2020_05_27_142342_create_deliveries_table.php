@@ -37,6 +37,12 @@ class CreateDeliveriesTable extends Migration
             $table->text('remark')->nullable()->comment('备注');
             $table->timestamps();
 
+            $table->foreign('archive_id')
+                ->references('id')
+                ->on('archives')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
             $table->index('archive_id');
         });
     }
