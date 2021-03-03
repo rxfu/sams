@@ -16,7 +16,7 @@ class CreateDeliveriesTable extends Migration
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
             $table->string('archive_id', 20)->comment('档案编号');
-            $table->string('receiver', 64)->nullable()->comment('档案接收单位');
+            $table->string('receiver')->nullable()->comment('档案接收单位');
             $table->string('ems', 20)->nullable()->comment("机要号");
             $table->string('phone', 20)->nullable()->comment("联系电话");
             $table->string('address')->nullable()->comment("地址");
